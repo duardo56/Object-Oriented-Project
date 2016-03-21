@@ -128,14 +128,12 @@ public class LoginMenu extends javax.swing.JFrame {
         try{
             File loginf = new File("user-password");
             Scanner read = new Scanner(loginf);
-            
             read.useDelimiter(",");
             
-            while(read.hasNextLine()){
+            while(read.hasNext()){
                 String user = read.next();
                 char [] password = read.next().toCharArray();
                 
-                read.next();
                 if(txtUsername.getText().equals(user) && Arrays.equals(input,password)){
                     login = true;
                     break;
@@ -147,10 +145,11 @@ public class LoginMenu extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(null,"Can't find a text file");
         }
    
-        
-        if (!login){
-            
-               javax.swing.JOptionPane.showMessageDialog(null, "Failed to input correct password.");
+        //If user has incorrect login
+        if (!login){ 
+               javax.swing.JOptionPane.showMessageDialog(null, "Wrong username or password.");
+               txtPassword.setText(""); //CLears Password Textfield
+               txtUsername.setText(""); //Clears Username Textfield
         }
         else{
             ManagementMenu m = new ManagementMenu();
