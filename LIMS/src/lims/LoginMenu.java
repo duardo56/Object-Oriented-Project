@@ -5,6 +5,7 @@
  */
 package lims;
 
+import java.awt.Component;
 import java.util.Arrays;
 
 /**
@@ -117,8 +118,21 @@ public class LoginMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-           if (Arrays.toString(txtPassword.getPassword()).equals("abc"))
-               System.exit(0);
+        String str = "abc";
+        char [] charArray = str.toCharArray();
+        char [] input = txtPassword.getPassword();
+        Component controllingFrame = null;
+   
+        
+        if (!(Arrays.equals(input, charArray))){
+            
+               javax.swing.JOptionPane.showMessageDialog(controllingFrame, "Failed to input correct password.");
+        }
+        else{
+            ManagementMenu m = new ManagementMenu();
+            m.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
