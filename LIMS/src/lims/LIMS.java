@@ -5,6 +5,13 @@
  */
 package lims;
 
+import java.io.ObjectOutputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+
 /**
  *
  * @author reticent
@@ -14,8 +21,9 @@ public class LIMS {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        MainMenu gui = new MainMenu();
+    public static void main(String[] args)  {
+        
+        LoginMenu gui = new LoginMenu();
         gui.setVisible(true);
     }
     
