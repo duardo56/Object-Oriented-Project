@@ -1,0 +1,58 @@
+MAIN MENU:
+	Button -> Exit: Exits the program
+	Button -> Log In: Switchs to the LOG IN
+
+
+LOG IN:
+	Input Field: -> Username: user's systems name
+	Input Field -> Password: user's password
+	Button: Continue: (processes username and passoword) Switches to user level Menu : remains on window for re-input of username and password
+
+MANAGMENT MAIN MENU:	
+	Button -> Log out: Returns to the MAIN MENU
+	Button -> View Samples
+	Button -> View Customer
+		View Samples: Displays a list of sample's status and curent analysis
+		View Customer: Displays customer's information
+	
+
+
+
+ANALYSIS MAIN MENU:
+	Button -> [View Samples] : Moves to SAMPLE MENU
+		-Sample Menu- :
+			Field -> Company :
+			Field -> Type :
+			Field -> Status :
+			Field -> ID :
+		
+	Button -> [Log Out] : Returns to the MAIN MENU
+	
+
+
+
+
+CLIENT MENU:
+	Button -> [View Sample]: Opens the SAMPLE MENU
+		-SAMPLE MENU- Displays information about the sample
+			|List View of samples|
+				Field -> Analysis : Person working of the sample
+				Field -> Status : Whether the sample is complete/ incomplete / in progress
+				Field -> Sample ID : The identifer of the sample
+				Field -> Company : Name of company working on work order
+				Field -> Type : The type of sample gas/ water/ metal/ ground
+				Field -> Fidelity : The qaulity of the completed sample
+	Button -> [Back] : Returns to the Client Menu 
+		
+	Button -> [Input Work Order] : Opens the WORK ORDER MENU
+		-WORK ORDER MENU- : Client enters the sample details and their contact information 
+			_Input Field_ -> First Name
+			_Input Field_ -> Last Name
+			_Input Field_ -> Company
+			_Input Field_ -> Contact Number
+			_Input Field_ -> Sample Type
+			_Input Field_ -> Due Date
+			Button -> [Send] : Sends the work order to be processed
+			Button -> [Back] : Returns to the CLIENT MENU
+	Button -> [Log out] : Returns to the MAIN MENU
+	
