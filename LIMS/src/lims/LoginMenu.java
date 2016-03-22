@@ -5,7 +5,6 @@
  */
 package lims;
 
-import java.awt.Component;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
@@ -19,7 +18,6 @@ public class LoginMenu extends javax.swing.JFrame {
 
     /**
      * Creates new form LoginMenu
-     * @param window
      */
     
     public LoginMenu() {
