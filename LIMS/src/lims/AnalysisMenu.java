@@ -305,7 +305,9 @@ public class AnalysisMenu extends javax.swing.JFrame  {
     private void listSampleListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listSampleListValueChanged
         JList test = (JList)evt.getSource();
         int num =test.getSelectedIndex();
-        javax.swing.JOptionPane.showMessageDialog(null,num);
+        //javax.swing.JOptionPane.showMessageDialog(null,num);
+        
+        readClientFile(num);
     }//GEN-LAST:event_listSampleListValueChanged
     
     //Method to fill the Jlist with samples that analysis is working on
@@ -330,8 +332,50 @@ public class AnalysisMenu extends javax.swing.JFrame  {
     }
     
     //Reads from file the Client's submitted information
-    private void readClientFile(){
+    private void readClientFile(int e){
         
+        File userSample;    //Stores file of sample
+        String test;    //Stores the name of the file/sample
+        /*
+        String company; //Stores comapny name
+        String typeT;   //Stores type (?)
+        String status;  //Stores status
+        String id;  //Stores id
+        */
+        Scanner read;   //Scanner object read
+        
+        listModel = (DefaultListModel) listSampleList.getModel(); //retrieves data from listSampleList
+
+        test = listModel.getElementAt(e).toString();    //Stores whatever is at element e in test as a string
+        javax.swing.JOptionPane.showMessageDialog(null,test);   //Test Purpose to make
+        
+        userSample = new File(test);
+        
+        try{
+            read = new Scanner(userSample); 
+            read.useDelimiter(",");
+            
+            /*
+            Have to implement an algorithm where it does not exceed the
+            use of delimiter (or the reason behind the errors we've gotten
+            with the scanner. But as of now, all it does it read the next 4
+            things.
+            
+            
+                company = read.next();
+                typeT = read.next();
+                status = read.next();
+                id = read.next();
+              */  
+                lblCompany.setText(read.next());
+                lblType.setText(read.next());
+                lblStatus.setText(read.next());
+                lblID.setText(read.next());
+            
+        }
+        catch(FileNotFoundException q){
+            javax.swing.JOptionPane.showMessageDialog(null,"Can't find text file");
+        }
     }
     
     /**
