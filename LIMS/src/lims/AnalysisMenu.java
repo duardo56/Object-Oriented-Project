@@ -261,13 +261,15 @@ public class AnalysisMenu extends javax.swing.JFrame  {
         System.exit(0); //closes the program
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-   
+    //Current Use implementation ideas for this is unknown since constructor
+    // takes care of original problem.
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
        JTabbedPane tabbedPane= (JTabbedPane)evt.getSource();
        int tab = tabbedPane.getSelectedIndex();
        
        //Implement some way to let the program know what current tab its on
        //and to not allow it to run if it is already on the current tab.
+       
        if (tabNum ==-1){
            
            //If Analysis Tab is clicked on for the 1st time
