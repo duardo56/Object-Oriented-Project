@@ -47,8 +47,6 @@ public class LoginCreateUser extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Password"));
         jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
-
-        txtPassword.setText("jPasswordField1");
         jPanel2.add(txtPassword);
 
         jButton1.setText("Create");
@@ -117,6 +115,13 @@ public class LoginCreateUser extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        /*
+            Work in Progress - Need to implement a way to save Usernames and files into the same object
+            and find a way to distinguish whether or not a username already exist within the system.
+                1) A way to save files as objects
+                2) A way to read through the files and check uernames
+        */
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

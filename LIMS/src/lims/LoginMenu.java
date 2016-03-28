@@ -140,6 +140,7 @@ public class LoginMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Login to the LIMS system
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         char [] input = txtPassword.getPassword();
         boolean login = false;
