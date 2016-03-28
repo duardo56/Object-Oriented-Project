@@ -180,7 +180,7 @@ public class LoginMenu extends javax.swing.JFrame {
 
     //Closes the program
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        System.exit(0); //Unsure whether this.dipose() or exit is better????
+        this.dispose(); //Unsure whether this.dipose() or exit is better????
     }//GEN-LAST:event_jButton2ActionPerformed
 
     //Opens a new window to create a new login
