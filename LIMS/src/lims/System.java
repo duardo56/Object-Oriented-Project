@@ -5,16 +5,20 @@
  */
 package lims;
 
+import java.io.Serializable;
+import java.util.Hashtable;
+
 /**
  *
  * @author reticent
  */
-public class System {
+public class System implements Serializable {
     
-    private UserList list;
     
-    public System(){
-        
+    private Hashtable<User, String> list = new Hashtable<User, String>();
+    
+    public System(String username, String password, String status){
+        User newUser = new User(username,password);
+        list.put(newUser, status);
     }
-    
 }
