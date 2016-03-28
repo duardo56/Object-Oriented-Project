@@ -12,8 +12,8 @@ package lims;
 public class LIMS {
     
     public static void main(String[] args)  {
-        LoginMenu gui = new LoginMenu();
-        gui.setVisible(true);
+        LoginMenu gui = new LoginMenu();    //Creates LoginMenu Gui
+        gui.setVisible(true);   //Sets visibility of gui to true
     }
     
 }

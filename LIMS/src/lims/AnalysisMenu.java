@@ -363,7 +363,6 @@ public class AnalysisMenu extends javax.swing.JFrame  {
             with the scanner. But as of now, all it does it read the next 4
             things.
             
-            
                 company = read.next();
                 typeT = read.next();
                 status = read.next();
