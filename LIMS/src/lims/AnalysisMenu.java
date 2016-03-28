@@ -258,7 +258,7 @@ public class AnalysisMenu extends javax.swing.JFrame  {
 
     //Closes the program when exit from Menu is clicked
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        System.exit(0); //closes the program
+        this.dispose(); //closes the program
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     //Current Use implementation ideas for this is unknown since constructor
