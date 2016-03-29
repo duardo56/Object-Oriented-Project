@@ -12,13 +12,14 @@ import java.util.Hashtable;
  *
  * @author reticent
  */
-public class System implements Serializable {
+public class LimsSystem implements Serializable {
     
     
     private Hashtable<User, String> list = new Hashtable<User, String>();
     
-    public System(String username, String password, String status){
+    public LimsSystem(String username, String password, String status){
         User newUser = new User(username,password);
         list.put(newUser, status);
     }
+    
 }

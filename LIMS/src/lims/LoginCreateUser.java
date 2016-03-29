@@ -143,6 +143,10 @@ public class LoginCreateUser extends javax.swing.JFrame {
             and find a way to distinguish whether or not a username already exist within the system.
                 1) A way to save files as objects
                 2) A way to read through the files and check uernames
+        
+            ****UPDATE 03/29/2016****
+        Idea: implement System and User class here in order to create User objects and store them 
+        using serialization. 
         */
         
     }//GEN-LAST:event_btnCreateUserActionPerformed

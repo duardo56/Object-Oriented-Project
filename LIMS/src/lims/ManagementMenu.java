@@ -111,7 +111,7 @@ public class ManagementMenu extends javax.swing.JFrame {
 
         jLabel1.setText("Company:");
 
-        jButton1.setText("Refresh");
+        jButton1.setText("Accept");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -120,7 +120,7 @@ public class ManagementMenu extends javax.swing.JFrame {
 
         jLabel2.setText("Type: ");
 
-        jButton2.setText("Submit");
+        jButton2.setText("Remove");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
