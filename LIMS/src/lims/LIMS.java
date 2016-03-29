@@ -30,8 +30,8 @@ public class LIMS {
         */
         try{
             User user = new User();
-            user.setPassword("Password");
-            user.setUsername("User");
+            user.setPassword("Test");
+            user.setUsername("Pass");
 
             File file = new File("testFile");
             OutputStream fileOutputStream = new FileOutputStream(file);
@@ -46,6 +46,8 @@ public class LIMS {
             User result = (User)ois.readObject();
             
             System.out.println("Username: "+result.getUsername() + "Password: "+result.getPassword());
+            
+            
         }
         catch (FileNotFoundException e){
             e.printStackTrace();
@@ -57,6 +59,7 @@ public class LIMS {
             e.printStackTrace();
         }
         
+        //Don't forget to uncomment
         //***********************************************************
         //LoginMenu gui = new LoginMenu();    //Creates LoginMenu Gui
         //gui.setVisible(true);   //Sets visibility of gui to true

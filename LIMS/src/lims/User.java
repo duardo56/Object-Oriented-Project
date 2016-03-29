@@ -15,8 +15,10 @@ public class User implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
-    private String username;
-    private String password;
+    private String username;    //Stores user's username
+    private String password;    //Stores user's password (Needs to encrypt password)
+    private String firstName;   //Stores user's first name
+    private String lastName;    //Stores user's last name
     
     public User(){}
     
@@ -26,11 +28,19 @@ public class User implements Serializable {
     }
     
     public String getUsername(){
-        return this.username;
+        return username;
     }
     
     public String getPassword(){
-        return this.password;
+        return password;
+    }
+    
+    public String getFirstName(){
+        return firstName;
+    }
+    
+    public String getLastName(){
+        return lastName;
     }
     
     public void setUsername(String username){
@@ -39,6 +49,14 @@ public class User implements Serializable {
     
     public void setPassword(String password){
         this.password = password;
+    }
+    
+    public void setFirstName(String firstName){
+        this.firstName = firstName;
+    }
+    
+    public void setLastName(String lastName){
+        this.lastName = lastName;
     }
 }
     

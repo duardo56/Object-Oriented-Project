@@ -9,13 +9,12 @@ package lims;
  *
  * @author reticent
  */
-public class ManagementUser extends User{
-   
+public class ClientUser extends User{
+    
     //Defualt Constructor
-    public ManagementUser(String username, String password, String firstName, String lastName){
+    public ClientUser(String username, String password, String firstName, String lastName){
         super(username, password);
         this.setFirstName(username);
         this.setLastName(lastName);
     }
-    
 }
