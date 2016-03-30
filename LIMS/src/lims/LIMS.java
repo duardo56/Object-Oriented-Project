@@ -68,8 +68,10 @@ public class LIMS {
         //****************************************************************
         //*********************End of Testing****************************
         
-        LoginMenu gui = new LoginMenu();    //Creates LoginMenu Gui
-        gui.setVisible(true);   //Sets visibility of gui to true
+        MainMenu GUI = new MainMenu();
+        GUI.setVisible(true);
+        
+        
     }
     
 }

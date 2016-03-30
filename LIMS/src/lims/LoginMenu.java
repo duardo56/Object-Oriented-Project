@@ -203,8 +203,8 @@ public class LoginMenu extends javax.swing.JFrame {
                 }
                 
                 else if ((list.getUserClass(user).equals("AnalysisUser"))){
-                    AnalysisMenuDelete m = new AnalysisMenuDelete();    //Creates Analysis menu object
-                    m.setVisible(true); //Sets visibility of m to true 
+//                    AnalysisMenuDelete m = new AnalysisMenuDelete();    //Creates Analysis menu object
+       //             m.setVisible(true); //Sets visibility of m to true 
                     this.dispose(); //disposes of login menu window
                 }
                 
@@ -218,7 +218,10 @@ public class LoginMenu extends javax.swing.JFrame {
 
     //Closes the program
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.dispose(); //Unsure whether this.dipose() or exit is better????
+        this.dispose();
+           MainMenu GUI = new MainMenu();
+        GUI.setVisible(true);
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     //Opens a new window to create a new login
