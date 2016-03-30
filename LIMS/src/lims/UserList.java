@@ -20,27 +20,27 @@ public class UserList implements Serializable {
     //Default Constructor
     public UserList(){}
     
-    //Adds user
+    //Adds user according to the status/type of user
     public synchronized void addUser(String username, String password, String firstName, String lastName, String status){
         if (status.equals("Management")){
-            User test = new ManagementUser(username, password,firstName, lastName);
-            list.put(username, test);
+            User user = new ManagementUser(username.toLowerCase(), password,firstName, lastName);
+            list.put(username.toLowerCase(), user);
         }
         else if(status.equals("Analysis")){
-            User test = new AnalysisUser(username, password,firstName, lastName);
-            list.put(username, test);
+            User user = new AnalysisUser(username.toLowerCase(), password,firstName, lastName);
+            list.put(username.toLowerCase(), user);
         }
         
         else if (status.equals("Client")){
-            User test = new ClientUser(username, password,firstName, lastName);
-            list.put(username, test);
+            User user = new ClientUser(username.toLowerCase(), password,firstName, lastName);
+            list.put(username.toLowerCase(), user);
         }
     }
     
     //Check if user exist
     public synchronized boolean checkUser(String username){
         
-        if(list.containsKey(username))
+        if(list.containsKey(username.toLowerCase()))
             return true;
         else  
             return false;
@@ -48,7 +48,7 @@ public class UserList implements Serializable {
     
     //Gets the User Object
     public User getUser(String username){
-        return (User)list.get(username);
+        return (User)list.get(username.toLowerCase());
     }
     
 }

@@ -5,6 +5,15 @@
  */
 package lims;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author reticent
@@ -12,7 +21,7 @@ package lims;
 public class LoginCreateUser extends javax.swing.JFrame {
 
     /**
-     * Creates new form LoginCreateUser
+     * Creates new LoginCreateUser form
      */
     public LoginCreateUser() {
         initComponents();
@@ -165,34 +174,61 @@ public class LoginCreateUser extends javax.swing.JFrame {
         using serialization. 
         */
         
-        //
+        //If checkBox is set to Analysis
         if (getCheckBox().equals("Analysis")){
             
-            //
+            //Checks if text boxes are empty
             if(checkEmptyTxtBoxes()){
                 
+                //Username does not exist
+                if (!checkUsername(txtUsername.getText().toLowerCase())){
+                    try {
+                        createNewUser(getCheckBox());
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginCreateUser.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    this.dispose(); //Closes this form
+                }
             }
         }
         
-        //
+        //If checkBox is set to Management
         else if(getCheckBox().equals("Management")){
             
-            //
+            //Checks if text boxes are empty
             if (checkEmptyTxtBoxes()){
                 
+                //Username does not exist
+                 if (!checkUsername(txtUsername.getText().toLowerCase())){
+                     try {
+                         createNewUser(getCheckBox());
+                     } catch (IOException ex) {
+                         Logger.getLogger(LoginCreateUser.class.getName()).log(Level.SEVERE, null, ex);
+                     }
+                    this.dispose(); //Closes this form
+                }
             }
         }
         
-        //
+        //If checkBox is set to Client
         else if (getCheckBox().equals("Client")){
             
-            //
+            //Checks if text boxes are empty
             if (checkEmptyTxtBoxes()){
                 
+                //Username does not exist
+                if (!checkUsername(txtUsername.getText().toLowerCase())){
+                    try {
+                        createNewUser(getCheckBox());
+                    } catch (IOException ex) {
+                        Logger.getLogger(LoginCreateUser.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    this.dispose(); //Closes this form
+                }
             }
         }
         
-        //
+        //If no checkBox are present
         else if (getCheckBox().equals("none")){
             javax.swing.JOptionPane.showMessageDialog(null, "Please select one of the check boxes.");
         }
@@ -288,15 +324,61 @@ public class LoginCreateUser extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(null, "Please enter a username.");
             return false;   //Returns false if username is empty;
         }
-        
     }
     
     //Method to check whether or not username has been taken
-    private boolean checkUsername(){
+    private boolean checkUsername(String username){
+        try{
+            
+        //Retrieves UserList.bin 
+        FileInputStream fInput = new FileInputStream("UserListTest");
+        ObjectInputStream ois = new ObjectInputStream(fInput);
+        list = (UserList)ois.readObject(); 
         
+        //If user exist
+        if (!list.checkUser(username)){
+            return false;    //return true
+        }
+        else{
+            javax.swing.JOptionPane.showMessageDialog(null, "Username Exist - Please try another username.");
+            return true;
+        }
         
+        }
+        catch (FileNotFoundException e){
+            javax.swing.JOptionPane.showMessageDialog(null,"Can't find UserList.bin text file");
+        }
+        catch (IOException e){
+            javax.swing.JOptionPane.showMessageDialog(null,"IOException Error");
+        }
+        catch (ClassNotFoundException e){
+            javax.swing.JOptionPane.showMessageDialog(null,"Class not found Exception Error");
+        }
         return false;
     }
+    
+    //Create new user method
+    private void createNewUser(String status) throws FileNotFoundException, IOException{
+        
+        char [] temp = txtPassword.getPassword();   //Holds password in an array of characters
+        String password = new String(temp); //Holds password as String
+        
+        //Adds user to UserList
+        list.addUser(txtUsername.getText().toLowerCase(), password , 
+                     txtFirstName.getText(), txtLastName.getText(), status);
+        
+        
+        //Saves
+	ObjectOutputStream outStream = new ObjectOutputStream(new FileOutputStream("UserListTest"));
+	outStream.writeObject(list);
+        
+        //Displays user a message saying it was successful in creating a new user
+        javax.swing.JOptionPane.showMessageDialog(null, "User Successfully created.");
+    }
+    
+    //Declared Variables
+    public UserList list;   //Holds UserList object
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreateUser;
