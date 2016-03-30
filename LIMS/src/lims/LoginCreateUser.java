@@ -146,6 +146,7 @@ public class LoginCreateUser extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Exit button
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
             this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
@@ -163,27 +164,138 @@ public class LoginCreateUser extends javax.swing.JFrame {
         Idea: implement System and User class here in order to create User objects and store them 
         using serialization. 
         */
+        
+        //
+        if (getCheckBox().equals("Analysis")){
+            
+            //
+            if(checkEmptyTxtBoxes()){
+                
+            }
+        }
+        
+        //
+        else if(getCheckBox().equals("Management")){
+            
+            //
+            if (checkEmptyTxtBoxes()){
+                
+            }
+        }
+        
+        //
+        else if (getCheckBox().equals("Client")){
+            
+            //
+            if (checkEmptyTxtBoxes()){
+                
+            }
+        }
+        
+        //
+        else if (getCheckBox().equals("none")){
+            javax.swing.JOptionPane.showMessageDialog(null, "Please select one of the check boxes.");
+        }
     }//GEN-LAST:event_btnCreateUserActionPerformed
 
     //Management Checkbox
     private void cbManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbManagementActionPerformed
-        
+        switchBoxChecking(evt.getActionCommand());
     }//GEN-LAST:event_cbManagementActionPerformed
 
     //Analysis Checkbox
     private void cbAnalysisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAnalysisActionPerformed
-        
+        switchBoxChecking(evt.getActionCommand());
     }//GEN-LAST:event_cbAnalysisActionPerformed
 
     //Client Checkbox
     private void cbClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbClientActionPerformed
-        
+        switchBoxChecking(evt.getActionCommand());
     }//GEN-LAST:event_cbClientActionPerformed
    
     
     //If there is more than 1 checkbox checked, it will deactive the rest and turn on current
-    private void checkBoxChecking(){
+    private void switchBoxChecking(String evt){
         
+        //if event is equal to Management, set the other buttons to false
+        if (evt.equals("Management")){
+            cbClient.setSelected(false);
+            cbAnalysis.setSelected(false);
+        }
+        
+        //if event is equal to Analysis, set the other buttons to false
+        else if(evt.equals("Analysis")){
+            cbManagement.setSelected(false);
+            cbClient.setSelected(false);
+        }
+        
+        //if event is equal to Client, set the other buttons to false
+        else if (evt.equals("Client")){
+            cbManagement.setSelected(false);
+            cbAnalysis.setSelected(false);
+        }
+    }
+    
+    //Check what current User CheckBox is selected and returns that as a string
+    private String getCheckBox(){
+        
+        if (cbClient.isSelected()){
+            return "Client";
+        }
+        else if (cbManagement.isSelected()){
+            return "Management";
+        }
+        else if(cbAnalysis.isSelected()){
+            return "Analysis";
+        }
+        else{
+            return "none";
+        }
+    }
+    
+    //Check whether or not the textboxes are empty
+    private boolean checkEmptyTxtBoxes(){
+        //Checks UserName
+        if (txtUsername.getText().length() != 0){
+            
+            //Checks Password
+            if (txtPassword.getPassword().length !=0){
+                
+                //Checks FirstName
+                if (txtFirstName.getText().length() != 0){
+                    
+                    //Checks LastName
+                    if(txtLastName.getText().length() != 0){
+                        return true;
+                    }
+                    
+                    else{
+                        javax.swing.JOptionPane.showMessageDialog(null, "Please enter your last name.");
+                        return false;   //Returns false if last name is empty
+                    }
+                }
+                else{
+                    javax.swing.JOptionPane.showMessageDialog(null, "Please enter your first name.");
+                    return false;   //Returns false if first name is empty;
+                }
+            }
+            else{
+                javax.swing.JOptionPane.showMessageDialog(null, "Please enter a password.");
+                return false;   //Returns false if password is empty;  
+            }   
+        }
+        else{
+            javax.swing.JOptionPane.showMessageDialog(null, "Please enter a username.");
+            return false;   //Returns false if username is empty;
+        }
+        
+    }
+    
+    //Method to check whether or not username has been taken
+    private boolean checkUsername(){
+        
+        
+        return false;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
