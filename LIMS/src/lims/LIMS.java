@@ -24,29 +24,31 @@ public class LIMS {
     
     public static void main(String[] args) throws IOException  {
         
-        //************************************************************
+        ///***********************************************************
         /*
-            Testing: User class and System Class
-        */
+            Testing: UserList class save and retrieval functions
+        *///**********************************************************
         try{
-            User user = new User();
-            user.setPassword("Test");
-            user.setUsername("Pass");
-
-            File file = new File("testFile");
+            //UserList Hashtable test
+            UserList list = new UserList();
+            list.addUser("TestUserList","password","Carlos","Rios","Management");
+            list.addUser("Number2","testPass2","testName2","testLast2","Analysis");
+            list.addUser("Number3","testPass3","testName3","testLast3","Client");
+            
+            //Saves UserList.bin
+            File file = new File("UserListTest");
             OutputStream fileOutputStream = new FileOutputStream(file);
             ObjectOutput outputStream = new ObjectOutputStream(fileOutputStream);
-            outputStream.writeObject(user);
-
-            System.out.println("I've stored the User object into the file: " + file.getName());
-
-            //Input Stream
-            FileInputStream fInput = new FileInputStream("testFile");
+            outputStream.writeObject(list);
+            
+            System.out.println("I've stored the UserList object into the file: " + file.getName());
+            
+            //Retrieves and displays UserList.bin
+            FileInputStream fInput = new FileInputStream("UserListTest");
             ObjectInputStream ois = new ObjectInputStream(fInput);
-            User result = (User)ois.readObject();
+            UserList testing = (UserList)ois.readObject();
             
-            System.out.println("Username: "+result.getUsername() + "Password: "+result.getPassword());
-            
+           System.out.println(testing.getUser("TestUserList").getPassword());
             
         }
         catch (FileNotFoundException e){

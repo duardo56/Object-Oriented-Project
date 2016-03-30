@@ -14,7 +14,7 @@ public class AnalysisUser extends User {
     //Defualt Constructor
     public AnalysisUser(String username, String password, String firstName, String lastName){
         super(username, password);
-        this.setFirstName(username);
+        this.setFirstName(firstName);
         this.setLastName(lastName);
     }
     

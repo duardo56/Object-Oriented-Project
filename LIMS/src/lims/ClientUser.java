@@ -14,7 +14,7 @@ public class ClientUser extends User{
     //Defualt Constructor
     public ClientUser(String username, String password, String firstName, String lastName){
         super(username, password);
-        this.setFirstName(username);
+        this.setFirstName(firstName);
         this.setLastName(lastName);
     }
 }

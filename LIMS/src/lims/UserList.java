@@ -17,35 +17,39 @@ public class UserList implements Serializable {
     
     private Hashtable<String, User> list = new Hashtable<String, User>();
     
-    public UserList(String username, String password, String firstName, String lastName, String status){
-        checkStatus(username, password, firstName, lastName, status);
+    public UserList(){
+        
     }
     
-    private boolean checkStatus(String username, String password, String firstName, String lastName, String status){
-        
+    //Adds user
+    public synchronized void addUser(String username, String password, String firstName, String lastName, String status){
         if (status.equals("Management")){
             User test = new ManagementUser(username, password,firstName, lastName);
             list.put(username, test);
-            return true;
         }
         else if(status.equals("Analysis")){
             User test = new AnalysisUser(username, password,firstName, lastName);
             list.put(username, test);
-            return true;
         }
         
         else if (status.equals("Client")){
             User test = new ClientUser(username, password,firstName, lastName);
             list.put(username, test);
+        }
+    }
+    
+    //Check if user exist
+    public synchronized boolean checkUser(String username){
+        
+        if(list.containsKey(username))
             return true;
-        }
-        
-        else if (status == null){
-            
+        else  
             return false;
-        }
-        
-        return false;
+    }
+    
+    //Gets the User Object
+    public User getUser(String username){
+        return (User)list.get(username);
     }
     
 }

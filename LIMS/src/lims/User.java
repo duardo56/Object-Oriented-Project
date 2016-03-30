@@ -20,41 +20,48 @@ public class User implements Serializable {
     private String firstName;   //Stores user's first name
     private String lastName;    //Stores user's last name
     
-    public User(){}
-    
+    //Constructor w/ 2 parameters (String, String)
     public User(String username, String password){
         this.username = username;
         this.password = password;
     }
     
+    //Get Username 
     public String getUsername(){
         return username;
     }
     
+    //Get Password
     public String getPassword(){
         return password;
     }
     
+    //Get First name
     public String getFirstName(){
         return firstName;
     }
     
+    //Get Last name
     public String getLastName(){
         return lastName;
     }
     
+    //Set Username
     public void setUsername(String username){
         this.username = username;
     }
     
+    //Set Password
     public void setPassword(String password){
         this.password = password;
     }
     
+    //Set Firstname
     public void setFirstName(String firstName){
         this.firstName = firstName;
     }
     
+    //Set Lastname
     public void setLastName(String lastName){
         this.lastName = lastName;
     }
