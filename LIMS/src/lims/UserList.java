@@ -17,9 +17,8 @@ public class UserList implements Serializable {
     
     private Hashtable<String, User> list = new Hashtable<String, User>();
     
-    public UserList(){
-        
-    }
+    //Default Constructor
+    public UserList(){}
     
     //Adds user
     public synchronized void addUser(String username, String password, String firstName, String lastName, String status){

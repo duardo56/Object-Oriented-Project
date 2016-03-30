@@ -25,42 +25,42 @@ public class LIMS {
         
         ///***********************************************************
         //
-        //    Testing: UserList class save and retrieval functions
+        //    Testing: UserList class save and retrieval
         //
         ///***********************************************************
         
-        try{
-            //UserList Hashtable test
-            UserList list = new UserList();
-            list.addUser("Number1","testPass1","testName1","testName1","Management");
-            list.addUser("Number2","testPass2","testName2","testLast2","Analysis");
-            list.addUser("Number3","testPass3","testName3","testLast3","Client");
-            
-            //Saves UserList.bin
-            File file = new File("UserListTest");
-            OutputStream fileOutputStream = new FileOutputStream(file);
-            ObjectOutput outputStream = new ObjectOutputStream(fileOutputStream);
-            outputStream.writeObject(list);
-            
-            System.out.println("I've stored the UserList object into the file: " + file.getName());
-            
-            //Retrieves and displays UserList.bin
-            FileInputStream fInput = new FileInputStream("UserListTest");
-            ObjectInputStream ois = new ObjectInputStream(fInput);
-            UserList testing = (UserList)ois.readObject();
-            
-           System.out.println(testing.getUser("Number1").getPassword());
-            
-        }
-        catch (FileNotFoundException e){
-            e.printStackTrace();
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        catch(ClassNotFoundException e){
-            e.printStackTrace();
-        }
+//        try{
+//            //UserList Hashtable test
+//            UserList list = new UserList();
+//            list.addUser("Number1","testPass1","testName1","testName1","Management");
+//            list.addUser("Number2","testPass2","testName2","testLast2","Analysis");
+//            list.addUser("Number3","testPass3","testName3","testLast3","Client");
+//            
+//            //Saves UserList.bin
+//            File file = new File("UserListTest");
+//            OutputStream fileOutputStream = new FileOutputStream(file);
+//            ObjectOutput outputStream = new ObjectOutputStream(fileOutputStream);
+//            outputStream.writeObject(list);
+//            
+//            System.out.println("I've stored the UserList object into the file: " + file.getName());
+//            
+//            //Retrieves and displays UserList.bin
+//            FileInputStream fInput = new FileInputStream("UserListTest");
+//            ObjectInputStream ois = new ObjectInputStream(fInput);
+//            UserList testing = (UserList)ois.readObject();
+//            
+//           System.out.println(testing.getUser("Number1").getPassword());
+//            
+//        }
+//        catch (FileNotFoundException e){
+//            e.printStackTrace();
+//        }
+//        catch (IOException e){
+//            e.printStackTrace();
+//        }
+//        catch(ClassNotFoundException e){
+//            e.printStackTrace();
+//        }
         //****************************************************************
         //*********************End of Testing****************************
         

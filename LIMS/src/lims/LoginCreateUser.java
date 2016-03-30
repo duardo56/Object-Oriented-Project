@@ -75,10 +75,25 @@ public class LoginCreateUser extends javax.swing.JFrame {
         });
 
         cbManagement.setText("Management");
+        cbManagement.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbManagementActionPerformed(evt);
+            }
+        });
 
         cbAnalysis.setText("Analysis");
+        cbAnalysis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAnalysisActionPerformed(evt);
+            }
+        });
 
         cbClient.setText("Client");
+        cbClient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbClientActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -148,9 +163,29 @@ public class LoginCreateUser extends javax.swing.JFrame {
         Idea: implement System and User class here in order to create User objects and store them 
         using serialization. 
         */
-        
     }//GEN-LAST:event_btnCreateUserActionPerformed
+
+    //Management Checkbox
+    private void cbManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbManagementActionPerformed
+        
+    }//GEN-LAST:event_cbManagementActionPerformed
+
+    //Analysis Checkbox
+    private void cbAnalysisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAnalysisActionPerformed
+        
+    }//GEN-LAST:event_cbAnalysisActionPerformed
+
+    //Client Checkbox
+    private void cbClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbClientActionPerformed
+        
+    }//GEN-LAST:event_cbClientActionPerformed
    
+    
+    //If there is more than 1 checkbox checked, it will deactive the rest and turn on current
+    private void checkBoxChecking(){
+        
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreateUser;
     private javax.swing.JButton btnExit;

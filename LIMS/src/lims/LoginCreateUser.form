@@ -158,16 +158,25 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Management"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbManagementActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="cbAnalysis">
       <Properties>
         <Property name="text" type="java.lang.String" value="Analysis"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbAnalysisActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="cbClient">
       <Properties>
         <Property name="text" type="java.lang.String" value="Client"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbClientActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
