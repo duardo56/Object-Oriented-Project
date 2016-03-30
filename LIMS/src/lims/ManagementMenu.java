@@ -73,7 +73,9 @@ public class ManagementMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Management Main Menu");
+        setMaximumSize(new java.awt.Dimension(640, 400));
         setName("ManagementMenu"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(640, 400));
         setResizable(false);
 
         SampleView.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
@@ -86,7 +88,7 @@ public class ManagementMenu extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 297, Short.MAX_VALUE)
+            .addGap(0, 284, Short.MAX_VALUE)
         );
 
         SampleView.addTab("View Customer", jPanel2);
@@ -191,7 +193,7 @@ public class ManagementMenu extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(175, Short.MAX_VALUE))
+                                .addContainerGap(162, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(51, 51, 51)
@@ -238,8 +240,8 @@ public class ManagementMenu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(SampleView)
-                .addContainerGap())
+                .addComponent(SampleView, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         SampleView.getAccessibleContext().setAccessibleName("ViewSample");

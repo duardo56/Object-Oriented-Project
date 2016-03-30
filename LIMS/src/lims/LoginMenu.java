@@ -188,21 +188,35 @@ public class LoginMenu extends javax.swing.JFrame {
                     login = true;
 
                 }
-
             }
         }
 
             //If user has incorrect login
             if (!login){ 
                    javax.swing.JOptionPane.showMessageDialog(null, "Wrong username or password.");
-                   txtPassword.setText(""); //CLears Password Textfield
+                   txtPassword.setText(""); //Clears Password Textfield
                    txtUsername.setText(""); //Clears Username Textfield
             }
             //If user has correct login
             else{
-                ManagementMenu m = new ManagementMenu();    //Creates management menu 
-                m.setVisible(true); //Sets visibility of m to true
-                this.dispose(); //disposes of login menu window
+                
+                if (list.getUserClass(user).equals("ManagementUser")){
+                    ManagementMenu m = new ManagementMenu();    //Creates management menu object
+                    m.setVisible(true); //Sets visibility of m to true
+                    this.dispose(); //disposes of login menu window
+                }
+                
+                else if ((list.getUserClass(user).equals("AnalysisUser"))){
+                    AnalysisMenuDelete m = new AnalysisMenuDelete();    //Creates Analysis menu object
+                    m.setVisible(true); //Sets visibility of m to true 
+                    this.dispose(); //disposes of login menu window
+                }
+                
+                else if((list.getUserClass(user).equals("ClientUser"))){
+                    ClientMenu m = new ClientMenu();    //Creates client menu  pbject
+                    m.setVisible(true); //Sets visibility of m to true
+                    this.dispose(); //disposes of login menu window
+                }
             }
     }//GEN-LAST:event_jButton1ActionPerformed
 
