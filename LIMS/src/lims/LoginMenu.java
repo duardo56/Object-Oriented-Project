@@ -5,10 +5,7 @@
  */
 package lims;
 
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;

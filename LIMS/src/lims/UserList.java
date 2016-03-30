@@ -75,10 +75,4 @@ public class UserList implements Serializable {
         
         return arr;
     }
-<<<<<<< Updated upstream
-=======
-    
-    
-    
->>>>>>> Stashed changes
 }
