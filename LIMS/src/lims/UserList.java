@@ -21,7 +21,7 @@ public class UserList implements Serializable {
     public UserList(){}
     
     //Adds user according to the status/type of user
-    public synchronized void addUser(String username, String password, String firstName, String lastName, String status){
+    public void addUser(String username, String password, String firstName, String lastName, String status){
         if (status.equals("Management")){
             User user = new ManagementUser(username.toLowerCase(), password,firstName, lastName);
             list.put(username.toLowerCase(), user);
@@ -38,7 +38,7 @@ public class UserList implements Serializable {
     }
     
     //Check if user exist
-    public synchronized boolean checkUser(String username){
+    public boolean checkUser(String username){
         
         if(list.containsKey(username.toLowerCase()))
             return true;
@@ -49,6 +49,11 @@ public class UserList implements Serializable {
     //Gets the User Object
     public User getUser(String username){
         return (User)list.get(username.toLowerCase());
+    }
+    
+    //Gets the class of the User
+    public String getUserClass (String username){
+        return getUser(username).getClass().getSimpleName();
     }
     
 }

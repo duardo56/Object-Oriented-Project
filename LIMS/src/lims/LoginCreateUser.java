@@ -349,10 +349,10 @@ public class LoginCreateUser extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(null,"Can't find UserList.bin text file");
         }
         catch (IOException e){
-            javax.swing.JOptionPane.showMessageDialog(null,"IOException Error");
+            javax.swing.JOptionPane.showMessageDialog(null,"Error reading UserList.bin file");
         }
         catch (ClassNotFoundException e){
-            javax.swing.JOptionPane.showMessageDialog(null,"Class not found Exception Error");
+            javax.swing.JOptionPane.showMessageDialog(null,"Error reading UserList.bin file");
         }
         return false;
     }
@@ -377,7 +377,7 @@ public class LoginCreateUser extends javax.swing.JFrame {
     }
     
     //Declared Variables
-    public UserList list;   //Holds UserList object
+    private UserList list;   //Holds UserList object
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

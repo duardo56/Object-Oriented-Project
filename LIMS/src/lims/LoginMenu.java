@@ -6,9 +6,14 @@
 package lims;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -142,44 +147,63 @@ public class LoginMenu extends javax.swing.JFrame {
 
     //Login to the LIMS system
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        char [] input = txtPassword.getPassword();
-        boolean login = false;
         
-        //Tries and reads the user-password.txt
+        //Local Variables
+        String user = txtUsername.getText().toLowerCase();    //Holds typed username
+        char [] input = txtPassword.getPassword();  //Holds typed password
+        char [] password;   //Holds password from UserListTest
+        String gui; //Holds String for what kind of gui to open (Analysis, management, or client)
+        
+        boolean login = false;  //Login if True, else display error in username/password
+        
+        //Tries to read the UserListTest.bin file
         try{
-            File loginf = new File("user-password");
-            Scanner read = new Scanner(loginf);
-            read.useDelimiter(",");
-            
-            //Algortihm to seperate username and password
-            while(read.hasNext()){
-                String user = read.next();
-                char [] password = read.next().toCharArray();
-                
-                //login set to true if it finds a match for username and password
-                if(txtUsername.getText().equals(user) && Arrays.equals(input,password)){
-                    login = true;
-                    break;
-                }
-            }
-            
+            //Retrieves UserList.bin 
+            FileInputStream fInput = new FileInputStream("UserListTest");
+            ObjectInputStream ois = new ObjectInputStream(fInput);
+            list = (UserList)ois.readObject();
         }
         catch(FileNotFoundException q){
             javax.swing.JOptionPane.showMessageDialog(null,"Can't find a text file");
+        } 
+        
+        catch (IOException ex) {
+            javax.swing.JOptionPane.showMessageDialog(null,"Error reading UserList.bin file");
+        } 
+        
+        catch (ClassNotFoundException ex) {
+            javax.swing.JOptionPane.showMessageDialog(null,"Error reading UserList.bin file");
         }
-   
-        //If user has incorrect login
-        if (!login){ 
-               javax.swing.JOptionPane.showMessageDialog(null, "Wrong username or password.");
-               txtPassword.setText(""); //CLears Password Textfield
-               txtUsername.setText(""); //Clears Username Textfield
+        
+        //Text Box Username and Password Box Password are not empty
+        if (!(txtUsername.getText().equals("") || txtPassword.getPassword().length ==0)){
+            
+            //Checks if user exist
+            if (list.checkUser(user)){
+
+                password = list.getUser(user).getPassword().toCharArray();  //retrieves password
+
+                //If password is equal to current password input
+                if(Arrays.equals(input,password)){
+                    login = true;
+
+                }
+
+            }
         }
-        //If user has correct login
-        else{
-            ManagementMenu m = new ManagementMenu();    //Creates management menu 
-            m.setVisible(true); //Sets visibility of m to true
-            this.dispose(); //disposes of login menu window
-        }
+
+            //If user has incorrect login
+            if (!login){ 
+                   javax.swing.JOptionPane.showMessageDialog(null, "Wrong username or password.");
+                   txtPassword.setText(""); //CLears Password Textfield
+                   txtUsername.setText(""); //Clears Username Textfield
+            }
+            //If user has correct login
+            else{
+                ManagementMenu m = new ManagementMenu();    //Creates management menu 
+                m.setVisible(true); //Sets visibility of m to true
+                this.dispose(); //disposes of login menu window
+            }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     //Closes the program
@@ -193,6 +217,9 @@ public class LoginMenu extends javax.swing.JFrame {
         gui.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    //Declared Variables
+    public UserList list;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
