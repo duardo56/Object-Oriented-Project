@@ -5,6 +5,13 @@
  */
 package lims;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author reticent
@@ -15,7 +22,28 @@ public class ManagementMenu extends javax.swing.JFrame {
      * Creates new form ManagementMenu
      */
     public ManagementMenu() {
+        
+        //Initializes GUI
         initComponents();
+        
+        //Read UserListTest file and store into UserList list object
+        try{
+            FileInputStream fInput = new FileInputStream("UserListTest");
+            ObjectInputStream ois = new ObjectInputStream(fInput);
+            list = (UserList)ois.readObject();
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        catch(ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        
+        fillClientList();
+        
     }
 
     /**
@@ -48,7 +76,7 @@ public class ManagementMenu extends javax.swing.JFrame {
         lblType = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        listClients = new javax.swing.JList<>();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -93,11 +121,6 @@ public class ManagementMenu extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        listSampleList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                listSampleListValueChanged(evt);
-            }
-        });
         jScrollPane1.setViewportView(listSampleList);
 
         jLabel6.setText("Current List of Samples");
@@ -144,14 +167,14 @@ public class ManagementMenu extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
@@ -159,10 +182,11 @@ public class ManagementMenu extends javax.swing.JFrame {
                                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE))))))
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                                .addComponent(jLabel2)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblType, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
                     .addComponent(lblID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -208,7 +232,7 @@ public class ManagementMenu extends javax.swing.JFrame {
 
         SampleView.addTab("View Sample", jPanel1);
 
-        jScrollPane2.setViewportView(jList1);
+        jScrollPane2.setViewportView(listClients);
 
         jLabel5.setText("Current List of Clients");
 
@@ -335,10 +359,12 @@ public class ManagementMenu extends javax.swing.JFrame {
         m.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    //Exit from Menu
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    //Remove Button Method
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         /*
         Code dedicated to submit changes to the sample analysis to the management
@@ -348,18 +374,30 @@ public class ManagementMenu extends javax.swing.JFrame {
         */
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    //Accept Button Method
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         /*
-
+            Method is dedicated to approve samples submitted by Client (WIP)
         */
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void listSampleListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listSampleListValueChanged
-
-    }//GEN-LAST:event_listSampleListValueChanged
-
-    //Declared Variables
-    UserList list;
+     
+    //Populate the Jlist with Client Users
+    private void fillClientList(){
+        userNames = (list.getUsersWithCertainClass("ClientUser"));
+        
+        for (int x = 0; x < userNames.size(); x++){
+            listModel.addElement(list.getUser(userNames.get(x)).getLastName()+ ", "+list.getUser(userNames.get(x)).getFirstName());
+        }
+        
+        listClients.setModel(listModel); //adds elements to the JList
+    }
+    
+    //Declared variable
+    private ArrayList <String> userNames; //Holds users that are clients of the system
+    private UserList list;  //Holds UserList object
+    private DefaultListModel listModel = new DefaultListModel();
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane SampleView;
@@ -381,7 +419,6 @@ public class ManagementMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -396,6 +433,7 @@ public class ManagementMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblType;
+    private javax.swing.JList<String> listClients;
     private javax.swing.JList<String> listSampleList;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,12 @@
  */
 package lims;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author reticent
@@ -14,8 +20,28 @@ public class AnalysisMenu extends javax.swing.JFrame {
     /**
      * Creates new form AnalysisMenu
      */
-    public AnalysisMenu() {
+    public AnalysisMenu(){
+        
+        //Initializes GUI
         initComponents();
+        
+        //Read UserListTest file and store into UserList list object
+        try{
+            FileInputStream fInput = new FileInputStream("UserListTest");
+            ObjectInputStream ois = new ObjectInputStream(fInput);
+            list = (UserList)ois.readObject();
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        catch(ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        
+        
     }
 
     /**
@@ -217,6 +243,14 @@ public class AnalysisMenu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_listSampleListValueChanged
 
+    //Populate the Jlist with Samples
+    private void fillSampleList(){
+        
+    }
+    
+    //Declared variable
+    private UserList list;  //Holds UserList object
+    private DefaultListModel listModel;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane SampleView;

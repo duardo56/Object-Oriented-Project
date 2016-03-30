@@ -5,6 +5,7 @@
  */
 package lims;
 
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -203,7 +204,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 }
                 
                 else if ((list.getUserClass(user).equals("AnalysisUser"))){
-                    AnalysisMenuDelete m = new AnalysisMenuDelete();    //Creates Analysis menu object
+                    AnalysisMenu m = new AnalysisMenu();    //Creates Analysis menu object
                     m.setVisible(true); //Sets visibility of m to true 
                     this.dispose(); //disposes of login menu window
                 }
