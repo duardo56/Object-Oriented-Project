@@ -6,6 +6,8 @@
 package lims;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 /**
@@ -55,5 +57,25 @@ public class UserList implements Serializable {
     public String getUserClass (String username){
         return getUser(username).getClass().getSimpleName();
     }
+    
+    //Method returns an ArrayList of users of a certain type (Management, Analysis, or Client)
+    public ArrayList getUsersWithCertainClass(String typeOfUser){
+        ArrayList<String> arr= new ArrayList<String>();
+        Enumeration uc = list.keys();
+        String temp;
+        
+        while(uc.hasMoreElements()){
+            
+            temp = (String) uc.nextElement();   //Stores username
+            
+            if (this.getUserClass(temp).equals(typeOfUser)){
+                arr.add(temp);
+            }
+        }
+        
+        return arr;
+    }
+    
+    
     
 }

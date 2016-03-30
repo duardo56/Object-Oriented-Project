@@ -14,6 +14,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 /**
  *
@@ -50,6 +51,9 @@ public class LIMS {
 //            UserList testing = (UserList)ois.readObject();
 //            
 //           System.out.println(testing.getUser("Number1").getPassword());
+//           
+//           ArrayList<String> arr = new ArrayList<String> (testing.getUsersWithCertainClass("AnalysisUser"));
+//           System.out.println(arr.get(0));
 //            
 //        }
 //        catch (FileNotFoundException e){
