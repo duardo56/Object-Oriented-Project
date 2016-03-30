@@ -10,7 +10,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
@@ -25,13 +24,15 @@ public class LIMS {
     public static void main(String[] args) throws IOException  {
         
         ///***********************************************************
-        /*
-            Testing: UserList class save and retrieval functions
-        *///**********************************************************
+        //
+        //    Testing: UserList class save and retrieval functions
+        //
+        ///***********************************************************
+        
         try{
             //UserList Hashtable test
             UserList list = new UserList();
-            list.addUser("TestUserList","password","Carlos","Rios","Management");
+            list.addUser("Number1","testPass1","testName1","testName1","Management");
             list.addUser("Number2","testPass2","testName2","testLast2","Analysis");
             list.addUser("Number3","testPass3","testName3","testLast3","Client");
             
@@ -48,7 +49,7 @@ public class LIMS {
             ObjectInputStream ois = new ObjectInputStream(fInput);
             UserList testing = (UserList)ois.readObject();
             
-           System.out.println(testing.getUser("TestUserList").getPassword());
+           System.out.println(testing.getUser("Number1").getPassword());
             
         }
         catch (FileNotFoundException e){
@@ -60,11 +61,11 @@ public class LIMS {
         catch(ClassNotFoundException e){
             e.printStackTrace();
         }
+        //****************************************************************
+        //*********************End of Testing****************************
         
-        //Don't forget to uncomment
-        //***********************************************************
-        //LoginMenu gui = new LoginMenu();    //Creates LoginMenu Gui
-        //gui.setVisible(true);   //Sets visibility of gui to true
+        LoginMenu gui = new LoginMenu();    //Creates LoginMenu Gui
+        gui.setVisible(true);   //Sets visibility of gui to true
     }
     
 }
