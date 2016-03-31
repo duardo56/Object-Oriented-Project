@@ -204,16 +204,13 @@ public class LoginMenu extends javax.swing.JFrame {
                 }
                 
                 else if ((list.getUserClass(user).equals("AnalysisUser"))){
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 //                    AnalysisMenuDelete m = new AnalysisMenuDelete();    //Creates Analysis menu object
        //             m.setVisible(true); //Sets visibility of m to true 
-=======
-=======
->>>>>>> 1a623ebd205b7d993c811a605f9e9568b440f0f1
+
                     AnalysisMenu m = new AnalysisMenu();    //Creates Analysis menu object
                     m.setVisible(true); //Sets visibility of m to true 
->>>>>>> 1a623ebd205b7d993c811a605f9e9568b440f0f1
+
                     this.dispose(); //disposes of login menu window
                 }
                 
