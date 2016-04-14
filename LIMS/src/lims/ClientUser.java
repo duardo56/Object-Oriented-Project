@@ -10,6 +10,7 @@ package lims;
  * @author reticent
  */
 public class ClientUser extends User{
+    //TODO: Add and implement companyName
     
     //Defualt Constructor
     public ClientUser(String username, String password, String firstName, String lastName){

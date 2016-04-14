@@ -16,6 +16,7 @@ import java.util.Hashtable;
  */
 public class UserList implements Serializable {
     
+    private static final long serialVersionUID = 1L;
     
     private Hashtable<String, User> list = new Hashtable<String, User>();
     
