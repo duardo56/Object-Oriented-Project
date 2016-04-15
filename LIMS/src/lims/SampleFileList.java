@@ -19,6 +19,7 @@ public class SampleFileList implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
+    //Declared Member Variables
     private Hashtable<String,ArrayList<SampleFile>> list = new Hashtable<>();  //Stores username (as String) w/ corresponding file
     private ArrayList<Integer> IDList = new ArrayList<Integer>();   //Stores ID's already used in system (Implemented to keep track of ID's)
     

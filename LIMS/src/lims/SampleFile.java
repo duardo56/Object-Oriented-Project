@@ -19,7 +19,7 @@ public class SampleFile implements Serializable{
     
     //Declared Member Variables
     private String analysis;    //Person working on the sample
-    private String status;  //Progress of the sample (rejected/work in progress/completed/needsApproval)
+    private String status;  //Progress of the sample (rejected/work in progress/completed/revision)
     private int sampleID;   //The identifier of the sample (9-digit number)
     private String testType;    //The type of sample (gas/water/metal/ground)
     private String company; //Name of company working on order
@@ -33,7 +33,7 @@ public class SampleFile implements Serializable{
     
     //Default w/6 parameters(String, int, String, String, String, String)
     public SampleFile(String testType, int sampleID, String company, double expectedFidelity,String dueDate, String sentDate){
-        this.status = "needsApproval";
+        this.status = "revision";
         this.sampleID = sampleID;
         this.company = company;
         this.expectedFidelity = expectedFidelity;
