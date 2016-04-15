@@ -11,11 +11,15 @@ package lims;
  */
 public class ClientMenu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ClientMenu
-     */
+    //Default Constructor for ClientMenu
     public ClientMenu() {
         initComponents();
+    }
+    
+    //Constructor w/1 parameter (String username)
+    public ClientMenu(String username) {
+        initComponents();
+        this.username = username;   //Sets username of current client
     }
 
     /**
@@ -154,6 +158,9 @@ public class ClientMenu extends javax.swing.JFrame {
         });
     }
 
+    //Declared member variables
+    private String username;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogOut;
     private javax.swing.JButton jButton1;

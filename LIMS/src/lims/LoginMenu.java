@@ -205,9 +205,6 @@ public class LoginMenu extends javax.swing.JFrame {
                 
                 else if ((list.getUserClass(user).equals("AnalysisUser"))){
 
-//                    AnalysisMenuDelete m = new AnalysisMenuDelete();    //Creates Analysis menu object
-       //             m.setVisible(true); //Sets visibility of m to true 
-
                     AnalysisMenu m = new AnalysisMenu();    //Creates Analysis menu object
                     m.setVisible(true); //Sets visibility of m to true 
 
@@ -215,7 +212,7 @@ public class LoginMenu extends javax.swing.JFrame {
                 }
                 
                 else if((list.getUserClass(user).equals("ClientUser"))){
-                    ClientMenu m = new ClientMenu();    //Creates client menu  pbject
+                    ClientMenu m = new ClientMenu(user);    //Creates client menu  pbject
                     m.setVisible(true); //Sets visibility of m to true
                     this.dispose(); //disposes of login menu window
                 }
