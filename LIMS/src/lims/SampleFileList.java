@@ -25,8 +25,7 @@ public class SampleFileList implements Serializable {
     //Default constructor (dummy)
     public SampleFileList(){}
     
-    //Create new file
-    //TODO: Needs fixing. Need to ensure that i don't overwrite the hastable by ensuring it checks for User and just adds to the list
+    //Creates new SampleFile object for user
     public void addFile(String username, String testType, String company, double expectedFidelity,String dueDate, String sentDate){
         
         ArrayList<SampleFile> t = new ArrayList<SampleFile>();  
@@ -35,15 +34,15 @@ public class SampleFileList implements Serializable {
         t.add(temp);
         
         //if user does not exist in hashtable
-        if (!checkUser(username))
-            list.put(username , t); //Adds user w/ file in the hashtable
+        if (!checkUser(username.toLowerCase()))
+            list.put(username.toLowerCase(), t); //Adds new user w/ SampleFile into the hashtable
         else
-            list.get(username).add(temp);   //Adds file to exisitng user in the hashtable
+            list.get(username.toLowerCase()).add(temp);   //Adds file to exisitng user into the hashtable
         
         t.clear();
     }
     
-    //Check if user exist
+    //Check if user exist within SimpleFileList Hashtable
     public boolean checkUser(String username){
         
         if(list.containsKey(username.toLowerCase()))
@@ -52,26 +51,69 @@ public class SampleFileList implements Serializable {
             return false;
     }
     
-    //Get SampleFile
+    //Get SampleFile (returns an arrayList of all SimpleFiles for all users)
     //TODO: Finish implementing algorithm to list all files from all Clients
-    public ArrayList getSampleFileList(){
+    public ArrayList getAllSampleFiles(){
+        
+        //Instanced Varibles
         ArrayList<SampleFile> arr = new ArrayList<SampleFile>();
         Enumeration uc = list.keys();
-        String temp;
+        String temp;    //Holds username
         
         while(uc.hasMoreElements()){
             
             temp = (String) uc.nextElement();   //Stores username
             
             for (int x =0 ; x < list.get(temp).size(); x++)
-                arr.add(list.get(temp).get(x));
+                arr.add(list.get(temp).get(x)); //Adds SampleFiles' object to arr
         }
-        
         return arr;
     }
     
-    //Gets User's SampleFiles
-    //private 
+    //Gets User's SampleFiles (All of them)
+    public ArrayList getAllUsersSampleFiles(String username){
+        
+        //Instanced Varibles
+        ArrayList<SampleFile> arr = new ArrayList<SampleFile>();
+        Enumeration uc = list.keys();
+        String temp;    //Holds username from hashtable
+        
+        while(uc.hasMoreElements()){
+            
+            temp = (String) uc.nextElement();   //Stores username
+            
+            if (temp.equalsIgnoreCase(username)){
+                for (int x =0 ; x < list.get(temp).size(); x++){
+                    arr.add(list.get(temp).get(x));
+                }
+                break;
+            }
+        }
+        return arr;
+    }
+    
+    //Gets Specific SampleFile Object of User
+    public SampleFile getUserSpecificSampleFile(int id){
+        
+        //Instanced Varibles
+        SampleFile file = null;  //Holds SampleFile obj
+        Enumeration uc = list.keys();
+        String temp;    //Holds username from hashtable
+        
+        while(uc.hasMoreElements()){
+            
+            temp = (String) uc.nextElement();   //Stores username
+
+                for (int x =0 ; x < list.get(temp).size(); x++){
+                    if (list.get(temp).get(x).getSampleID() == id){
+                        file = list.get(temp).get(x);
+                        break;
+                    }
+                }
+            
+        }
+        return file;
+    }
     
     //Creates new ID for current Sample
     private int createID(){
@@ -81,9 +123,9 @@ public class SampleFileList implements Serializable {
         Random rand = new Random();
         
         do{
-            temp = rand.nextInt(1000000000);    //Creates a random # b/w 0-999999999
+            temp = rand.nextInt(1000000000);    //Creates a random # b/w 0-999999999 (9-digits)
             
-        }while(checkSampleID(temp));
+        }while(checkSampleID(temp));    //Checks if sampleID has been taken
         
         return temp;
     }
@@ -91,6 +133,6 @@ public class SampleFileList implements Serializable {
     //Checks if there current ID is being used by another sample
     private boolean checkSampleID(int n){
         //Checks if current number n exist within list.
-        return IDList.equals(n);
+        return IDList.contains(n);
     }
 }
