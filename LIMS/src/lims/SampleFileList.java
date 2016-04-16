@@ -40,7 +40,7 @@ public class SampleFileList implements Serializable {
         else
             list.get(username.toLowerCase()).add(temp);   //Adds file to exisitng user into the hashtable
         
-        t.clear();
+        
     }
     
     //Check if user exist within SimpleFileList Hashtable

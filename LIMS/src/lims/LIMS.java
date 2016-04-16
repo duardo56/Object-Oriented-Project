@@ -65,6 +65,59 @@ public class LIMS {
 //        catch(ClassNotFoundException e){
 //            e.printStackTrace();
 //        }
+//        
+//            try{
+//                //Create SampleFileList for test purpose
+//                SampleFileList test = new SampleFileList();
+//                test.addFile("Number1", "Gas", "TestComp", 68.0, "12/12/2012", "10/10/2010");
+//                test.addFile("Number1", "Solid", "TestSolidComp", 68.0, "09/06/2012", "06/12/2010");
+//                test.addFile("Number2", "Solid", "TestComp2", 50.0, "10/02/2014", "7/06/2000");
+//                test.addFile("Number3", "Liquid", "DifferentComp", 99.0, "03/02/2020", "10/10/2010");
+//                
+//                //Saves SampleFileList.bin
+//                File file = new File("SampleFileList");
+//                OutputStream fileOutputStream = new FileOutputStream(file);
+//                ObjectOutput outputStream = new ObjectOutputStream(fileOutputStream);
+//                outputStream.writeObject(test);
+//                
+//                System.out.println("I've stored the SampleFileList object into the file: " + file.getName());
+//            
+//                Retrieves and displays UserList.bin
+//                FileInputStream fInput = new FileInputStream("SampleFileList");
+//                ObjectInputStream ois = new ObjectInputStream(fInput);
+//                SampleFileList testing = (SampleFileList)ois.readObject();
+//                
+//                ArrayList<SampleFile> t =  testing.getAllSampleFiles();
+//                ArrayList<SampleFile> userSpec =  testing.getAllUsersSampleFiles("Number1");
+//                
+//                
+//                System.out.println("Current Size of SampleList: " + t.size());
+//                System.out.println(t.get(0).getCompany());
+//                System.out.println(t.get(1).getCompany());
+//                System.out.println(t.get(2).getCompany());
+//                System.out.println(t.get(3).getCompany());
+//                
+//                System.out.println("Testing Get User files (Number1)..." );
+//                System.out.println(userSpec.size());
+//                System.out.println(userSpec.get(0).getCompany());
+//                System.out.println(userSpec.get(1).getCompany());
+//                System.out.println(userSpec.get(1).getSampleID());
+//                
+//                System.out.println("Testing Find Specific File(Number1)...");
+//                System.out.println(testing.getUserSpecificSampleFile(882678991).getCompany());
+//                
+//                
+//            }
+//            catch (FileNotFoundException e){
+//                e.printStackTrace();
+//            }
+//            catch (IOException e){
+//                e.printStackTrace();
+//            }
+//            catch(ClassNotFoundException e){
+//                e.printStackTrace();
+//            }
+            
         //****************************************************************
         //*********************End of Testing****************************
         

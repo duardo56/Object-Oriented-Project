@@ -89,9 +89,10 @@ public class ManagementMenu extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane6 = new javax.swing.JScrollPane();
-        tableWorkOrder2 = new javax.swing.JTable();
+        tblWorkOrder = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
+        btnAcceptChanges = new javax.swing.JButton();
+        btnUpdateTable = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -176,7 +177,7 @@ public class ManagementMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -274,7 +275,7 @@ public class ManagementMenu extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 292, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 492, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,8 +323,8 @@ public class ManagementMenu extends javax.swing.JFrame {
 
         SampleView.addTab("View Clients", jPanel2);
 
-        tableWorkOrder2.setAutoCreateRowSorter(true);
-        tableWorkOrder2.setModel(new javax.swing.table.DefaultTableModel(
+        tblWorkOrder.setAutoCreateRowSorter(true);
+        tblWorkOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null},
@@ -395,28 +396,41 @@ public class ManagementMenu extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tableWorkOrder2.setFocusCycleRoot(true);
-        jScrollPane6.setViewportView(tableWorkOrder2);
+        tblWorkOrder.setFocusCycleRoot(true);
+        jScrollPane6.setViewportView(tblWorkOrder);
 
         jSplitPane1.setRightComponent(jScrollPane6);
 
-        jButton3.setText("jButton3");
+        btnAcceptChanges.setText("Accept");
+        btnAcceptChanges.setToolTipText("Accept Changes in Table");
+        btnAcceptChanges.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAcceptChangesActionPerformed(evt);
+            }
+        });
+
+        btnUpdateTable.setText("Update");
+        btnUpdateTable.setToolTipText("Updates table");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addContainerGap())
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAcceptChanges, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnUpdateTable, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(jButton3)
-                .addContainerGap(461, Short.MAX_VALUE))
+                .addComponent(btnAcceptChanges)
+                .addGap(18, 18, 18)
+                .addComponent(btnUpdateTable)
+                .addContainerGap(420, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel3);
@@ -501,6 +515,12 @@ public class ManagementMenu extends javax.swing.JFrame {
         */
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnAcceptChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptChangesActionPerformed
+        // TODO add your handling code here:
+        javax.swing.JOptionPane.showMessageDialog(null, tblWorkOrder.getModel().getValueAt(0, 2));//Gets value at row x column
+       
+    }//GEN-LAST:event_btnAcceptChangesActionPerformed
+
      
     //Populate the Jlist with Client Users
     private void fillClientList(){
@@ -513,6 +533,13 @@ public class ManagementMenu extends javax.swing.JFrame {
         listClients.setModel(listModel); //adds elements to the JList
     }
     
+    //****************************************************************
+    //Populates the JTable in 
+    private void fillJTable(){
+        
+        
+    }
+    
     //Declared variable
     private ArrayList <String> userNames; //Holds users that are clients of the system
     private UserList list;  //Holds UserList object
@@ -521,9 +548,10 @@ public class ManagementMenu extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane SampleView;
+    private javax.swing.JButton btnAcceptChanges;
+    private javax.swing.JButton btnUpdateTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
@@ -559,6 +587,6 @@ public class ManagementMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lblType;
     private javax.swing.JList<String> listClients;
     private javax.swing.JList<String> listSampleList;
-    private javax.swing.JTable tableWorkOrder2;
+    private javax.swing.JTable tblWorkOrder;
     // End of variables declaration//GEN-END:variables
 }
