@@ -142,7 +142,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" pref="526" max="32767" attributes="0"/>
+                              <Component id="jScrollPane1" pref="676" max="32767" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
@@ -363,7 +363,7 @@
                           <Component id="jLabel5" min="-2" pref="158" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" pref="195" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="492" max="32767" attributes="0"/>
+                      <EmptySpace pref="642" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -544,13 +544,15 @@
                         <Column editable="true" title="Status" type="java.lang.String"/>
                         <Column editable="false" title="Company" type="java.lang.String"/>
                         <Column editable="false" title="Test Type" type="java.lang.String"/>
-                        <Column editable="false" title="Fidelity" type="java.lang.Double"/>
+                        <Column editable="false" title="Expected Fidelity" type="java.lang.Double"/>
                         <Column editable="false" title="Due Date" type="java.lang.String"/>
                         <Column editable="false" title="Sent Date" type="java.lang.String"/>
                         <Column editable="false" title="Received Date" type="java.lang.String"/>
                         <Column editable="false" title="Completed Date" type="java.lang.String"/>
                       </Table>
                     </Property>
+                    <Property name="autoResizeMode" type="int" value="4"/>
+                    <Property name="autoscrolls" type="boolean" value="false"/>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
@@ -663,6 +665,9 @@
                     <Property name="text" type="java.lang.String" value="Update"/>
                     <Property name="toolTipText" type="java.lang.String" value="Updates table"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateTableActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

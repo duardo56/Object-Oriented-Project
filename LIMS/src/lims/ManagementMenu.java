@@ -12,6 +12,8 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -27,11 +29,17 @@ public class ManagementMenu extends javax.swing.JFrame {
         //Initializes GUI
         initComponents();
         
-        //Read UserListTest file and store into UserList list object
+        //Reads UserListTest and SampleFileList file 
+        //and store into UserList list object and SampleFileList object
         try{
             FileInputStream fInput = new FileInputStream("UserListTest");
             ObjectInputStream ois = new ObjectInputStream(fInput);
             list = (UserList)ois.readObject();
+            
+            fInput = new FileInputStream("SampleFileList");
+            ois = new ObjectInputStream(fInput);
+            sampleList =  (SampleFileList)ois.readObject();
+            
         }
         catch (FileNotFoundException e){
             e.printStackTrace();
@@ -43,6 +51,8 @@ public class ManagementMenu extends javax.swing.JFrame {
             e.printStackTrace();
         }
         
+        //Fills tables with proper information
+        fillJTable();
         fillClientList();
         
     }
@@ -177,7 +187,7 @@ public class ManagementMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -275,7 +285,7 @@ public class ManagementMenu extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 492, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 642, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -378,7 +388,7 @@ public class ManagementMenu extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Sample ID", "Analysis", "Status", "Company", "Test Type", "Fidelity", "Due Date", "Sent Date", "Received Date", "Completed Date"
+                "Sample ID", "Analysis", "Status", "Company", "Test Type", "Expected Fidelity", "Due Date", "Sent Date", "Received Date", "Completed Date"
             }
         ) {
             Class[] types = new Class [] {
@@ -396,6 +406,8 @@ public class ManagementMenu extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblWorkOrder.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tblWorkOrder.setAutoscrolls(false);
         tblWorkOrder.setFocusCycleRoot(true);
         jScrollPane6.setViewportView(tblWorkOrder);
 
@@ -411,6 +423,11 @@ public class ManagementMenu extends javax.swing.JFrame {
 
         btnUpdateTable.setText("Update");
         btnUpdateTable.setToolTipText("Updates table");
+        btnUpdateTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateTableActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -516,14 +533,23 @@ public class ManagementMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAcceptChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptChangesActionPerformed
-        // TODO add your handling code here:
-        javax.swing.JOptionPane.showMessageDialog(null, tblWorkOrder.getModel().getValueAt(0, 2));//Gets value at row x column
+       // TODO add your handling code here:
+       fillJTable();
+       ArrayList <SampleFile> fileList = sampleList.getAllSampleFiles();   //Holds all Sample Files
+       javax.swing.JOptionPane.showMessageDialog(null, tblWorkOrder.getModel().getValueAt(0, 2));//Gets value at row x column
+       tblWorkOrder.getModel().setValueAt(fileList.get(0).getSampleID(), 0, 0);
        
     }//GEN-LAST:event_btnAcceptChangesActionPerformed
 
+    private void btnUpdateTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateTableActionPerformed
+        fillJTable();
+    }//GEN-LAST:event_btnUpdateTableActionPerformed
+
      
-    //Populate the Jlist with Client Users
+    //Populate the Jlist with Client User's information
     private void fillClientList(){
+        
+        DefaultListModel listModel = new DefaultListModel();
         userNames = (list.getUsersWithCertainClass("ClientUser"));
         
         for (int x = 0; x < userNames.size(); x++){
@@ -537,13 +563,34 @@ public class ManagementMenu extends javax.swing.JFrame {
     //Populates the JTable in 
     private void fillJTable(){
         
+        //Instanced Variables
+        TableModel tbl = tblWorkOrder.getModel();
+        ArrayList <SampleFile> fileList = sampleList.getAllSampleFiles();   //Holds all Sample Files
+        
+        for (int x = 0; x < fileList.size();x++){
+            
+            tbl.setValueAt(fileList.get(x).getSampleID(), x, 0);
+            tbl.setValueAt(fileList.get(x).getAnalysis(), x, 1);
+            tbl.setValueAt(fileList.get(x).getStatus(), x, 2);
+            tbl.setValueAt(fileList.get(x).getCompany(), x, 3);
+            tbl.setValueAt(fileList.get(x).getTestType(), x, 4);
+            tbl.setValueAt(fileList.get(x).getExpectedFidelity(), x, 5);
+            tbl.setValueAt(fileList.get(x).getDueDate(), x, 6);
+            tbl.setValueAt(fileList.get(x).getSentDate(), x, 7);
+            tbl.setValueAt(fileList.get(x).getReceivedDate(), x, 8);
+            tbl.setValueAt(fileList.get(x).getCompletedDate(), x, 9);
+        }
+        
+        tblWorkOrder.setModel(tbl);
         
     }
     
     //Declared variable
+    private SampleFileList sampleList;  //Holds SampleFileList class
+    //private ArrayList <SampleFile> fileList;    //Holds SampleFileList ArrayList
     private ArrayList <String> userNames; //Holds users that are clients of the system
     private UserList list;  //Holds UserList object
-    private DefaultListModel listModel = new DefaultListModel();
+    //private DefaultListModel listModel = new DefaultListModel();
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
