@@ -5,6 +5,7 @@
  */
 package lims;
 
+import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -98,11 +100,11 @@ public class ManagementMenu extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jSplitPane1 = new javax.swing.JSplitPane();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        tblWorkOrder = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         btnAcceptChanges = new javax.swing.JButton();
         btnUpdateTable = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tblWorkOrder = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -187,7 +189,7 @@ public class ManagementMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -232,7 +234,7 @@ public class ManagementMenu extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblType, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -285,7 +287,7 @@ public class ManagementMenu extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 642, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 741, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,64 +330,31 @@ public class ManagementMenu extends javax.swing.JFrame {
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addContainerGap(248, Short.MAX_VALUE))
         );
 
         SampleView.addTab("View Clients", jPanel2);
 
+        btnAcceptChanges.setText("Accept");
+        btnAcceptChanges.setToolTipText("Accept Changes in Table");
+        btnAcceptChanges.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAcceptChangesActionPerformed(evt);
+            }
+        });
+
+        btnUpdateTable.setText("Update");
+        btnUpdateTable.setToolTipText("Updates table");
+        btnUpdateTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateTableActionPerformed(evt);
+            }
+        });
+
         tblWorkOrder.setAutoCreateRowSorter(true);
         tblWorkOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Sample ID", "Analysis", "Status", "Company", "Test Type", "Expected Fidelity", "Due Date", "Sent Date", "Received Date", "Completed Date"
@@ -408,46 +377,44 @@ public class ManagementMenu extends javax.swing.JFrame {
         });
         tblWorkOrder.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblWorkOrder.setAutoscrolls(false);
+        tblWorkOrder.setColumnSelectionAllowed(true);
         tblWorkOrder.setFocusCycleRoot(true);
+        tblWorkOrder.getTableHeader().setResizingAllowed(false);
+        tblWorkOrder.getTableHeader().setReorderingAllowed(false);
+        tblWorkOrder.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblWorkOrderKeyReleased(evt);
+            }
+        });
         jScrollPane6.setViewportView(tblWorkOrder);
-
-        jSplitPane1.setRightComponent(jScrollPane6);
-
-        btnAcceptChanges.setText("Accept");
-        btnAcceptChanges.setToolTipText("Accept Changes in Table");
-        btnAcceptChanges.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAcceptChangesActionPerformed(evt);
-            }
-        });
-
-        btnUpdateTable.setText("Update");
-        btnUpdateTable.setToolTipText("Updates table");
-        btnUpdateTable.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateTableActionPerformed(evt);
-            }
-        });
+        tblWorkOrder.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAcceptChanges, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnUpdateTable, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
-                .addGap(25, 25, 25))
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 1086, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(btnAcceptChanges)
-                .addGap(18, 18, 18)
-                .addComponent(btnUpdateTable)
-                .addContainerGap(420, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(btnAcceptChanges)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnUpdateTable))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel3);
@@ -533,19 +500,44 @@ public class ManagementMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAcceptChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptChangesActionPerformed
-       // TODO add your handling code here:
        fillJTable();
-       ArrayList <SampleFile> fileList = sampleList.getAllSampleFiles();   //Holds all Sample Files
-       javax.swing.JOptionPane.showMessageDialog(null, tblWorkOrder.getModel().getValueAt(0, 2));//Gets value at row x column
-       tblWorkOrder.getModel().setValueAt(fileList.get(0).getSampleID(), 0, 0);
-       
     }//GEN-LAST:event_btnAcceptChangesActionPerformed
 
     private void btnUpdateTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateTableActionPerformed
         fillJTable();
     }//GEN-LAST:event_btnUpdateTableActionPerformed
 
-     
+    private void tblWorkOrderKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblWorkOrderKeyReleased
+        
+        //Instanced Variables
+        ArrayList <SampleFile> fileList = sampleList.getAllSampleFiles(); 
+        row = tblWorkOrder.getSelectedRow();    //Holds current selected row
+        column = tblWorkOrder.getSelectedColumn();  //Holds current selected column
+        
+        try{
+            //Checks if button pressed is the Enter key
+            if (evt.getKeyChar() == KeyEvent.VK_ENTER){
+                
+                //Checks whether the selected row is less the File List size
+                if (row < fileList.size()){
+                    
+                    //Compares current value in the selected cell 
+                    //with status of corresponding file for any changes.
+                    if (!(tblWorkOrder.getValueAt(row, column).equals(fileList.get(row).getStatus()))){
+                        //javax.swing.JOptionPane.showMessageDialog(null, "It does not equal to original.");
+                        
+                    }
+                    else{
+                        //javax.swing.JOptionPane.showMessageDialog(null, "It does equal to original.");
+                    }
+                }
+            }
+        }
+        catch (Exception e){
+            javax.swing.JOptionPane.showMessageDialog(null, "Array is out of bounds");
+        }
+    }//GEN-LAST:event_tblWorkOrderKeyReleased
+
     //Populate the Jlist with Client User's information
     private void fillClientList(){
         
@@ -564,25 +556,44 @@ public class ManagementMenu extends javax.swing.JFrame {
     private void fillJTable(){
         
         //Instanced Variables
-        TableModel tbl = tblWorkOrder.getModel();
+        DefaultTableModel tbl = (DefaultTableModel)tblWorkOrder.getModel();
+        
+        //TableModel tbl = tblWorkOrder.getModel();
         ArrayList <SampleFile> fileList = sampleList.getAllSampleFiles();   //Holds all Sample Files
         
         for (int x = 0; x < fileList.size();x++){
             
-            tbl.setValueAt(fileList.get(x).getSampleID(), x, 0);
-            tbl.setValueAt(fileList.get(x).getAnalysis(), x, 1);
-            tbl.setValueAt(fileList.get(x).getStatus(), x, 2);
-            tbl.setValueAt(fileList.get(x).getCompany(), x, 3);
-            tbl.setValueAt(fileList.get(x).getTestType(), x, 4);
-            tbl.setValueAt(fileList.get(x).getExpectedFidelity(), x, 5);
-            tbl.setValueAt(fileList.get(x).getDueDate(), x, 6);
-            tbl.setValueAt(fileList.get(x).getSentDate(), x, 7);
-            tbl.setValueAt(fileList.get(x).getReceivedDate(), x, 8);
-            tbl.setValueAt(fileList.get(x).getCompletedDate(), x, 9);
+            int ID = fileList.get(x).getSampleID();
+            String analysis = fileList.get(x).getAnalysis();
+            String getStatus = fileList.get(x).getStatus();
+            String company = fileList.get(x).getCompany();
+            String testType = fileList.get(x).getTestType();
+            double expFidelity = fileList.get(x).getExpectedFidelity();
+            String dueDate = fileList.get(x).getDueDate();
+            String sentDate = fileList.get(x).getSentDate();
+            String recDate = fileList.get(x).getReceivedDate();
+            String compDate = fileList.get(x).getCompletedDate();
+            
+            Object [] arr = {ID, analysis, getStatus,company, testType, expFidelity,
+                             dueDate, sentDate, recDate, compDate};
+            
+            tbl.addRow(arr);
+            
+//            tbl.setValueAt(fileList.get(x).getSampleID(), x, 0);
+//            tbl.setValueAt(fileList.get(x).getAnalysis(), x, 1);
+//            tbl.setValueAt(fileList.get(x).getStatus(), x, 2);
+//            tbl.setValueAt(fileList.get(x).getCompany(), x, 3);
+//            tbl.setValueAt(fileList.get(x).getTestType(), x, 4);
+//            tbl.setValueAt(fileList.get(x).getExpectedFidelity(), x, 5);
+//            tbl.setValueAt(fileList.get(x).getDueDate(), x, 6);
+//            tbl.setValueAt(fileList.get(x).getSentDate(), x, 7);
+//            tbl.setValueAt(fileList.get(x).getReceivedDate(), x, 8);
+//            tbl.setValueAt(fileList.get(x).getCompletedDate(), x, 9);
+//            
+//            
         }
         
         tblWorkOrder.setModel(tbl);
-        
     }
     
     //Declared variable
@@ -590,6 +601,8 @@ public class ManagementMenu extends javax.swing.JFrame {
     //private ArrayList <SampleFile> fileList;    //Holds SampleFileList ArrayList
     private ArrayList <String> userNames; //Holds users that are clients of the system
     private UserList list;  //Holds UserList object
+    private int row;    //Current Clicked row
+    private int column; //Current Clicked Column
     //private DefaultListModel listModel = new DefaultListModel();
     
     
