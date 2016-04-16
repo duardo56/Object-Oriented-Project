@@ -561,7 +561,10 @@ public class ManagementMenu extends javax.swing.JFrame {
         //TableModel tbl = tblWorkOrder.getModel();
         ArrayList <SampleFile> fileList = sampleList.getAllSampleFiles();   //Holds all Sample Files
         
-        for (int x = 0; x < fileList.size();x++){
+        
+        
+        //Stores each variable from corresponding SampleFile into an Object arr to add to the JTable row
+        for (int x = tblWorkOrder.getRowCount(); x < fileList.size();x++){
             
             int ID = fileList.get(x).getSampleID();
             String analysis = fileList.get(x).getAnalysis();
