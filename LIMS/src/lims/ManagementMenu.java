@@ -105,6 +105,7 @@ public class ManagementMenu extends javax.swing.JFrame {
         btnUpdateTable = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         tblWorkOrder = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -189,7 +190,7 @@ public class ManagementMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 817, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 895, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -287,7 +288,7 @@ public class ManagementMenu extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 783, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 861, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -419,6 +420,19 @@ public class ManagementMenu extends javax.swing.JFrame {
 
         jSplitPane1.setLeftComponent(jPanel3);
 
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 174, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 548, Short.MAX_VALUE)
+        );
+
+        jSplitPane1.setRightComponent(jPanel4);
+
         SampleView.addTab("Manage Work Order", jSplitPane1);
 
         jMenu1.setText("Menu");
@@ -507,7 +521,29 @@ public class ManagementMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAcceptChangesActionPerformed
 
     private void btnUpdateTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateTableActionPerformed
+         try{
+            FileInputStream fInput = new FileInputStream("UserListTest");
+            ObjectInputStream ois = new ObjectInputStream(fInput);
+            list = (UserList)ois.readObject();
+            
+            fInput = new FileInputStream("SampleFileList");
+            ois = new ObjectInputStream(fInput);
+            sampleList =  (SampleFileList)ois.readObject();
+            
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        catch(ClassNotFoundException e){
+            e.printStackTrace();
+        }
+         
         fillJTable();
+        fillClientList();
+        
     }//GEN-LAST:event_btnUpdateTableActionPerformed
 
     private void tblWorkOrderKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblWorkOrderKeyReleased
@@ -553,6 +589,10 @@ public class ManagementMenu extends javax.swing.JFrame {
                                 statusHolder.set(index, "Rejected");
                         }
                     }
+                }
+                //If the analysis column is currently selected
+                else if (column == 1){
+                    
                 }
             }
         }
@@ -647,6 +687,7 @@ public class ManagementMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
