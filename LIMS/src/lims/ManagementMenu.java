@@ -189,7 +189,7 @@ public class ManagementMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 817, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -287,7 +287,7 @@ public class ManagementMenu extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 741, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 783, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,7 +398,7 @@ public class ManagementMenu extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAcceptChanges, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnUpdateTable, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
-                .addGap(31, 31, 31)
+                .addGap(73, 73, 73)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 1086, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -500,7 +500,10 @@ public class ManagementMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAcceptChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptChangesActionPerformed
-       fillJTable();
+       
+        for (int x = 0; x < idHolder.size();x++ ){
+            sampleList.getUserSpecificSampleFile(idHolder.get(x)).setStatus(statusHolder.get(x));
+       }
     }//GEN-LAST:event_btnAcceptChangesActionPerformed
 
     private void btnUpdateTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateTableActionPerformed
@@ -513,22 +516,42 @@ public class ManagementMenu extends javax.swing.JFrame {
         ArrayList <SampleFile> fileList = sampleList.getAllSampleFiles(); 
         row = tblWorkOrder.getSelectedRow();    //Holds current selected row
         column = tblWorkOrder.getSelectedColumn();  //Holds current selected column
+        String currentInput = (String) tblWorkOrder.getValueAt(row, column);
+        int currentID = (int)tblWorkOrder.getValueAt(row, 0);
         
         try{
             //Checks if button pressed is the Enter key
             if (evt.getKeyChar() == KeyEvent.VK_ENTER){
                 
-                //Checks whether the selected row is less the File List size
-                if (row < fileList.size()){
+                //Checks if selected column is either Analysis (1) or Status(2)
+                if (column == 2){
                     
                     //Compares current value in the selected cell 
                     //with status of corresponding file for any changes.
-                    if (!(tblWorkOrder.getValueAt(row, column).equals(fileList.get(row).getStatus()))){
-                        //javax.swing.JOptionPane.showMessageDialog(null, "It does not equal to original.");
+                    if (currentInput.equalsIgnoreCase("approved") 
+                     || currentInput.equalsIgnoreCase("rejected")){
                         
-                    }
-                    else{
-                        //javax.swing.JOptionPane.showMessageDialog(null, "It does equal to original.");
+                        //Checks to see if current selected ID exist in the idHolder ArrayList
+                        if (!(idHolder.contains(currentID))){
+                            idHolder.add(currentID);
+                            
+                            //If currentInput is equal to approved, then add WIP to the status
+                            if (currentInput.equalsIgnoreCase("approved"))
+                                statusHolder.add("WIP");
+                            else
+                                statusHolder.add("Rejected");
+                        }
+                        
+                        //If current sampleID exist within the ArrayList and management wants to change
+                        else{
+                            int index = idHolder.indexOf(currentID);    //holds index
+                            
+                            //If currentInput is equal to approved, then add WIP to the status
+                            if (currentInput.equalsIgnoreCase("approved"))
+                                statusHolder.set(index, "WIP");
+                            else
+                                statusHolder.set(index, "Rejected");
+                        }
                     }
                 }
             }
@@ -561,8 +584,6 @@ public class ManagementMenu extends javax.swing.JFrame {
         //TableModel tbl = tblWorkOrder.getModel();
         ArrayList <SampleFile> fileList = sampleList.getAllSampleFiles();   //Holds all Sample Files
         
-        
-        
         //Stores each variable from corresponding SampleFile into an Object arr to add to the JTable row
         for (int x = tblWorkOrder.getRowCount(); x < fileList.size();x++){
             
@@ -581,19 +602,6 @@ public class ManagementMenu extends javax.swing.JFrame {
                              dueDate, sentDate, recDate, compDate};
             
             tbl.addRow(arr);
-            
-//            tbl.setValueAt(fileList.get(x).getSampleID(), x, 0);
-//            tbl.setValueAt(fileList.get(x).getAnalysis(), x, 1);
-//            tbl.setValueAt(fileList.get(x).getStatus(), x, 2);
-//            tbl.setValueAt(fileList.get(x).getCompany(), x, 3);
-//            tbl.setValueAt(fileList.get(x).getTestType(), x, 4);
-//            tbl.setValueAt(fileList.get(x).getExpectedFidelity(), x, 5);
-//            tbl.setValueAt(fileList.get(x).getDueDate(), x, 6);
-//            tbl.setValueAt(fileList.get(x).getSentDate(), x, 7);
-//            tbl.setValueAt(fileList.get(x).getReceivedDate(), x, 8);
-//            tbl.setValueAt(fileList.get(x).getCompletedDate(), x, 9);
-//            
-//            
         }
         
         tblWorkOrder.setModel(tbl);
@@ -601,7 +609,8 @@ public class ManagementMenu extends javax.swing.JFrame {
     
     //Declared variable
     private SampleFileList sampleList;  //Holds SampleFileList class
-    //private ArrayList <SampleFile> fileList;    //Holds SampleFileList ArrayList
+    private ArrayList <String> statusHolder = new ArrayList<String>();
+    private ArrayList <Integer> idHolder = new ArrayList<Integer>();
     private ArrayList <String> userNames; //Holds users that are clients of the system
     private UserList list;  //Holds UserList object
     private int row;    //Current Clicked row
