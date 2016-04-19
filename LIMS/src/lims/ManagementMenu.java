@@ -116,7 +116,7 @@ public class ManagementMenu extends javax.swing.JFrame {
         lblPNumber = new javax.swing.JLabel();
         lblComp = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        listSampleIDClient = new javax.swing.JList<>();
+        jList1 = new javax.swing.JList<>();
         jLabel16 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -422,7 +422,7 @@ public class ManagementMenu extends javax.swing.JFrame {
 
         lblComp.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
-        jScrollPane4.setViewportView(listSampleIDClient);
+        jScrollPane4.setViewportView(jList1);
 
         jLabel16.setText("Sample ID's ");
 
@@ -538,6 +538,8 @@ public class ManagementMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //*************************************************************
+    //Logout from current Session back to login Menu
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
 
         this.dispose();
@@ -546,13 +548,32 @@ public class ManagementMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     //*************************************************************
-    //Exit from Menu
+    //Exit from LIMS System
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    //*************************************************************
+    //View Clients Clients List mouse click event
     private void listClientsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listClientsMouseClicked
+        
+        //Instanced Member Variables
         JList source =(javax.swing.JList)evt.getSource();
+        int index = source.getSelectedIndex();  //Holds currently selected index of the list
+        ClientUser temp = (ClientUser)list.getUser(clientUsers.get(index));
+        
+        lblLName.setText(list.getUser(clientUsers.get(index)).getLastName());
+        lblFName.setText(list.getUser(clientUsers.get(index)).getFirstName());
+        lblPNumber.setText(list.getUser(clientUsers.get(index)).getPhoneNumber());
+        lblComp.setText(temp.getCompanyName());
+        
+        
+        
+        for (int x = 0; x < clientUsers.size(); x++){
+            
+           System.out.println(source.getSelectedIndex());   //Works (TESTING)
+           list.getUser(clientUsers.get(x)).getLastName();
+        }
 
         //javax.swing.JOptionPane.showMessageDialog(null, source.getSelectedValue().toString() );
     }//GEN-LAST:event_listClientsMouseClicked
@@ -731,18 +752,24 @@ public class ManagementMenu extends javax.swing.JFrame {
     private void fillClientList(){
         
         //Instanced Member Variables
-        DefaultListModel listModel = new DefaultListModel();
+        DefaultListModel listModel1 = new DefaultListModel();
+        DefaultListModel listModel2 = new DefaultListModel();
+        
         clientUsers = (list.getUsersWithCertainClass("ClientUser"));
         analysistUsers =(list.getUsersWithCertainClass("AnalysisUser"));
         
         for (int x = 0; x < clientUsers.size(); x++){
             
-            listModel.addElement(list.getUser(clientUsers.get(x)).getLastName()+ ", "+list.getUser(clientUsers.get(x)).getFirstName());
+            listModel1.addElement(list.getUser(clientUsers.get(x)).getLastName()+ ", "+list.getUser(clientUsers.get(x)).getFirstName());   
         }
         
-        //adds elements to the JList
-        listAnalysist.setModel(listModel);
-        listClients.setModel(listModel); 
+        
+        for (int x = 0; x < analysistUsers.size(); x++){
+            
+            listModel2.addElement(list.getUser(analysistUsers.get(x)).getLastName()+ ", "+list.getUser(analysistUsers.get(x)).getFirstName());
+        } 
+        listClients.setModel(listModel1);
+        listAnalysist.setModel(listModel2);
     }
     
     //****************************************************************
@@ -784,7 +811,9 @@ public class ManagementMenu extends javax.swing.JFrame {
     private ArrayList <Integer> idHolder = new ArrayList<Integer>();
     private ArrayList <String> clientUsers; //Holds users that are clients of the system
     private ArrayList <String> analysistUsers; //Holds users that are clients of the system
-    private UserList list;  //Holds UserList object
+    private UserList list;  //Holds UserList (specifically Clients) object
+    
+    
     private int row;    //Current Clicked row
     private int column; //Current Clicked Column
     //private DefaultListModel listModel = new DefaultListModel();
@@ -811,6 +840,7 @@ public class ManagementMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -837,7 +867,6 @@ public class ManagementMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lblType;
     private javax.swing.JList<String> listAnalysist;
     private javax.swing.JList<String> listClients;
-    private javax.swing.JList<String> listSampleIDClient;
     private javax.swing.JList<String> listSampleList;
     private javax.swing.JTable tblWorkOrder;
     // End of variables declaration//GEN-END:variables

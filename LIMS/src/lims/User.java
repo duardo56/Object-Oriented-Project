@@ -19,6 +19,7 @@ public class User implements Serializable {
     private String password;    //Stores user's password (Needs to encrypt password)
     private String firstName;   //Stores user's first name
     private String lastName;    //Stores user's last name
+    private String phoneNumber; //Stores user's phone number
     
     //Constructor w/ 2 parameters (String, String)
     public User(String username, String password){
@@ -44,6 +45,16 @@ public class User implements Serializable {
     //Get Last name
     public String getLastName(){
         return lastName;
+    }
+    
+    //Get Phone Number
+    public String getPhoneNumber(){
+        return phoneNumber;
+    }
+    
+    //Set Phone Number
+    public void setPhoneNumber(String phoneNumber){
+        this.phoneNumber = phoneNumber;
     }
     
     //Set Username

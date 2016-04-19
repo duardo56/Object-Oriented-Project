@@ -10,12 +10,22 @@ package lims;
  * @author reticent
  */
 public class ClientUser extends User{
-    //TODO: Add and implement companyName
+    
+    //Declared Member Variables
+    private String companyName; //Holds client user's company name
     
     //Defualt Constructor
     public ClientUser(String username, String password, String firstName, String lastName){
         super(username, password);
         this.setFirstName(firstName);
         this.setLastName(lastName);
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 }
