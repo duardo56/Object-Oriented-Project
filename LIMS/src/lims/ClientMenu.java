@@ -50,6 +50,7 @@ public class ClientMenu extends javax.swing.JFrame {
         DateInput = new javax.swing.JTextField();
         FidelityGoal = new javax.swing.JTextField();
         CompanyName = new javax.swing.JTextField();
+        submitBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -117,6 +118,13 @@ public class ClientMenu extends javax.swing.JFrame {
             }
         });
 
+        submitBtn.setText("Submit");
+        submitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -164,6 +172,10 @@ public class ClientMenu extends javax.swing.JFrame {
                     .addComponent(FidelityGoal, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(CompanyName, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap(132, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(submitBtn)
+                .addGap(41, 41, 41))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,7 +212,9 @@ public class ClientMenu extends javax.swing.JFrame {
                         .addGap(13, 13, 13)
                         .addComponent(jLabel4))
                     .addComponent(SampleType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addComponent(submitBtn)
+                .addGap(15, 15, 15))
         );
 
         jTabbedPane4.addTab("Input Work Order", jPanel1);
@@ -370,6 +384,10 @@ public class ClientMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_DateInputActionPerformed
 
+    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
+
+    }//GEN-LAST:event_submitBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -442,5 +460,6 @@ public class ClientMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblType;
     private javax.swing.JList<String> listSampleList;
+    private javax.swing.JButton submitBtn;
     // End of variables declaration//GEN-END:variables
 }
