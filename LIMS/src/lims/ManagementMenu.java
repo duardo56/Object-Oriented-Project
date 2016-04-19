@@ -60,8 +60,7 @@ public class ManagementMenu extends javax.swing.JFrame {
         
         //Fills tables with proper information
         fillJTable();
-        fillClientList();
-        
+        fillClientList(); 
     }
 
     /**
@@ -116,7 +115,7 @@ public class ManagementMenu extends javax.swing.JFrame {
         lblPNumber = new javax.swing.JLabel();
         lblComp = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        listUFiles = new javax.swing.JList<>();
         jLabel16 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -422,9 +421,9 @@ public class ManagementMenu extends javax.swing.JFrame {
 
         lblComp.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
-        jScrollPane4.setViewportView(jList1);
+        jScrollPane4.setViewportView(listUFiles);
 
-        jLabel16.setText("Sample ID's ");
+        jLabel16.setText("Sample ID ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -446,7 +445,7 @@ public class ManagementMenu extends javax.swing.JFrame {
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel11))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblComp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblPNumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -455,12 +454,11 @@ public class ManagementMenu extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(53, 53, 53)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                        .addComponent(jLabel16)
-                        .addGap(520, 520, 520))))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(jLabel16)))
+                .addContainerGap(490, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -560,22 +558,23 @@ public class ManagementMenu extends javax.swing.JFrame {
         //Instanced Member Variables
         JList source =(javax.swing.JList)evt.getSource();
         int index = source.getSelectedIndex();  //Holds currently selected index of the list
-        ClientUser temp = (ClientUser)list.getUser(clientUsers.get(index));
+        ClientUser temp = (ClientUser)list.getUser(clientUsers.get(index)); //Stores ClientUser Object
+        DefaultListModel listModel = new DefaultListModel();
+        ArrayList<SampleFile> tempFile = sampleList.getAllUsersSampleFiles(temp.getUsername());
         
-        lblLName.setText(list.getUser(clientUsers.get(index)).getLastName());
-        lblFName.setText(list.getUser(clientUsers.get(index)).getFirstName());
-        lblPNumber.setText(list.getUser(clientUsers.get(index)).getPhoneNumber());
-        lblComp.setText(temp.getCompanyName());
+        //Sets and Displays each label
+        lblLName.setText(list.getUser(clientUsers.get(index)).getLastName());   //Get and Display Last Name of User
+        lblFName.setText(list.getUser(clientUsers.get(index)).getFirstName());  //Get and Display First Name of User
+        lblPNumber.setText(list.getUser(clientUsers.get(index)).getPhoneNumber());  //Get and Display Phone Number of User
+        lblComp.setText(temp.getCompanyName()); //Get and Display Company Name that user represents
         
-        
-        
-        for (int x = 0; x < clientUsers.size(); x++){
+        for (int x = 0; x < sampleList.getAllUsersSampleFiles(temp.getUsername()).size(); x++){
             
-           System.out.println(source.getSelectedIndex());   //Works (TESTING)
-           list.getUser(clientUsers.get(x)).getLastName();
+            listModel.addElement((int)tempFile.get(x).getSampleID());
         }
-
-        //javax.swing.JOptionPane.showMessageDialog(null, source.getSelectedValue().toString() );
+        
+        listUFiles.setModel(listModel);
+        
     }//GEN-LAST:event_listClientsMouseClicked
 
     //*************************************************************
@@ -811,13 +810,9 @@ public class ManagementMenu extends javax.swing.JFrame {
     private ArrayList <Integer> idHolder = new ArrayList<Integer>();
     private ArrayList <String> clientUsers; //Holds users that are clients of the system
     private ArrayList <String> analysistUsers; //Holds users that are clients of the system
-    private UserList list;  //Holds UserList (specifically Clients) object
-    
-    
+    private UserList list;  //Holds UserList (specifically Clients) object    
     private int row;    //Current Clicked row
-    private int column; //Current Clicked Column
-    //private DefaultListModel listModel = new DefaultListModel();
-    
+    private int column; //Current Clicked Column    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane SampleView;
@@ -840,7 +835,6 @@ public class ManagementMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -868,6 +862,7 @@ public class ManagementMenu extends javax.swing.JFrame {
     private javax.swing.JList<String> listAnalysist;
     private javax.swing.JList<String> listClients;
     private javax.swing.JList<String> listSampleList;
+    private javax.swing.JList<String> listUFiles;
     private javax.swing.JTable tblWorkOrder;
     // End of variables declaration//GEN-END:variables
 }

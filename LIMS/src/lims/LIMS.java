@@ -94,8 +94,6 @@ public class LIMS {
         
         MainMenu GUI = new MainMenu();
         GUI.setVisible(true);
-        
-        
     }
     
 }
