@@ -87,25 +87,25 @@ public class ManagementMenu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         lblType = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        listClients = new javax.swing.JList<>();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel3 = new javax.swing.JPanel();
         btnAcceptChanges = new javax.swing.JButton();
         btnUpdateTable = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         tblWorkOrder = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        listAnalysist = new javax.swing.JList<>();
+        jLabel9 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listClients = new javax.swing.JList<>();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -190,7 +190,7 @@ public class ManagementMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 895, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 733, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -235,7 +235,7 @@ public class ManagementMenu extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblType, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -249,92 +249,10 @@ public class ManagementMenu extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(76, 76, 76))))
+                        .addGap(70, 70, 70))))
         );
 
         SampleView.addTab("View Sample", jPanel1);
-
-        listClients.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                listClientsMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(listClients);
-
-        jLabel5.setText("Current List of Clients");
-
-        jLabel7.setText("First Name:");
-
-        jLabel8.setText("Last Name:");
-
-        jLabel9.setText("Company:");
-
-        jLabel10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-
-        jLabel11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-
-        jLabel12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-
-        jLabel13.setText("Phone #:");
-
-        jLabel14.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 861, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel9)
-                                .addComponent(jLabel8)
-                                .addComponent(jLabel13)))
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(248, Short.MAX_VALUE))
-        );
-
-        SampleView.addTab("View Clients", jPanel2);
 
         btnAcceptChanges.setText("Accept");
         btnAcceptChanges.setToolTipText("Accept Changes in Table");
@@ -390,16 +308,42 @@ public class ManagementMenu extends javax.swing.JFrame {
         jScrollPane6.setViewportView(tblWorkOrder);
         tblWorkOrder.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
+        listAnalysist.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(listAnalysist);
+
+        jLabel9.setText("List of Analysist");
+
+        jButton3.setText("Add Analysist to Order");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnAcceptChanges, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnUpdateTable, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
-                .addGap(73, 73, 73)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnAcceptChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnUpdateTable, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel9))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 1086, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -410,8 +354,14 @@ public class ManagementMenu extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(btnAcceptChanges)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnUpdateTable)
+                        .addGap(53, 53, 53)
+                        .addComponent(jLabel9)
                         .addGap(18, 18, 18)
-                        .addComponent(btnUpdateTable))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -424,7 +374,7 @@ public class ManagementMenu extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 174, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -434,6 +384,62 @@ public class ManagementMenu extends javax.swing.JFrame {
         jSplitPane1.setRightComponent(jPanel4);
 
         SampleView.addTab("Manage Work Order", jSplitPane1);
+
+        listClients.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listClientsMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(listClients);
+
+        jLabel5.setText("Current List of Clients");
+
+        jLabel7.setText("First Name");
+
+        jLabel8.setText("Last Name:");
+
+        jLabel10.setText("Phone Number:");
+
+        jLabel11.setText("Company Name:");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(78, 78, 78)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11)))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(886, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel10)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel11)))
+                .addContainerGap(168, Short.MAX_VALUE))
+        );
+
+        SampleView.addTab("View Clients", jPanel2);
 
         jMenu1.setText("Menu");
 
@@ -463,7 +469,7 @@ public class ManagementMenu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(SampleView))
+                .addComponent(SampleView, javax.swing.GroupLayout.DEFAULT_SIZE, 1295, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -493,8 +499,100 @@ public class ManagementMenu extends javax.swing.JFrame {
     private void listClientsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listClientsMouseClicked
         JList source =(javax.swing.JList)evt.getSource();
 
-        javax.swing.JOptionPane.showMessageDialog(null, source.getSelectedValue().toString() );
+        //javax.swing.JOptionPane.showMessageDialog(null, source.getSelectedValue().toString() );
     }//GEN-LAST:event_listClientsMouseClicked
+
+    //After pressing the Enter button, this event runs in order to verify the change and store it
+    private void tblWorkOrderKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblWorkOrderKeyReleased
+
+        //Instanced Variables
+        ArrayList <SampleFile> fileList = sampleList.getAllSampleFiles();
+        row = tblWorkOrder.getSelectedRow();    //Holds current selected row
+        column = tblWorkOrder.getSelectedColumn();  //Holds current selected column
+        String currentInput = (String) tblWorkOrder.getValueAt(row, column);
+        int currentID = (int)tblWorkOrder.getValueAt(row, 0);
+
+        try{
+            //Checks if button pressed is the Enter key
+            if (evt.getKeyChar() == KeyEvent.VK_ENTER){
+
+                //Checks if selected column is either Analysis (1) or Status(2)
+                if (column == 2){
+
+                    //Compares current value in the selected cell
+                    //with status of corresponding file for any changes.
+                    if (currentInput.equalsIgnoreCase("approved")
+                        || currentInput.equalsIgnoreCase("rejected")){
+
+                        //Checks to see if current selected ID exist in the idHolder ArrayList
+                        if (!(idHolder.contains(currentID))){
+                            idHolder.add(currentID);
+
+                            //If currentInput is equal to approved, then add WIP to the status
+                            if (currentInput.equalsIgnoreCase("approved"))
+                            statusHolder.add("WIP");
+                            else
+                            statusHolder.add("Rejected");
+                        }
+
+                        //If current sampleID exist within the ArrayList and management wants to change
+                        else{
+                            int index = idHolder.indexOf(currentID);    //holds index
+
+                            //If currentInput is equal to approved, then add WIP to the status
+                            if (currentInput.equalsIgnoreCase("approved"))
+                            statusHolder.set(index, "WIP");
+                            else
+                            statusHolder.set(index, "Rejected");
+                        }
+                    }
+                }
+                //If the analysis column is currently selected
+                else if (column == 1){
+
+                }
+            }
+        }
+        catch (Exception e){
+            javax.swing.JOptionPane.showMessageDialog(null, "Array is out of bounds");
+        }
+    }//GEN-LAST:event_tblWorkOrderKeyReleased
+
+    
+    //Updates the JTable
+    private void btnUpdateTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateTableActionPerformed
+        try{
+            FileInputStream fInput = new FileInputStream("UserListTest");
+            ObjectInputStream ois = new ObjectInputStream(fInput);
+            list = (UserList)ois.readObject();
+
+            fInput = new FileInputStream("SampleFileList");
+            ois = new ObjectInputStream(fInput);
+            sampleList =  (SampleFileList)ois.readObject();
+
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        catch(ClassNotFoundException e){
+            e.printStackTrace();
+        }
+
+        fillJTable();
+        fillClientList();
+
+    }//GEN-LAST:event_btnUpdateTableActionPerformed
+
+    //Writes the changes to corresponding files
+    private void btnAcceptChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptChangesActionPerformed
+
+        for (int x = 0; x < idHolder.size();x++ ){
+            sampleList.getUserSpecificSampleFile(idHolder.get(x)).setStatus(statusHolder.get(x));
+        }
+    }//GEN-LAST:event_btnAcceptChangesActionPerformed
 
     //Remove Button Method
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -513,105 +611,26 @@ public class ManagementMenu extends javax.swing.JFrame {
         */
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void btnAcceptChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptChangesActionPerformed
-       
-        for (int x = 0; x < idHolder.size();x++ ){
-            sampleList.getUserSpecificSampleFile(idHolder.get(x)).setStatus(statusHolder.get(x));
-       }
-    }//GEN-LAST:event_btnAcceptChangesActionPerformed
-
-    private void btnUpdateTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateTableActionPerformed
-         try{
-            FileInputStream fInput = new FileInputStream("UserListTest");
-            ObjectInputStream ois = new ObjectInputStream(fInput);
-            list = (UserList)ois.readObject();
-            
-            fInput = new FileInputStream("SampleFileList");
-            ois = new ObjectInputStream(fInput);
-            sampleList =  (SampleFileList)ois.readObject();
-            
-        }
-        catch (FileNotFoundException e){
-            e.printStackTrace();
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        catch(ClassNotFoundException e){
-            e.printStackTrace();
-        }
-         
-        fillJTable();
-        fillClientList();
-        
-    }//GEN-LAST:event_btnUpdateTableActionPerformed
-
-    private void tblWorkOrderKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblWorkOrderKeyReleased
-        
-        //Instanced Variables
-        ArrayList <SampleFile> fileList = sampleList.getAllSampleFiles(); 
-        row = tblWorkOrder.getSelectedRow();    //Holds current selected row
-        column = tblWorkOrder.getSelectedColumn();  //Holds current selected column
-        String currentInput = (String) tblWorkOrder.getValueAt(row, column);
-        int currentID = (int)tblWorkOrder.getValueAt(row, 0);
-        
-        try{
-            //Checks if button pressed is the Enter key
-            if (evt.getKeyChar() == KeyEvent.VK_ENTER){
-                
-                //Checks if selected column is either Analysis (1) or Status(2)
-                if (column == 2){
-                    
-                    //Compares current value in the selected cell 
-                    //with status of corresponding file for any changes.
-                    if (currentInput.equalsIgnoreCase("approved") 
-                     || currentInput.equalsIgnoreCase("rejected")){
-                        
-                        //Checks to see if current selected ID exist in the idHolder ArrayList
-                        if (!(idHolder.contains(currentID))){
-                            idHolder.add(currentID);
-                            
-                            //If currentInput is equal to approved, then add WIP to the status
-                            if (currentInput.equalsIgnoreCase("approved"))
-                                statusHolder.add("WIP");
-                            else
-                                statusHolder.add("Rejected");
-                        }
-                        
-                        //If current sampleID exist within the ArrayList and management wants to change
-                        else{
-                            int index = idHolder.indexOf(currentID);    //holds index
-                            
-                            //If currentInput is equal to approved, then add WIP to the status
-                            if (currentInput.equalsIgnoreCase("approved"))
-                                statusHolder.set(index, "WIP");
-                            else
-                                statusHolder.set(index, "Rejected");
-                        }
-                    }
-                }
-                //If the analysis column is currently selected
-                else if (column == 1){
-                    
-                }
-            }
-        }
-        catch (Exception e){
-            javax.swing.JOptionPane.showMessageDialog(null, "Array is out of bounds");
-        }
-    }//GEN-LAST:event_tblWorkOrderKeyReleased
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     //Populate the Jlist with Client User's information
     private void fillClientList(){
         
+        //Instanced Member Variables
         DefaultListModel listModel = new DefaultListModel();
-        userNames = (list.getUsersWithCertainClass("ClientUser"));
+        clientUsers = (list.getUsersWithCertainClass("ClientUser"));
+        analysistUsers =(list.getUsersWithCertainClass("AnalysisUser"));
         
-        for (int x = 0; x < userNames.size(); x++){
-            listModel.addElement(list.getUser(userNames.get(x)).getLastName()+ ", "+list.getUser(userNames.get(x)).getFirstName());
+        for (int x = 0; x < clientUsers.size(); x++){
+            
+            listModel.addElement(list.getUser(clientUsers.get(x)).getLastName()+ ", "+list.getUser(clientUsers.get(x)).getFirstName());
         }
         
-        listClients.setModel(listModel); //adds elements to the JList
+        //adds elements to the JList
+        listAnalysist.setModel(listModel);
+        listClients.setModel(listModel); 
     }
     
     //****************************************************************
@@ -651,7 +670,8 @@ public class ManagementMenu extends javax.swing.JFrame {
     private SampleFileList sampleList;  //Holds SampleFileList class
     private ArrayList <String> statusHolder = new ArrayList<String>();
     private ArrayList <Integer> idHolder = new ArrayList<Integer>();
-    private ArrayList <String> userNames; //Holds users that are clients of the system
+    private ArrayList <String> clientUsers; //Holds users that are clients of the system
+    private ArrayList <String> analysistUsers; //Holds users that are clients of the system
     private UserList list;  //Holds UserList object
     private int row;    //Current Clicked row
     private int column; //Current Clicked Column
@@ -664,14 +684,12 @@ public class ManagementMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnUpdateTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -692,12 +710,14 @@ public class ManagementMenu extends javax.swing.JFrame {
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel lblCompany;
     private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblType;
+    private javax.swing.JList<String> listAnalysist;
     private javax.swing.JList<String> listClients;
     private javax.swing.JList<String> listSampleList;
     private javax.swing.JTable tblWorkOrder;

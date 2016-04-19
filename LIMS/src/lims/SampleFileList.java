@@ -39,8 +39,6 @@ public class SampleFileList implements Serializable {
             list.put(username.toLowerCase(), t); //Adds new user w/ SampleFile into the hashtable
         else
             list.get(username.toLowerCase()).add(temp);   //Adds file to exisitng user into the hashtable
-        
-        
     }
     
     //Check if user exist within SimpleFileList Hashtable
@@ -111,7 +109,6 @@ public class SampleFileList implements Serializable {
                         break;
                     }
                 }
-            
         }
         return file;
     }
