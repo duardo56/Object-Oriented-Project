@@ -454,11 +454,12 @@ public class ManagementMenu extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(53, 53, 53)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(jLabel16)))
-                .addContainerGap(490, Short.MAX_VALUE))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                        .addComponent(jLabel16)
+                        .addGap(520, 520, 520))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -806,8 +807,8 @@ public class ManagementMenu extends javax.swing.JFrame {
     
     //Declared variable
     private SampleFileList sampleList;  //Holds SampleFileList class
-    private ArrayList <String> statusHolder = new ArrayList<String>();
-    private ArrayList <Integer> idHolder = new ArrayList<Integer>();
+    private ArrayList <String> statusHolder = new ArrayList<String>(); //Holds the changed status of the sample
+    private ArrayList <Integer> idHolder = new ArrayList<Integer>();    //Holds the changed sample 
     private ArrayList <String> clientUsers; //Holds users that are clients of the system
     private ArrayList <String> analysistUsers; //Holds users that are clients of the system
     private UserList list;  //Holds UserList (specifically Clients) object    
