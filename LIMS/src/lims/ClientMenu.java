@@ -442,11 +442,13 @@ public class ClientMenu extends javax.swing.JFrame {
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         String firstname = fName.getText();  
         String lastname = LName.getText();
+        String comp = CompanyName.getText(); 
+        
         
         //finish writing the code to input the information into the files 
         clientInfo.setFirstName(firstname);
         clientInfo.setLastName(lastname);
-       
+        userClient.setCompanyName(comp);
         
         
             
@@ -518,6 +520,8 @@ public class ClientMenu extends javax.swing.JFrame {
     private SampleFileList sampleList; //object for class 
     private SampleFile sampleFiles; //object for inputing the information via the client
     private User clientInfo ; // object for the user class 
+    private ClientUser userClient; //object for user client class 
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CompanyName;
