@@ -5,8 +5,14 @@
  */
 package lims;
 import java.util.ArrayList;
-    import javax.swing.table.DefaultTableModel;
-
+import javax.swing.table.DefaultTableModel;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.ObjectInputStream;
+import java.io.IOException;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author reticent
@@ -16,6 +22,23 @@ public class ClientMenu extends javax.swing.JFrame {
     //Default Constructor for ClientMenu
     public ClientMenu() {
         initComponents();
+            
+        try{
+            FileInputStream fInput = new FileInputStream("SampleFileList");
+            ObjectInputStream ois =  new ObjectInputStream(fInput);
+            sampleList = (SampleFileList)ois.readObject();
+            
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        catch(ClassNotFoundException e ){
+            e.printStackTrace();
+        }
+        
+        
         fillJTable();
         
     }
@@ -417,7 +440,17 @@ public class ClientMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_DateInputActionPerformed
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
+        String firstname = fName.getText();  
+        String lastname = LName.getText();
+        
+        //finish writing the code to input the information into the files 
+        clientInfo.setFirstName(firstname);
+        clientInfo.setLastName(lastname);
+       
+        
+        
             
+        
     }//GEN-LAST:event_submitBtnActionPerformed
 
     /**
@@ -455,16 +488,27 @@ public class ClientMenu extends javax.swing.JFrame {
         });
     }
 
-        //populate the JTable
+//        //populate the JTable
         private void fillJTable(){
-            DefaultTableModel tml = (DefaultTableModel)tblSampleTest.getModel();
+            DefaultTableModel tbl = (DefaultTableModel)tblSampleTest.getModel();
             
             ArrayList <SampleFile> fileList = sampleList.getAllSampleFiles();
             
             for( int x = tblSampleTest.getRowCount(); x < fileList.size(); x++){
                 
+                int ID  = fileList.get(x).getSampleID(); 
+                String getStatus = fileList.get(x).getStatus();
+                String testType = fileList.get(x).getTestType();
+                double expFidelity = fileList.get(x).getExpectedFidelity();
+                String dueDate = fileList.get(x).getDueDate();
+                String sentDate = fileList.get(x).getSentDate();
+                String compDate = fileList.get(x).getCompletedDate();
+                
+                
+                Object [] arr = {ID, getStatus, testType, expFidelity, dueDate, sentDate, compDate}; 
+                tbl.addRow(arr);
             }
-            
+           tblSampleTest.setModel(tbl);
         }
     
     
@@ -472,6 +516,8 @@ public class ClientMenu extends javax.swing.JFrame {
     //Declared member variables
     private String username;
     private SampleFileList sampleList; //object for class 
+    private SampleFile sampleFiles; //object for inputing the information via the client
+    private User clientInfo ; // object for the user class 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CompanyName;
