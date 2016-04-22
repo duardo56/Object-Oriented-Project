@@ -159,14 +159,14 @@ public class ManagementMenu extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Sample ID", "Analysis", "Status", "Company", "Test Type", "Expected Fidelity", "Due Date", "Sent Date", "Received Date", "Completed Date"
+                "Sample ID", "Analysist", "Status", "Company", "Test Type", "Expected Fidelity", "Due Date", "Sent Date", "Received Date", "Completed Date"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, false, false, false, false, false
+                false, true, true, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -613,23 +613,16 @@ public class ManagementMenu extends javax.swing.JFrame {
         
         //Instanced Member Variables
         DefaultListModel listModel1 = new DefaultListModel();
-  //      DefaultListModel listModel2 = new DefaultListModel();
+
         
         clientUsers = (list.getUsersWithCertainClass("ClientUser"));
-        analysistUsers = (list.getUsersWithCertainClass("AnalysisUser"));
-        
+       
         for (int x = 0; x < clientUsers.size(); x++){
             
             listModel1.addElement(list.getUser(clientUsers.get(x)).getUserID());   
         }
         
-//        
-//        for (int x = 0; x < analysistUsers.size(); x++){
-//            
-//            listModel2.addElement(list.getUser(analysistUsers.get(x)).getLastName()
-//                           + ", "+list.getUser(analysistUsers.get(x)).getFirstName() 
-//                           + "-" + list.getUser(analysistUsers.get(x)).getUserID());
-//        } 
+
         listClients.setModel(listModel1);
    //    listAnalysist.setModel(listModel2);
     }
@@ -647,19 +640,34 @@ public class ManagementMenu extends javax.swing.JFrame {
         //combobox to chooose sample types 
         JComboBox StatusComboBox = new JComboBox();
         JComboBox AnalystcomboBox = new JComboBox();
+        
+        //DefaultListModel analystModel = new DefaultListModel();
+        
+       //initiate combobox in the analyst cell 
+       TableColumn analystcoloumn = tblWorkOrder.getColumnModel().getColumn(1);
+       analystcoloumn.setCellEditor(new DefaultCellEditor(AnalystcomboBox));
        
         //initate combobox in the status cell
         TableColumn  StatusColoumn = tblWorkOrder.getColumnModel().getColumn(2);
        StatusColoumn.setCellEditor(new DefaultCellEditor(StatusComboBox));
         
-       //initiate combobox in the analyst cell 
-       TableColumn analystcoloumn = tblWorkOrder.getColumnModel().getColumn(1);
-       analystcoloumn.setCellEditor(new DefaultCellEditor(AnalystcomboBox));
+       
      
+       //add items for the status combobox
        StatusComboBox.addItem("        "); //empty string 
        StatusComboBox.addItem("Approved");
        StatusComboBox.addItem("Rejected");
-      
+       
+        analysistUsers = (list.getUsersWithCertainClass("AnalysisUser"));
+        
+       //populate the analyst combobox 
+    
+ 
+               
+        for (int x = 0; x < analysistUsers.size(); x++){
+            
+            AnalystcomboBox.addItem(list.getUser(analysistUsers.get(x)).getUserID());
+        } 
 
 
 
