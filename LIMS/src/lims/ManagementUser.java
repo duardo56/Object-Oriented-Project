@@ -12,8 +12,8 @@ package lims;
 public class ManagementUser extends User{
    
     //Defualt Constructor
-    public ManagementUser(String username, String password, String firstName, String lastName){
-        super(username, password);
+    public ManagementUser(String username, String password, String firstName, String lastName, int uniqueID){
+        super(username, password, uniqueID);
         this.setFirstName(firstName);
         this.setLastName(lastName);
     }

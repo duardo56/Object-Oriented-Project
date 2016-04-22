@@ -20,11 +20,13 @@ public class User implements Serializable {
     private String firstName;   //Stores user's first name
     private String lastName;    //Stores user's last name
     private String phoneNumber; //Stores user's phone number
+    private int userID;   //User's unique ID
     
-    //Constructor w/ 2 parameters (String, String)
-    public User(String username, String password){
+    //Constructor w/ 3 parameters (String, String)
+    public User(String username, String password, int userID){
         this.username = username;
         this.password = password;
+        this.userID = userID;
     }
     
     //Get Username 
@@ -50,6 +52,10 @@ public class User implements Serializable {
     //Get Phone Number
     public String getPhoneNumber(){
         return phoneNumber;
+    }
+    
+    public int getUserID(){
+        return this.userID;
     }
     
     //Set Phone Number

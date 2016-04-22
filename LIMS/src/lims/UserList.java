@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Random;
 
 /**
  *
@@ -19,6 +20,7 @@ public class UserList implements Serializable {
     private static final long serialVersionUID = 1L;
     
     private Hashtable<String, User> list = new Hashtable<String, User>();
+    private ArrayList<Integer> IDList = new ArrayList<Integer>();   //Stores ID's already used in system (Implemented to keep track of ID's)
     
     //Default Constructor
     public UserList(){}
@@ -26,16 +28,16 @@ public class UserList implements Serializable {
     //Adds user according to the status/type of user
     public void addUser(String username, String password, String firstName, String lastName, String status){
         if (status.equals("Management")){
-            User user = new ManagementUser(username.toLowerCase(), password,firstName, lastName);
+            User user = new ManagementUser(username.toLowerCase(), password,firstName, lastName,createID());
             list.put(username.toLowerCase(), user);
         }
         else if(status.equals("Analysis")){
-            User user = new AnalysisUser(username.toLowerCase(), password,firstName, lastName);
+            User user = new AnalysisUser(username.toLowerCase(), password,firstName, lastName, createID());
             list.put(username.toLowerCase(), user);
         }
         
         else if (status.equals("Client")){
-            User user = new ClientUser(username.toLowerCase(), password,firstName, lastName);
+            User user = new ClientUser(username.toLowerCase(), password,firstName, lastName, createID());
             list.put(username.toLowerCase(), user);
         }
     }
@@ -75,5 +77,25 @@ public class UserList implements Serializable {
         }
         
         return arr;
+    }
+    //Creates new ID for current Sample
+    private int createID(){
+        
+        //Instanced Variables
+        int temp = 0;   //Holds randomized ID Number (9-Digits Long)
+        Random rand = new Random();
+        
+        do{
+            temp = rand.nextInt(1000000000);    //Creates a random # b/w 0-999999999 (9-digits)
+            
+        }while(checkSampleID(temp));    //Checks if sampleID has been taken
+        
+        return temp;
+    }
+    
+    //Checks if there current ID is being used by another sample
+    private boolean checkSampleID(int n){
+        //Checks if current number n exist within list.
+        return IDList.contains(n);
     }
 }

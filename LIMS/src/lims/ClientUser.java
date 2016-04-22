@@ -15,8 +15,8 @@ public class ClientUser extends User{
     private String companyName; //Holds client user's company name
     
     //Defualt Constructor
-    public ClientUser(String username, String password, String firstName, String lastName){
-        super(username, password);
+    public ClientUser(String username, String password, String firstName, String lastName, int uniqueID){
+        super(username, password, uniqueID);
         this.setFirstName(firstName);
         this.setLastName(lastName);
     }
