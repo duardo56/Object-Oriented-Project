@@ -34,6 +34,7 @@ public class SampleFile implements Serializable{
     //Default w/6 parameters(String, int, String, String, String, String)
     public SampleFile(String testType, int sampleID, String company, double expectedFidelity,String dueDate, String sentDate){
         this.status = "revision";
+        this.testType = testType;
         this.sampleID = sampleID;
         this.company = company;
         this.expectedFidelity = expectedFidelity;

@@ -51,7 +51,6 @@ public class SampleFileList implements Serializable {
     }
     
     //Get SampleFile (returns an arrayList of all SimpleFiles for all users)
-    //TODO: Finish implementing algorithm to list all files from all Clients
     public ArrayList getAllSampleFiles(){
         
         //Instanced Varibles

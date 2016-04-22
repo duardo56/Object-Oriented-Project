@@ -27,7 +27,9 @@ public class ClientMenu extends javax.swing.JFrame {
     //Default Constructor for ClientMenu
     public ClientMenu() {
         initComponents();
-            
+        
+        username = "Client3";
+        
         try{
             FileInputStream fInput = new FileInputStream("SampleFileList");
             ObjectInputStream ois =  new ObjectInputStream(fInput);
@@ -51,7 +53,25 @@ public class ClientMenu extends javax.swing.JFrame {
     //Constructor w/1 parameter (String username)
     public ClientMenu(String username) {
         initComponents();
+        
         this.username = username;   //Sets username of current client
+        
+         try{
+            FileInputStream fInput = new FileInputStream("SampleFileList");
+            ObjectInputStream ois =  new ObjectInputStream(fInput);
+            sampleList = (SampleFileList)ois.readObject();
+            
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        catch(ClassNotFoundException e ){
+            e.printStackTrace();
+        }
+        
+        fillJTable();
     }
 
     /**
@@ -67,12 +87,6 @@ public class ClientMenu extends javax.swing.JFrame {
         jTabbedPane4 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         Titile = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        fName = new javax.swing.JTextField();
-        LName = new javax.swing.JTextField();
-        IdField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         SampleType = new javax.swing.JTextField();
@@ -91,14 +105,6 @@ public class ClientMenu extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSampleTest = new javax.swing.JTable();
-        lblID = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        lblType = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        lblStatus = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        lblCompany = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -114,24 +120,6 @@ public class ClientMenu extends javax.swing.JFrame {
         jTabbedPane4.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
 
         Titile.setText("Input Sample Informatin: ");
-
-        jLabel1.setText("First Name:");
-
-        jLabel2.setText("Last Name: ");
-
-        jLabel3.setText("Sample ID:");
-
-        fName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fNameActionPerformed(evt);
-            }
-        });
-
-        IdField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IdFieldActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("Sample Type: ");
 
@@ -173,60 +161,52 @@ public class ClientMenu extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(243, 243, 243)
-                        .addComponent(Titile, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(fName, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(70, 70, 70)
-                                .addComponent(jLabel6)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(IdField, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addGap(1, 1, 1)
-                                        .addComponent(LName, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(SampleType))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(70, 70, 70)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel8)
-                                                    .addComponent(jLabel7))
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel15)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel14)))))))))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(DateInput, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
-                    .addComponent(FidelityGoal, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CompanyName, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sendDate))
-                .addContainerGap(637, Short.MAX_VALUE))
+                .addGap(243, 243, 243)
+                .addComponent(Titile, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(submitBtn)
                 .addGap(41, 41, 41))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel8)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(35, 35, 35)
+                            .addComponent(jLabel4))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(FidelityGoal, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                            .addComponent(CompanyName, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                            .addComponent(SampleType))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(133, 133, 133)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(124, 124, 124)
+                                        .addComponent(jLabel14)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addContainerGap(845, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(jLabel15)
+                                .addGap(18, 18, 18)
+                                .addComponent(sendDate, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(685, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(DateInput, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,45 +215,27 @@ public class ClientMenu extends javax.swing.JFrame {
                 .addComponent(Titile, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(fName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(CompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(LName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(FidelityGoal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel3)
-                        .addGap(16, 16, 16))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(DateInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(IdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
-                        .addGap(18, 18, 18)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(13, 13, 13)
-                                    .addComponent(jLabel4))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel14))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel15))))
-                        .addComponent(SampleType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15)
                     .addComponent(sendDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(FidelityGoal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(DateInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(SampleType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(submitBtn)
                 .addGap(15, 15, 15))
         );
@@ -317,7 +279,7 @@ public class ClientMenu extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 874, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1297, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -330,26 +292,6 @@ public class ClientMenu extends javax.swing.JFrame {
                 .addContainerGap(185, Short.MAX_VALUE))
         );
 
-        lblID.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        lblID.setPreferredSize(new java.awt.Dimension(10, 30));
-
-        jLabel13.setText("ID:");
-
-        lblType.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        lblType.setPreferredSize(new java.awt.Dimension(10, 30));
-
-        jLabel12.setText("Status:");
-
-        jLabel11.setText("Type: ");
-
-        lblStatus.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        lblStatus.setPreferredSize(new java.awt.Dimension(10, 30));
-
-        jLabel10.setText("Comapany:");
-
-        lblCompany.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        lblCompany.setPreferredSize(new java.awt.Dimension(10, 30));
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -357,51 +299,13 @@ public class ClientMenu extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblType, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(35, 35, 35))
+                .addGap(0, 0, 0))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(lblCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(25, 25, 25)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11)
-                                    .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(28, 28, 28)
-                                .addComponent(jLabel12))
-                            .addComponent(lblType, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(48, 48, 48)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
-                            .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(31, 31, 31)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -454,64 +358,39 @@ public class ClientMenu extends javax.swing.JFrame {
       System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void IdFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_IdFieldActionPerformed
-
-    private void fNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fNameActionPerformed
-
-    }//GEN-LAST:event_fNameActionPerformed
-
     private void SampleTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SampleTypeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SampleTypeActionPerformed
 
     private void DateInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DateInputActionPerformed
-       
-        
-        
         
     }//GEN-LAST:event_DateInputActionPerformed
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
        
-        String firstname = fName.getText();  
-        String lastname = LName.getText();
+        //Stored Instanced Variables from Submit Order
         String comp = CompanyName.getText(); 
         String sample = SampleType.getText();
-        String sId = IdField.getText();
-        int Id = Integer.parseInt(sId); //convert the id to integers 
         String expFid = FidelityGoal.getText();
         double expFidelity = Double.parseDouble(expFid); //convert to double 
         String dDate = DateInput.getText();
         String sentDate = sendDate.getText();
         
+        sampleList.addFile(username, sample, comp, expFidelity, dDate, sentDate);
         
-        //finish writing the code to input the information into the files 
-        clientInfo.setFirstName(firstname);
-        clientInfo.setLastName(lastname);
-        
-       // userClient.setCompanyName(comp);
-        SampleFile s_input = new SampleFile(sample, Id, comp, expFidelity, dDate, sentDate);
-      
-        //write changes to files 
-                
-        for (int x = 0; x < idHolder.size();x++ ){
-            sampleList.getUserSpecificSampleFile(idHolder.get(x)).setStatus(statusHolder.get(x));
-            
-            //Loops through the rows until it find correspnding Sample ID that has been changed
-            for (int y = 0; y < tblSampleList.getRowCount();y++){
-                
-                //Checks for corresponding SampleId with row to check and store the value of status
-                if ((int)tblWorkOrder.getValueAt(y, 0) == idHolder.get(x)){
-                    sampleList.getUserSpecificSampleFile(idHolder.get(x)).setAnalysis((String)tblWorkOrder.getValueAt(y, 1));
-                    
-                    break;
-                }
-            }
+        //save the files 
+       try{
+           //saves the file 
+           File file = new File("SampleFileList");
+           OutputStream fileOutputStream = new FileOutputStream(file);
+           ObjectOutput outputStream = new ObjectOutputStream (fileOutputStream);
+           outputStream.writeObject(sampleList);
+           
+       } catch (FileNotFoundException e) {
+           e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        
-        
         
         //update the table 
         try{
@@ -528,35 +407,12 @@ public class ClientMenu extends javax.swing.JFrame {
             e.printStackTrace();
         }
         
-      
-        
-        
-        
-        //save the files 
-       try{
-           //saves the file 
-           File file = new File("SampleFileList");
-           OutputStream fileOutputStream = new FileOutputStream(file);
-           ObjectOutput outputStream = new ObjectOutputStream (fileOutputStream);
-           outputStream.writeObject(sampleList);
-           
-       } catch (FileNotFoundException e) {
-           e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
       fillJTable();
-       
-       
-        
-        
     }//GEN-LAST:event_submitBtnActionPerformed
 
     private void sendDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendDateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_sendDateActionPerformed
-
 
     public static void main(String args[]) {
       
@@ -567,36 +423,54 @@ public class ClientMenu extends javax.swing.JFrame {
             }
         });
     }
-
-        //write the changes 
-       
     
-    
-    
-          //populate the JTable
-        private void fillJTable(){
+         //populate the JTable
+        private void fillJTable(){    
             DefaultTableModel tbl = (DefaultTableModel)tblSampleTest.getModel();
             
             ArrayList <SampleFile> fileList = sampleList.getAllSampleFiles();
             
-            for( int x = tblSampleTest.getRowCount(); x < fileList.size(); x++){
+            if (tbl.getRowCount() ==0){
                 
-                int ID  = fileList.get(x).getSampleID(); 
-                String getStatus = fileList.get(x).getStatus();
-                String testType = fileList.get(x).getTestType();
-                double expFidelity = fileList.get(x).getExpectedFidelity();
-                String dueDate = fileList.get(x).getDueDate();
-                String sentDate = fileList.get(x).getSentDate();
-                String compDate = fileList.get(x).getCompletedDate();
+                for( int x = tblSampleTest.getRowCount() ; x < fileList.size(); x++){
                 
                 
-                Object [] arr = {ID, getStatus, testType, expFidelity, dueDate, sentDate, compDate}; 
-                tbl.addRow(arr);
+                    System.out.println("Inside the If: "+fileList.get(tblSampleTest.getRowCount()).getSampleID());
+                    int ID  = fileList.get(x).getSampleID(); 
+                    String getStatus = fileList.get(x).getStatus();
+                    String testType = fileList.get(x).getTestType();
+                    double expFidelity = fileList.get(x).getExpectedFidelity();
+                    String dueDate = fileList.get(x).getDueDate();
+                    String sentDate = fileList.get(x).getSentDate();
+                    String compDate = fileList.get(x).getCompletedDate();
+
+
+                    Object [] arr = {ID, getStatus, testType, expFidelity, dueDate, sentDate, compDate}; 
+                    tbl.addRow(arr);
+                }
+            }
+            else{
+                    for (int x = 0;x <fileList.size(); x++)
+                        System.out.println("Inside the Else #1: "+fileList.get(x).getSampleID());
+                    
+                    
+                    int ID  = fileList.get(element).getSampleID(); 
+                    String getStatus = fileList.get(element).getStatus();
+                    String testType = fileList.get(element).getTestType();
+                    double expFidelity = fileList.get(element).getExpectedFidelity();
+                    String dueDate = fileList.get(element).getDueDate();
+                    String sentDate = fileList.get(element).getSentDate();
+                    String compDate = fileList.get(element).getCompletedDate();
+
+
+                    Object [] arr = {ID, getStatus, testType, expFidelity, dueDate, sentDate, compDate}; 
+                    tbl.addRow(arr);
+                    
+                    element++;
+                    
             }
            tblSampleTest.setModel(tbl);
         }
-    
-    
     
     //Declared member variables
     private String username;
@@ -604,29 +478,18 @@ public class ClientMenu extends javax.swing.JFrame {
     private SampleFile sampleFiles; //object for inputing the information via the client
     private User clientInfo ; // object for the user class 
     private ClientUser userClient; //object for user client class 
-    private ArrayList <Integer> idHolder = new ArrayList<Integer>();
-    
+    private static int element =0;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CompanyName;
     private javax.swing.JTextField DateInput;
     private javax.swing.JTextField FidelityGoal;
-    private javax.swing.JTextField IdField;
-    private javax.swing.JTextField LName;
     private javax.swing.JTextField SampleType;
     private javax.swing.JLabel Titile;
     private javax.swing.JButton btnLogOut;
-    private javax.swing.JTextField fName;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -638,10 +501,6 @@ public class ClientMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane4;
-    private javax.swing.JLabel lblCompany;
-    private javax.swing.JLabel lblID;
-    private javax.swing.JLabel lblStatus;
-    private javax.swing.JLabel lblType;
     private javax.swing.JTextField sendDate;
     private javax.swing.JButton submitBtn;
     private javax.swing.JTable tblSampleTest;
