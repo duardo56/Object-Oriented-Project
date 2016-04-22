@@ -112,6 +112,28 @@ public class SampleFileList implements Serializable {
         return file;
     }
     
+    //Get SampleFile (returns an arrayList of all SimpleFiles for all users)
+    public ArrayList getFilesAssignedToAnalysis(int id){
+        
+        //Instanced Varibles
+        ArrayList<SampleFile> arr = new ArrayList<SampleFile>();
+        Enumeration uc = list.keys();
+        String temp;    //Holds username
+        
+        while(uc.hasMoreElements()){
+            
+            temp = (String) uc.nextElement();   //Stores username
+            
+            for (int x =0 ; x < list.get(temp).size(); x++){
+                if(list.get(temp).get(x).getAnalysisID() == id){
+                    System.out.println("True");
+                    arr.add(list.get(temp).get(x)); //Adds SampleFiles' object to arr
+                }
+            }
+        }
+        return arr;
+    }
+    
     //Creates new ID for current Sample
     private int createID(){
         

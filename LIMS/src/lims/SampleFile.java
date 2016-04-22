@@ -18,7 +18,7 @@ public class SampleFile implements Serializable{
     private static final long serialVersionUID = 1L;
     
     //Declared Member Variables
-    private String analysis;    //Person working on the sample
+    private int analysisID = 0;    //Person working on the sample
     private String status;  //Progress of the sample (accepted/rejected/work in progress/completed/revision)
     private int sampleID;   //The identifier of the sample (9-digit number)
     private String testType;    //The type of sample (gas/water/metal/ground)
@@ -49,8 +49,8 @@ public class SampleFile implements Serializable{
     }
     
     //Sets Analysis working on sample
-    public void setAnalysis(String analysis){
-        this.analysis = analysis;
+    public void setAnalysisID(int analysisID){
+        this.analysisID = analysisID;
     }
     
     //Sets Received Date of the Sample
@@ -64,8 +64,8 @@ public class SampleFile implements Serializable{
     
     //Accessors/Getters
     //Gets name of the Analsis working on sample
-    public String getAnalysis() {
-        return analysis;
+    public int getAnalysisID() {
+        return analysisID;
     }
 
     //Gets current status of the sample (incomplete,WIP,complete,needsApproval)

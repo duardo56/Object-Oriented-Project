@@ -27,11 +27,56 @@ public class AnalysisMenu extends javax.swing.JFrame {
         //Initializes GUI
         initComponents();
         
-        //Read UserListTest file and store into UserList list object
+        username = "Number2";
+        
+        //Reads UserListTest and SampleFileList file 
+        //and store into UserList list object and SampleFileList object
         try{
-            FileInputStream fInput = new FileInputStream("SampleFileList");
+            FileInputStream fInput = new FileInputStream("UserListTest");
             ObjectInputStream ois = new ObjectInputStream(fInput);
-            sampleList = (SampleFileList)ois.readObject();
+            list = (UserList)ois.readObject();
+            
+             userID = list.getUser(username).getUserID();    //Gets userID
+            
+            fInput = new FileInputStream("SampleFileList");
+            ois = new ObjectInputStream(fInput);
+            sampleList =  (SampleFileList)ois.readObject();
+            
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        catch(ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        
+        fillSampleTable(); //call method here 
+    }
+    
+    //Constructor
+    public AnalysisMenu(String username){
+        
+        //Initializes GUI
+        initComponents();
+        
+        this.username = username;
+        
+        //Reads UserListTest and SampleFileList file 
+        //and store into UserList list object and SampleFileList object
+        try{
+            FileInputStream fInput = new FileInputStream("UserListTest");
+            ObjectInputStream ois = new ObjectInputStream(fInput);
+            list = (UserList)ois.readObject();
+            
+            userID = list.getUser(username).getUserID();    //Gets userID
+            
+            fInput = new FileInputStream("SampleFileList");
+            ois = new ObjectInputStream(fInput);
+            sampleList =  (SampleFileList)ois.readObject();
+            
         }
         catch (FileNotFoundException e){
             e.printStackTrace();
@@ -257,7 +302,7 @@ public class AnalysisMenu extends javax.swing.JFrame {
     //Populate the Jlist with Samples
     private void fillSampleTable (){
         DefaultTableModel tbl = (DefaultTableModel) tblAnalystSample.getModel(); 
-        ArrayList  <SampleFile> fileList = sampleList.getAllSampleFiles(); 
+        ArrayList  <SampleFile> fileList = sampleList.getFilesAssignedToAnalysis(userID); 
         
         for (int i = tblAnalystSample.getRowCount(); i < fileList.size(); i++) {
                 int ID = fileList.get(i).getSampleID(); 
@@ -279,8 +324,10 @@ public class AnalysisMenu extends javax.swing.JFrame {
     
     //Declared variable
     private UserList list;  //Holds UserList object
+    private int userID;
     private DefaultListModel listModel;
-    private SampleFileList sampleList; 
+    private SampleFileList sampleList; //Holds SampleFileList
+    private String username;
     private SampleFile samplefiles;
     private User clientInfo; 
     private ClientUser userClient;
