@@ -129,12 +129,6 @@ public class ClientMenu extends javax.swing.JFrame {
 
         jLabel8.setText("Due Date: ");
 
-        DateInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DateInputActionPerformed(evt);
-            }
-        });
-
         submitBtn.setText("Submit");
         submitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -369,10 +363,6 @@ public class ClientMenu extends javax.swing.JFrame {
       System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void DateInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DateInputActionPerformed
-        
-    }//GEN-LAST:event_DateInputActionPerformed
-
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
        
         //Stored Instanced Variables from Submit Order
@@ -449,17 +439,17 @@ public class ClientMenu extends javax.swing.JFrame {
     }
     
          //populate the JTable
-        private void fillJTable(){    
+        private void fillJTable(){
             DefaultTableModel tbl = (DefaultTableModel)tblSampleTest.getModel();
+            
+            tbl.setRowCount(0);
             
             ArrayList <SampleFile> fileList = sampleList.getAllUsersSampleFiles(username);
             
-            if (tbl.getRowCount() ==0 ){
-                
-                for( int x = 0 ; x < fileList.size(); x++){
-                
-                
-                    System.out.println("Inside the If: "+fileList.get(tblSampleTest.getRowCount()).getSampleID());
+            
+                for( int x = 0 ; x < fileList.size(); x++)
+                {
+                    
                     int ID  = fileList.get(x).getSampleID(); 
                     String getStatus = fileList.get(x).getStatus();
                     String testType = fileList.get(x).getTestType();
@@ -468,12 +458,9 @@ public class ClientMenu extends javax.swing.JFrame {
                     String sentDate = fileList.get(x).getSentDate();
                     String compDate = fileList.get(x).getCompletedDate();
 
-
-                    Object [] arr = {ID, getStatus, testType, expFidelity, dueDate, sentDate, compDate}; 
+                    Object [] arr = {ID, getStatus, testType, expFidelity, dueDate, sentDate, compDate};
                     tbl.addRow(arr);
                 }
-            }
-           tblSampleTest.setModel(tbl);
         }
     
     //Declared member variables
@@ -482,7 +469,6 @@ public class ClientMenu extends javax.swing.JFrame {
     private SampleFile sampleFiles; //object for inputing the information via the client
     private User clientInfo ; // object for the user class 
     private ClientUser userClient; //object for user client class 
-    private static int element =0;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CompanyName;

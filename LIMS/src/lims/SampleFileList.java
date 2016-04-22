@@ -82,7 +82,7 @@ public class SampleFileList implements Serializable {
             
             if (temp.equalsIgnoreCase(username)){
                 for (int x =0 ; x < list.get(temp).size(); x++){
-                    System.out.println("testing...");
+                    //System.out.println("testing...");
                     arr.add(list.get(temp).get(x));
                 }
                 break;

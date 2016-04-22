@@ -634,6 +634,8 @@ public class ManagementMenu extends javax.swing.JFrame {
         //Instanced Variables
         DefaultTableModel tbl = (DefaultTableModel)tblWorkOrder.getModel();
         
+        tbl.setRowCount(0); 
+        
         //TableModel tbl = tblWorkOrder.getModel();
         ArrayList <SampleFile> fileList = sampleList.getAllSampleFiles();   //Holds all Sample Files
         

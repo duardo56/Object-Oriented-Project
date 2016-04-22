@@ -238,7 +238,10 @@ public class AnalysisMenu extends javax.swing.JFrame {
 
     //Populate the Jlist with Samples
     private void fillSampleTable (){
-        DefaultTableModel tbl = (DefaultTableModel) tblAnalystSample.getModel(); 
+        DefaultTableModel tbl = (DefaultTableModel) tblAnalystSample.getModel();
+        
+        tbl.setRowCount(0); //Set model row count = 0
+        
         ArrayList  <SampleFile> fileList = sampleList.getFilesAssignedToAnalysis(userID); 
         
         for (int i = tblAnalystSample.getRowCount(); i < fileList.size(); i++) {
@@ -250,7 +253,6 @@ public class AnalysisMenu extends javax.swing.JFrame {
                 String sentDate = fileList.get(i).getSentDate();
                 String recievedDate = fileList.get(i).getReceivedDate();
                 String compDate = fileList.get(i).getCompletedDate();
-                
                 
                 Object [] arr = {ID, getStatus, testType, expFidelity, dueDate, sentDate, recievedDate, compDate}; 
                 tbl.addRow(arr);
