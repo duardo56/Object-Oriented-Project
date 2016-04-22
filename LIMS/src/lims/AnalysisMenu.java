@@ -260,9 +260,7 @@ public class AnalysisMenu extends javax.swing.JFrame {
                         //set the combobox on the 2nd coloumn 
    //     JComboBox comboBox = new JComboBox();
      //   TableColumn  sampleColoumn = tblAnalystSample.getColumnModel().getColumn(1);
-     //   sampleColoumn.setCellEditor(new DefaultCellEditor(comboBox));
-                
-                
+     //   sampleColoumn.setCellEditor(new DefaultCellEditor(comboBox));      
         }
         tblAnalystSample.setModel(tbl);
     }
@@ -276,7 +274,6 @@ public class AnalysisMenu extends javax.swing.JFrame {
     private SampleFile samplefiles;
     private User clientInfo; 
     private ClientUser userClient;
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane SampleView;

@@ -634,7 +634,7 @@ public class ManagementMenu extends javax.swing.JFrame {
         //Instanced Variables
         DefaultTableModel tbl = (DefaultTableModel)tblWorkOrder.getModel();
         
-        tbl.setRowCount(0); 
+        tbl.setRowCount(0); //Set Table Row Count = 0
         
         //TableModel tbl = tblWorkOrder.getModel();
         ArrayList <SampleFile> fileList = sampleList.getAllSampleFiles();   //Holds all Sample Files
@@ -643,37 +643,28 @@ public class ManagementMenu extends javax.swing.JFrame {
         JComboBox StatusComboBox = new JComboBox();
         JComboBox AnalystcomboBox = new JComboBox();
         
-        //DefaultListModel analystModel = new DefaultListModel();
-        
-       //initiate combobox in the analyst cell 
-       TableColumn analystcoloumn = tblWorkOrder.getColumnModel().getColumn(1);
-       analystcoloumn.setCellEditor(new DefaultCellEditor(AnalystcomboBox));
+        //initiate combobox in the analyst cell 
+        TableColumn analystcoloumn = tblWorkOrder.getColumnModel().getColumn(1);
+        analystcoloumn.setCellEditor(new DefaultCellEditor(AnalystcomboBox));
        
         //initate combobox in the status cell
         TableColumn  StatusColoumn = tblWorkOrder.getColumnModel().getColumn(2);
-       StatusColoumn.setCellEditor(new DefaultCellEditor(StatusComboBox));
-        
-       
+        StatusColoumn.setCellEditor(new DefaultCellEditor(StatusComboBox));
      
-       //add items for the status combobox
-       StatusComboBox.addItem("        "); //empty string 
-       StatusComboBox.addItem("Approved");
-       StatusComboBox.addItem("Rejected");
+        //add items for the status combobox
+        StatusComboBox.addItem("        "); //empty string 
+        StatusComboBox.addItem("Approved");
+        StatusComboBox.addItem("Rejected");
        
         analysistUsers = (list.getUsersWithCertainClass("AnalysisUser"));
         
-       //populate the analyst combobox 
-    
- 
-               
+        //populate the analyst combobox 
         for (int x = 0; x < analysistUsers.size(); x++){
             
             AnalystcomboBox.addItem(list.getUser(analysistUsers.get(x)).getUserID());
-        } 
+        }
 
-
-
-//Stores each variable from corresponding SampleFile into an Object arr to add to the JTable row
+        //Stores each variable from corresponding SampleFile into an Object arr to add to the JTable row
         for (int x = tblWorkOrder.getRowCount(); x < fileList.size();x++){
             
             String analysis = null;
@@ -699,9 +690,7 @@ public class ManagementMenu extends javax.swing.JFrame {
                              dueDate, sentDate, recDate, compDate};
             
             tbl.addRow(arr);
-                
         }
-        
         tblWorkOrder.setModel(tbl);
     }
     

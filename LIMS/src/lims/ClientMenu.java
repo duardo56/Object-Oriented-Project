@@ -138,12 +138,6 @@ public class ClientMenu extends javax.swing.JFrame {
 
         jLabel15.setText("Sent Date:");
 
-        sendDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sendDateActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Phone Number");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Empty>", "Gas", "Water", "Soil", "Oil", "Metal" }));
@@ -363,16 +357,16 @@ public class ClientMenu extends javax.swing.JFrame {
       System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    //Submits SampleFile information
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
        
         //Stored Instanced Variables from Submit Order
         if (CompanyName.getText() !=null && FidelityGoal.getText() != null
             && DateInput.getText() !=null && sendDate.getText() !=null
             && txtPhoneNum.getText() != null && !jComboBox1.getSelectedItem().equals("<Empty>"))
-        {
-            
+        {   
             String comp = CompanyName.getText(); 
-            String sample=null;
+            String sample= (String)jComboBox1.getSelectedItem();
             String expFid = FidelityGoal.getText();
             double expFidelity = Double.parseDouble(expFid); //convert to double 
             String dDate = DateInput.getText();
@@ -424,10 +418,6 @@ public class ClientMenu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_submitBtnActionPerformed
 
-    private void sendDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendDateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sendDateActionPerformed
-
     public static void main(String args[]) {
       
         /* Create and display the form */
@@ -438,18 +428,14 @@ public class ClientMenu extends javax.swing.JFrame {
         });
     }
     
-         //populate the JTable
+        //populate the JTable
         private void fillJTable(){
             DefaultTableModel tbl = (DefaultTableModel)tblSampleTest.getModel();
-            
-            tbl.setRowCount(0);
-            
+            tbl.setRowCount(0); //Set Table Row Count = 0
             ArrayList <SampleFile> fileList = sampleList.getAllUsersSampleFiles(username);
-            
             
                 for( int x = 0 ; x < fileList.size(); x++)
                 {
-                    
                     int ID  = fileList.get(x).getSampleID(); 
                     String getStatus = fileList.get(x).getStatus();
                     String testType = fileList.get(x).getTestType();
@@ -464,7 +450,7 @@ public class ClientMenu extends javax.swing.JFrame {
         }
     
     //Declared member variables
-    private String username;
+    private String username;    //Holds Client's Usernames
     private SampleFileList sampleList; //object for class 
     private SampleFile sampleFiles; //object for inputing the information via the client
     private User clientInfo ; // object for the user class 
