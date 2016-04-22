@@ -82,6 +82,7 @@ public class SampleFileList implements Serializable {
             
             if (temp.equalsIgnoreCase(username)){
                 for (int x =0 ; x < list.get(temp).size(); x++){
+                    System.out.println("testing...");
                     arr.add(list.get(temp).get(x));
                 }
                 break;
@@ -126,7 +127,6 @@ public class SampleFileList implements Serializable {
             
             for (int x =0 ; x < list.get(temp).size(); x++){
                 if(list.get(temp).get(x).getAnalysisID() == id){
-                    System.out.println("True");
                     arr.add(list.get(temp).get(x)); //Adds SampleFiles' object to arr
                 }
             }

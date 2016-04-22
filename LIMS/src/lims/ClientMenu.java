@@ -28,7 +28,7 @@ public class ClientMenu extends javax.swing.JFrame {
     public ClientMenu() {
         initComponents();
         
-        username = "Client3";
+        username = "Number3";
         
         try{
             FileInputStream fInput = new FileInputStream("SampleFileList");
@@ -45,9 +45,7 @@ public class ClientMenu extends javax.swing.JFrame {
             e.printStackTrace();
         }
         
-        
         fillJTable();
-        
     }
     
     //Constructor w/1 parameter (String username)
@@ -428,9 +426,9 @@ public class ClientMenu extends javax.swing.JFrame {
         private void fillJTable(){    
             DefaultTableModel tbl = (DefaultTableModel)tblSampleTest.getModel();
             
-            ArrayList <SampleFile> fileList = sampleList.getAllSampleFiles();
+            ArrayList <SampleFile> fileList = sampleList.getAllUsersSampleFiles(username);
             
-            if (tbl.getRowCount() ==0){
+            if (tbl.getRowCount() ==0 ){
                 
                 for( int x = tblSampleTest.getRowCount() ; x < fileList.size(); x++){
                 
