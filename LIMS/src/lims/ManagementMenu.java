@@ -160,7 +160,7 @@ public class ManagementMenu extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, true, false, false, false, false, false, false, false
@@ -570,7 +570,7 @@ public class ManagementMenu extends javax.swing.JFrame {
             for (int y = 0; y < tblWorkOrder.getRowCount();y++){
                 
                 //Checks for corresponding SampleId with row to check and store the value of status
-                if ((int)tblWorkOrder.getValueAt(y, 0) == idHolder.get(x)){
+                if ((int)tblWorkOrder.getValueAt(y, 0) == idHolder.get(x) && tblWorkOrder.getValueAt(y, 1) !=null ){
                     sampleList.getUserSpecificSampleFile(idHolder.get(x)).setAnalysisID(Integer.parseInt((String)tblWorkOrder.getValueAt(y, 1)));
                     
                     break;
@@ -599,8 +599,8 @@ public class ManagementMenu extends javax.swing.JFrame {
     private void btnAddAnalysistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAnalysistActionPerformed
         String[] parts = listAnalysist.getSelectedValue().split("-");
         
-        if (tblWorkOrder.getSelectedColumn() == 1){
-            tblWorkOrder.setValueAt(parts[1], tblWorkOrder.getSelectedRow(), tblWorkOrder.getSelectedColumn());
+        if (tblWorkOrder.getSelectedColumn() == 1 && tblWorkOrder.getValueAt(tblWorkOrder.getSelectedRow(), 2).equals("approved")){
+                tblWorkOrder.setValueAt(parts[1], tblWorkOrder.getSelectedRow(), tblWorkOrder.getSelectedColumn());
         }
     }//GEN-LAST:event_btnAddAnalysistActionPerformed
 
@@ -648,7 +648,7 @@ public class ManagementMenu extends javax.swing.JFrame {
             
             int ID = fileList.get(x).getSampleID();
             if (fileList.get(x).getAnalysisID() ==0){
-                analysis = "";
+                analysis = null;
             }
             else{
                 analysis = String.valueOf(fileList.get(x).getAnalysisID());
