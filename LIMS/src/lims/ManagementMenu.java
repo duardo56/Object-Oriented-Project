@@ -16,10 +16,13 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultListModel;
+import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
 /**
@@ -223,9 +226,9 @@ public class ManagementMenu extends javax.swing.JFrame {
                                 .addComponent(btnAcceptChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(btnUpdateTable, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel9))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 1086, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -610,25 +613,25 @@ public class ManagementMenu extends javax.swing.JFrame {
         
         //Instanced Member Variables
         DefaultListModel listModel1 = new DefaultListModel();
-        DefaultListModel listModel2 = new DefaultListModel();
+  //      DefaultListModel listModel2 = new DefaultListModel();
         
         clientUsers = (list.getUsersWithCertainClass("ClientUser"));
-        analysistUsers =(list.getUsersWithCertainClass("AnalysisUser"));
+        analysistUsers = (list.getUsersWithCertainClass("AnalysisUser"));
         
         for (int x = 0; x < clientUsers.size(); x++){
             
             listModel1.addElement(list.getUser(clientUsers.get(x)).getUserID());   
         }
         
-        
-        for (int x = 0; x < analysistUsers.size(); x++){
-            
-            listModel2.addElement(list.getUser(analysistUsers.get(x)).getLastName()
-                           + ", "+list.getUser(analysistUsers.get(x)).getFirstName() 
-                           + "-" + list.getUser(analysistUsers.get(x)).getUserID());
-        } 
+//        
+//        for (int x = 0; x < analysistUsers.size(); x++){
+//            
+//            listModel2.addElement(list.getUser(analysistUsers.get(x)).getLastName()
+//                           + ", "+list.getUser(analysistUsers.get(x)).getFirstName() 
+//                           + "-" + list.getUser(analysistUsers.get(x)).getUserID());
+//        } 
         listClients.setModel(listModel1);
-        listAnalysist.setModel(listModel2);
+   //    listAnalysist.setModel(listModel2);
     }
     
     //****************************************************************
@@ -641,13 +644,32 @@ public class ManagementMenu extends javax.swing.JFrame {
         //TableModel tbl = tblWorkOrder.getModel();
         ArrayList <SampleFile> fileList = sampleList.getAllSampleFiles();   //Holds all Sample Files
         
-        //Stores each variable from corresponding SampleFile into an Object arr to add to the JTable row
+        //combobox to chooose sample types 
+        JComboBox StatusComboBox = new JComboBox();
+        JComboBox AnalystcomboBox = new JComboBox();
+       
+        //initate combobox in the status cell
+        TableColumn  StatusColoumn = tblWorkOrder.getColumnModel().getColumn(2);
+       StatusColoumn.setCellEditor(new DefaultCellEditor(StatusComboBox));
+        
+       //initiate combobox in the analyst cell 
+       TableColumn analystcoloumn = tblWorkOrder.getColumnModel().getColumn(1);
+       analystcoloumn.setCellEditor(new DefaultCellEditor(AnalystcomboBox));
+     
+       StatusComboBox.addItem("        "); //empty string 
+       StatusComboBox.addItem("Approved");
+       StatusComboBox.addItem("Rejected");
+      
+
+
+
+//Stores each variable from corresponding SampleFile into an Object arr to add to the JTable row
         for (int x = tblWorkOrder.getRowCount(); x < fileList.size();x++){
             
             String analysis = null;
             
             int ID = fileList.get(x).getSampleID();
-            if (fileList.get(x).getAnalysisID() ==0){
+            if (fileList.get(x).getAnalysisID() == 0){
                 analysis = null;
             }
             else{
@@ -667,6 +689,7 @@ public class ManagementMenu extends javax.swing.JFrame {
                              dueDate, sentDate, recDate, compDate};
             
             tbl.addRow(arr);
+                
         }
         
         tblWorkOrder.setModel(tbl);
