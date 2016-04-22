@@ -374,19 +374,19 @@ public class ClientMenu extends javax.swing.JFrame {
             
             sampleList.addFile(username, sample, comp, expFidelity, dDate, sentDate);
             
-            //save the files 
-       try{
-           //saves the file 
-           File file = new File("SampleFileList");
-           OutputStream fileOutputStream = new FileOutputStream(file);
-           ObjectOutput outputStream = new ObjectOutputStream (fileOutputStream);
-           outputStream.writeObject(sampleList);
-           
-       } catch (FileNotFoundException e) {
-           e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+           //save the files 
+           try{
+               //saves the file 
+               File file = new File("SampleFileList");
+               OutputStream fileOutputStream = new FileOutputStream(file);
+               ObjectOutput outputStream = new ObjectOutputStream (fileOutputStream);
+               outputStream.writeObject(sampleList);
+
+            } catch (FileNotFoundException e) {
+               e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         
         //update the table 
         try{
