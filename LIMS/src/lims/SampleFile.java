@@ -29,6 +29,7 @@ public class SampleFile implements Serializable{
     private String sentDate;    //The date the sample sent by Client
     private String receivedDate;    //The date of the sample when it arrived at the enviroment lab
     private String completedDate;   //The date the sample was completed on
+    private long pNum;  //Stores Client's phone number
     
     
     //Default w/6 parameters(String, int, String, String, String, String)
@@ -60,6 +61,10 @@ public class SampleFile implements Serializable{
     
     public void setFidelity(double fidelity){
         this.fidelity = fidelity;
+    }
+    
+    public void setPhoneNumber(long pNum){
+        this.pNum = pNum;
     }
     
     //Accessors/Getters
@@ -118,6 +123,9 @@ public class SampleFile implements Serializable{
         return completedDate;
     }
     
+    public long getPhoneNumer(){
+        return pNum;
+    }
     
     
 }
