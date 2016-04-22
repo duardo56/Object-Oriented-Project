@@ -428,26 +428,26 @@ public class ClientMenu extends javax.swing.JFrame {
         });
     }
     
-        //populate the JTable
-        private void fillJTable(){
-            DefaultTableModel tbl = (DefaultTableModel)tblSampleTest.getModel();
-            tbl.setRowCount(0); //Set Table Row Count = 0
-            ArrayList <SampleFile> fileList = sampleList.getAllUsersSampleFiles(username);
-            
-                for( int x = 0 ; x < fileList.size(); x++)
-                {
-                    int ID  = fileList.get(x).getSampleID(); 
-                    String getStatus = fileList.get(x).getStatus();
-                    String testType = fileList.get(x).getTestType();
-                    double expFidelity = fileList.get(x).getExpectedFidelity();
-                    String dueDate = fileList.get(x).getDueDate();
-                    String sentDate = fileList.get(x).getSentDate();
-                    String compDate = fileList.get(x).getCompletedDate();
+    //populate the JTable
+    private void fillJTable(){
+        DefaultTableModel tbl = (DefaultTableModel)tblSampleTest.getModel();
+        tbl.setRowCount(0); //Set Table Row Count = 0
+        ArrayList <SampleFile> fileList = sampleList.getAllUsersSampleFiles(username);
 
-                    Object [] arr = {ID, getStatus, testType, expFidelity, dueDate, sentDate, compDate};
-                    tbl.addRow(arr);
-                }
-        }
+            for( int x = 0 ; x < fileList.size(); x++)
+            {
+                int ID  = fileList.get(x).getSampleID(); 
+                String getStatus = fileList.get(x).getStatus();
+                String testType = fileList.get(x).getTestType();
+                double expFidelity = fileList.get(x).getExpectedFidelity();
+                String dueDate = fileList.get(x).getDueDate();
+                String sentDate = fileList.get(x).getSentDate();
+                String compDate = fileList.get(x).getCompletedDate();
+
+                Object [] arr = {ID, getStatus, testType, expFidelity, dueDate, sentDate, compDate};
+                tbl.addRow(arr);
+            }
+    }
     
     //Declared member variables
     private String username;    //Holds Client's Usernames
