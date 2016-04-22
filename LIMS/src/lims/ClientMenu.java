@@ -152,7 +152,7 @@ public class ClientMenu extends javax.swing.JFrame {
 
         jLabel1.setText("Phone Number");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Empty>", "Gas", "Water", "Soil", "Oil", "Metal" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -376,16 +376,21 @@ public class ClientMenu extends javax.swing.JFrame {
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
        
         //Stored Instanced Variables from Submit Order
-        String comp = CompanyName.getText(); 
-        String sample=null;
-        String expFid = FidelityGoal.getText();
-        double expFidelity = Double.parseDouble(expFid); //convert to double 
-        String dDate = DateInput.getText();
-        String sentDate = sendDate.getText();
-        
-        sampleList.addFile(username, sample, comp, expFidelity, dDate, sentDate);
-        
-        //save the files 
+        if (CompanyName.getText() !=null && FidelityGoal.getText() != null
+            && DateInput.getText() !=null && sendDate.getText() !=null
+            && txtPhoneNum.getText() != null && !jComboBox1.getSelectedItem().equals("<Empty>"))
+        {
+            
+            String comp = CompanyName.getText(); 
+            String sample=null;
+            String expFid = FidelityGoal.getText();
+            double expFidelity = Double.parseDouble(expFid); //convert to double 
+            String dDate = DateInput.getText();
+            String sentDate = sendDate.getText();
+            
+            sampleList.addFile(username, sample, comp, expFidelity, dDate, sentDate);
+            
+            //save the files 
        try{
            //saves the file 
            File file = new File("SampleFileList");
@@ -414,7 +419,19 @@ public class ClientMenu extends javax.swing.JFrame {
             e.printStackTrace();
         }
         
-      fillJTable();
+            CompanyName.setText("");
+            FidelityGoal.setText("");
+            DateInput.setText("");
+            sendDate.setText("");
+            txtPhoneNum.setText("");
+            jComboBox1.setSelectedIndex(0);
+        
+            fillJTable();
+        }
+        else {
+            javax.swing.JOptionPane.showMessageDialog(null,"Please enter all the proper information");
+        }
+        
     }//GEN-LAST:event_submitBtnActionPerformed
 
     private void sendDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendDateActionPerformed
@@ -439,7 +456,7 @@ public class ClientMenu extends javax.swing.JFrame {
             
             if (tbl.getRowCount() ==0 ){
                 
-                for( int x = tblSampleTest.getRowCount() ; x < fileList.size(); x++){
+                for( int x = 0 ; x < fileList.size(); x++){
                 
                 
                     System.out.println("Inside the If: "+fileList.get(tblSampleTest.getRowCount()).getSampleID());
@@ -455,26 +472,6 @@ public class ClientMenu extends javax.swing.JFrame {
                     Object [] arr = {ID, getStatus, testType, expFidelity, dueDate, sentDate, compDate}; 
                     tbl.addRow(arr);
                 }
-            }
-            else{
-                    for (int x = 0;x <fileList.size(); x++)
-                        System.out.println("Inside the Else #1: "+fileList.get(x).getSampleID());
-                    
-                    
-                    int ID  = fileList.get(element).getSampleID(); 
-                    String getStatus = fileList.get(element).getStatus();
-                    String testType = fileList.get(element).getTestType();
-                    double expFidelity = fileList.get(element).getExpectedFidelity();
-                    String dueDate = fileList.get(element).getDueDate();
-                    String sentDate = fileList.get(element).getSentDate();
-                    String compDate = fileList.get(element).getCompletedDate();
-
-
-                    Object [] arr = {ID, getStatus, testType, expFidelity, dueDate, sentDate, compDate}; 
-                    tbl.addRow(arr);
-                    
-                    element++;
-                    
             }
            tblSampleTest.setModel(tbl);
         }
