@@ -91,7 +91,8 @@ public class LIMS {
             
         //****************************************************************
         //*********************End of Testing****************************
-        
+        LIMSClient lc = new LIMSClient();
+        lc.connect("localhost", 8765);
         MainMenu GUI = new MainMenu();
         GUI.setVisible(true);
     }

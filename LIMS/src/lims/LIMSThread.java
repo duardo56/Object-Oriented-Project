@@ -41,9 +41,34 @@ public class LIMSThread extends Thread{
                 Message response;
                 System.out.println("[" + socket.getInetAddress() + ":" + socket.getPort() + "] " + sent.getMessage());
                 
-                //login
+                //Create new user
                 
-                //
+                //Login
+                if (sent.getMessage().equals("login")){
+                    
+                    String username = (String)sent.getObjCont().get(0);
+                    String password = (String)sent.getObjCont().get(1);
+                    
+                    //if there is no username
+                    if (username == null){
+                        response = new Message("FAIL");
+                        response.addObject(null);
+                        output.writeObject(response);
+                    }
+                    else{
+                        //TODO: Maybe Implement adding the corresponding sample list 
+                        //      and/or appropriate User Class ahead of time
+                        if( login(username, password)){
+                            response = new Message("OK");
+                            output.writeObject(response);
+                        }
+                        else{
+                            response = new Message("FAIL");
+                            output.writeObject(response);
+                        }
+                        
+                    }
+                }
                 
             }while(loop);
     
@@ -52,5 +77,21 @@ public class LIMSThread extends Thread{
             System.err.println("Error: " + e.getMessage());
             e.printStackTrace(System.err);
         } 
+    }
+    
+    public boolean login(String username, String password){
+        
+        //Checks if username exist
+        if (gs.userL.checkUser(username)){
+            
+            String stored_password = gs.userL.getUser(username).getPassword();
+            
+            if (stored_password.equals(password)){
+                return true;
+            }
+            
+        }
+        
+        return false;
     }
 }
