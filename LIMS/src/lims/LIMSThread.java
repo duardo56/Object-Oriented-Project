@@ -37,17 +37,21 @@ public class LIMSThread extends Thread{
             
             do{
                 //read and print message
-                Message sent = (Message)input.readObject();
+                Message received = (Message)input.readObject();
                 Message response;
-                System.out.println("[" + socket.getInetAddress() + ":" + socket.getPort() + "] " + sent.getMessage());
+                System.out.println("[" + socket.getInetAddress() + ":" + socket.getPort() + "] " + received.getMessage());
+                
+                
                 
                 //Create new user
                 
+                
+                
                 //Login
-                if (sent.getMessage().equals("login")){
+                if (received.getMessage().equals("login")){
                     
-                    String username = (String)sent.getObjCont().get(0);
-                    String password = (String)sent.getObjCont().get(1);
+                    String username = (String)received.getObjCont().get(0);
+                    String password = (String)received.getObjCont().get(1);
                     
                     //if there is no username
                     if (username == null){
@@ -60,18 +64,16 @@ public class LIMSThread extends Thread{
                         //      and/or appropriate User Class ahead of time
                         if( login(username, password)){
                             response = new Message("OK");
+                            response.addObject(gs.userL.getUser(username));
                             output.writeObject(response);
                         }
                         else{
                             response = new Message("FAIL");
                             output.writeObject(response);
-                        }
-                        
+                        }    
                     }
                 }
-                
             }while(loop);
-    
         }
         catch(Exception e){
             System.err.println("Error: " + e.getMessage());
@@ -79,6 +81,7 @@ public class LIMSThread extends Thread{
         } 
     }
     
+    //Login Method
     public boolean login(String username, String password){
         
         //Checks if username exist

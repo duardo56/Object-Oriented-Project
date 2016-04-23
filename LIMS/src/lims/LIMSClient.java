@@ -13,15 +13,16 @@ import java.util.ArrayList;
  */
 public class LIMSClient extends Client {
     
-    //Login
-    //Communicates back and forth with server to get ACK for token
-    public boolean login(String username, String password){
+    
+    //Communicates back and forth with server to get ACK for Login
+    public User login(String username, String password){
         
         try {
            
              //Local Varibles
             Message sendM = null;    //Holds message sent to server
             Message receiveM = null; //Receives the response from the server
+            User temp = null;
             
             //Reads, sends, and receives the message
             sendM =  new Message("login");
@@ -33,14 +34,19 @@ public class LIMSClient extends Client {
             //Successful Response from server
             if (receiveM.getMessage().equals("OK"))
             {
-             return true;   
+                ArrayList<Object> list = null;
+                list = receiveM.getObjCont();
+               
+                temp = (User)list.get(0);
+                
+             return temp;   
             }
-            return false;
+            return null;
         }
         catch (Exception e){
             System.err.println("Error: " + e.getMessage());
             e.printStackTrace(System.err);
-            return false;
+            return null;
         }
     }
     

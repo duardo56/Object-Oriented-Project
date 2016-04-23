@@ -160,8 +160,41 @@ public class LoginMenu extends javax.swing.JFrame {
         String gui; //Holds String for what kind of gui to open (Analysis, management, or client)
 
         String temp = new String(input);
-        System.out.println(lc.login(user, temp));
         
+        User u = lc.login(user, temp);
+        
+        //If login is successfull
+        if (u != null){
+            System.out.println("Login Successful!");
+            
+            if (u.getClass().getSimpleName().equals("ManagementUser")){
+                    ManagementMenu m = new ManagementMenu();    //Creates management menu object
+                    m.setVisible(true); //Sets visibility of m to true
+                    this.dispose(); //disposes of login menu window
+                }
+                
+                else if (u.getClass().getSimpleName().equals("ManagementUser")){
+
+                    AnalysisMenu m = new AnalysisMenu();    //Creates Analysis menu object
+                    m.setVisible(true); //Sets visibility of m to true 
+
+                    this.dispose(); //disposes of login menu window
+                }
+                
+                else if(u.getClass().getSimpleName().equals("ManagementUser")){
+                    ClientMenu m = new ClientMenu(user);    //Creates client menu  pbject
+                    m.setVisible(true); //Sets visibility of m to true
+                    this.dispose(); //disposes of login menu window
+                }
+            
+        }
+        
+        //Else login fails and clears text
+        else{
+            javax.swing.JOptionPane.showMessageDialog(null, "Wrong username or password.");
+            txtPassword.setText(""); //Clears Password Textfield
+            txtUsername.setText(""); //Clears Username Textfield
+        }
 //        boolean login = false;  //Login if True, else display error in username/password
 //        
 //        //Tries to read the UserListTest.bin file

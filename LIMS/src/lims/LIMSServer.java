@@ -35,7 +35,6 @@ public class LIMSServer extends Server {
     public LIMSServer(String serverName, int serverPort) {
         super(serverName, serverPort);
     }
-
     
     //Starts the GroupServer
     @Override
