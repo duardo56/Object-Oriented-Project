@@ -24,8 +24,9 @@ public class LIMSClient extends Client {
             Message receiveM = null; //Receives the response from the server
             
             //Reads, sends, and receives the message
-            sendM =  new Message("getToken");
+            sendM =  new Message("login");
             sendM.addObject(username);   //adds username
+            sendM.addObject(password);   //adds password
             output.writeObject(sendM);   //writes to the server
             receiveM = (Message)input.readObject();  //receives from the server
             

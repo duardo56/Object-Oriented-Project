@@ -22,9 +22,17 @@ public class LoginMenu extends javax.swing.JFrame {
      * Creates new form LoginMenu
      */
     
+    //Default Constructor
     public LoginMenu() {
         initComponents();
     }
+    
+    //Constructor w/2 parameters (servername, port#)
+    public LoginMenu(String servername, int port){
+        initComponents();
+        lc.connect(servername, port);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -150,73 +158,76 @@ public class LoginMenu extends javax.swing.JFrame {
         char [] input = txtPassword.getPassword();  //Holds typed password
         char [] password;   //Holds password from UserListTest
         String gui; //Holds String for what kind of gui to open (Analysis, management, or client)
+
+        String temp = new String(input);
+        System.out.println(lc.login(user, temp));
         
-        boolean login = false;  //Login if True, else display error in username/password
-        
-        //Tries to read the UserListTest.bin file
-        try{
-            //Retrieves UserList.bin 
-            FileInputStream fInput = new FileInputStream("UserListTest");
-            ObjectInputStream ois = new ObjectInputStream(fInput);
-            list = (UserList)ois.readObject();
-        }
-        catch(FileNotFoundException q){
-            javax.swing.JOptionPane.showMessageDialog(null,"Can't find a text file");
-        } 
-        
-        catch (IOException ex) {
-            javax.swing.JOptionPane.showMessageDialog(null,"Error reading UserList.bin file");
-        } 
-        
-        catch (ClassNotFoundException ex) {
-            javax.swing.JOptionPane.showMessageDialog(null,"Error reading UserList.bin file");
-        }
-        
-        //Text Box Username and Password Box Password are not empty
-        if (!(txtUsername.getText().equals("") || txtPassword.getPassword().length ==0)){
-            
-            //Checks if user exist
-            if (list.checkUser(user)){
-
-                password = list.getUser(user).getPassword().toCharArray();  //retrieves password
-
-                //If password is equal to current password input
-                if(Arrays.equals(input,password)){
-                    login = true;
-
-                }
-            }
-        }
-
-            //If user has incorrect login
-            if (!login){ 
-                   javax.swing.JOptionPane.showMessageDialog(null, "Wrong username or password.");
-                   txtPassword.setText(""); //Clears Password Textfield
-                   txtUsername.setText(""); //Clears Username Textfield
-            }
-            //If user has correct login
-            else{
-                
-                if (list.getUserClass(user).equals("ManagementUser")){
-                    ManagementMenu m = new ManagementMenu();    //Creates management menu object
-                    m.setVisible(true); //Sets visibility of m to true
-                    this.dispose(); //disposes of login menu window
-                }
-                
-                else if ((list.getUserClass(user).equals("AnalysisUser"))){
-
-                    AnalysisMenu m = new AnalysisMenu();    //Creates Analysis menu object
-                    m.setVisible(true); //Sets visibility of m to true 
-
-                    this.dispose(); //disposes of login menu window
-                }
-                
-                else if((list.getUserClass(user).equals("ClientUser"))){
-                    ClientMenu m = new ClientMenu(user);    //Creates client menu  pbject
-                    m.setVisible(true); //Sets visibility of m to true
-                    this.dispose(); //disposes of login menu window
-                }
-            }
+//        boolean login = false;  //Login if True, else display error in username/password
+//        
+//        //Tries to read the UserListTest.bin file
+//        try{
+//            //Retrieves UserList.bin 
+//            FileInputStream fInput = new FileInputStream("UserListTest");
+//            ObjectInputStream ois = new ObjectInputStream(fInput);
+//            list = (UserList)ois.readObject();
+//        }
+//        catch(FileNotFoundException q){
+//            javax.swing.JOptionPane.showMessageDialog(null,"Can't find a text file");
+//        } 
+//        
+//        catch (IOException ex) {
+//            javax.swing.JOptionPane.showMessageDialog(null,"Error reading UserList.bin file");
+//        } 
+//        
+//        catch (ClassNotFoundException ex) {
+//            javax.swing.JOptionPane.showMessageDialog(null,"Error reading UserList.bin file");
+//        }
+//        
+//        //Text Box Username and Password Box Password are not empty
+//        if (!(txtUsername.getText().equals("") || txtPassword.getPassword().length ==0)){
+//            
+//            //Checks if user exist
+//            if (list.checkUser(user)){
+//
+//                password = list.getUser(user).getPassword().toCharArray();  //retrieves password
+//
+//                //If password is equal to current password input
+//                if(Arrays.equals(input,password)){
+//                    login = true;
+//
+//                }
+//            }
+//        }
+//
+//            //If user has incorrect login
+//            if (!login){ 
+//                   javax.swing.JOptionPane.showMessageDialog(null, "Wrong username or password.");
+//                   txtPassword.setText(""); //Clears Password Textfield
+//                   txtUsername.setText(""); //Clears Username Textfield
+//            }
+//            //If user has correct login
+//            else{
+//                
+//                if (list.getUserClass(user).equals("ManagementUser")){
+//                    ManagementMenu m = new ManagementMenu();    //Creates management menu object
+//                    m.setVisible(true); //Sets visibility of m to true
+//                    this.dispose(); //disposes of login menu window
+//                }
+//                
+//                else if ((list.getUserClass(user).equals("AnalysisUser"))){
+//
+//                    AnalysisMenu m = new AnalysisMenu();    //Creates Analysis menu object
+//                    m.setVisible(true); //Sets visibility of m to true 
+//
+//                    this.dispose(); //disposes of login menu window
+//                }
+//                
+//                else if((list.getUserClass(user).equals("ClientUser"))){
+//                    ClientMenu m = new ClientMenu(user);    //Creates client menu  pbject
+//                    m.setVisible(true); //Sets visibility of m to true
+//                    this.dispose(); //disposes of login menu window
+//                }
+//            }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     //Closes the program
@@ -235,6 +246,7 @@ public class LoginMenu extends javax.swing.JFrame {
 
     //Declared Variables
     public UserList list;
+    LIMSClient lc = new LIMSClient();
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
