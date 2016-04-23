@@ -466,8 +466,6 @@ public class ClientMenu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_submitBtnActionPerformed
 
-<<<<<<< HEAD
-=======
     private void sendDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendDateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_sendDateActionPerformed
@@ -477,7 +475,7 @@ public class ClientMenu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
->>>>>>> master
+
     public static void main(String args[]) {
       
         /* Create and display the form */

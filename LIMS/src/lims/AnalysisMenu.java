@@ -374,16 +374,12 @@ public class AnalysisMenu extends javax.swing.JFrame {
                 
                 Object [] arr = {ID, getStatus, testType, expFidelity, dueDate, sentDate, recievedDate, compDate}; 
                 tbl.addRow(arr);
-<<<<<<< HEAD
             
                         //set the combobox on the 2nd coloumn 
    //     JComboBox comboBox = new JComboBox();
      //   TableColumn  sampleColoumn = tblAnalystSample.getColumnModel().getColumn(1);
      //   sampleColoumn.setCellEditor(new DefaultCellEditor(comboBox));      
-=======
-                
-                
->>>>>>> master
+
         }
         tblAnalystSample.setModel(tbl);
     }
