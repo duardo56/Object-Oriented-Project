@@ -19,7 +19,7 @@ public class User implements Serializable {
     private String password;    //Stores user's password (Needs to encrypt password)
     private String firstName;   //Stores user's first name
     private String lastName;    //Stores user's last name
-    private String phoneNumber; //Stores user's phone number
+    private long phoneNumber; //Stores user's phone number
     private int userID;   //User's unique ID
     
     //Constructor w/ 3 parameters (String, String)
@@ -50,7 +50,7 @@ public class User implements Serializable {
     }
     
     //Get Phone Number
-    public String getPhoneNumber(){
+    public long getPhoneNumber(){
         return phoneNumber;
     }
     
@@ -59,7 +59,7 @@ public class User implements Serializable {
     }
     
     //Set Phone Number
-    public void setPhoneNumber(String phoneNumber){
+    public void setPhoneNumber(long phoneNumber){
         this.phoneNumber = phoneNumber;
     }
     

@@ -5,11 +5,13 @@
  */
 package lims;
 
+import java.io.Serializable;
+
 /**
  *
  * @author reticent
  */
-public class ManagementUser extends User{
+public class ManagementUser extends User implements Serializable{
    
     //Defualt Constructor
     public ManagementUser(String username, String password, String firstName, String lastName, int uniqueID){

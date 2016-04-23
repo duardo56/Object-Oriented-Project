@@ -414,7 +414,13 @@ public class ManagementMenu extends javax.swing.JFrame {
         //Sets and Displays each label
         lblLName.setText(list.getUser(clientUsers.get(index)).getLastName());   //Get and Display Last Name of User
         lblFName.setText(list.getUser(clientUsers.get(index)).getFirstName());  //Get and Display First Name of User
-        lblPNumber.setText(list.getUser(clientUsers.get(index)).getPhoneNumber());  //Get and Display Phone Number of User
+        if (list.getUser(clientUsers.get(index)).getPhoneNumber() == 0)
+        {
+            lblPNumber.setText("");  //Get and Display Phone Number of User
+        }
+        else{
+            lblPNumber.setText(String.valueOf(list.getUser(clientUsers.get(index)).getPhoneNumber()));
+        }
         lblComp.setText(temp.getCompanyName()); //Get and Display Company Name that user represents
         
         for (int x = 0; x < sampleList.getAllUsersSampleFiles(temp.getUsername()).size(); x++){

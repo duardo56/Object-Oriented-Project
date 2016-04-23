@@ -30,19 +30,38 @@ public class ClientMenu extends javax.swing.JFrame {
         
         username = "Number3";
         
+          //Reads UserListTest and SampleFileList file 
+        //and store into UserList list object and SampleFileList object
         try{
-            FileInputStream fInput = new FileInputStream("SampleFileList");
-            ObjectInputStream ois =  new ObjectInputStream(fInput);
-            sampleList = (SampleFileList)ois.readObject();
+            FileInputStream fInput = new FileInputStream("UserListTest");
+            ObjectInputStream ois = new ObjectInputStream(fInput);
+            list = (UserList)ois.readObject();
             
-        } catch (FileNotFoundException e) {
+            fInput = new FileInputStream("SampleFileList");
+            ois = new ObjectInputStream(fInput);
+            sampleList =  (SampleFileList)ois.readObject();
+            
+            clientInfo = (ClientUser)list.getUser(username);
+        }
+        catch (FileNotFoundException e){
             e.printStackTrace();
         }
-        catch(IOException e){
+        catch (IOException e){
             e.printStackTrace();
         }
-        catch(ClassNotFoundException e ){
+        catch(ClassNotFoundException e){
             e.printStackTrace();
+        }
+        
+        CompanyName.setText(clientInfo.getCompanyName());
+        
+        if(clientInfo.getPhoneNumber() ==0)
+        {
+            txtPhoneNum.setText("");
+        }
+        else
+        {
+            txtPhoneNum.setText(String.valueOf(clientInfo.getPhoneNumber()));
         }
         
         fillJTable();
@@ -58,6 +77,12 @@ public class ClientMenu extends javax.swing.JFrame {
             FileInputStream fInput = new FileInputStream("SampleFileList");
             ObjectInputStream ois =  new ObjectInputStream(fInput);
             sampleList = (SampleFileList)ois.readObject();
+            
+            fInput = new FileInputStream("UserListTest");
+            ois = new ObjectInputStream(fInput);
+            list = (UserList)ois.readObject();
+            
+            clientInfo = (ClientUser)list.getUser(username);
             
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -372,6 +397,9 @@ public class ClientMenu extends javax.swing.JFrame {
             String dDate = DateInput.getText();
             String sentDate = sendDate.getText();
             
+            clientInfo.setCompanyName(comp);
+            clientInfo.setPhoneNumber((Long.valueOf(txtPhoneNum.getText())));
+            
             sampleList.addFile(username, sample, comp, expFidelity, dDate, sentDate);
             
            //save the files 
@@ -403,14 +431,29 @@ public class ClientMenu extends javax.swing.JFrame {
             e.printStackTrace();
         }
         
-            CompanyName.setText("");
+            CompanyName.setText(clientInfo.getCompanyName());
             FidelityGoal.setText("");
             DateInput.setText("");
             sendDate.setText("");
-            txtPhoneNum.setText("");
+            if (clientInfo.getPhoneNumber() == 0)
+                txtPhoneNum.setText("");
             jComboBox1.setSelectedIndex(0);
         
             fillJTable();
+            
+            //save the files 
+           try{
+               //saves the file 
+               File file = new File("UserListTest");
+               OutputStream fileOutputStream = new FileOutputStream(file);
+               ObjectOutput outputStream = new ObjectOutputStream (fileOutputStream);
+               outputStream.writeObject(list);
+
+            } catch (FileNotFoundException e) {
+               e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         else {
             javax.swing.JOptionPane.showMessageDialog(null,"Please enter all the proper information");
@@ -453,8 +496,8 @@ public class ClientMenu extends javax.swing.JFrame {
     private String username;    //Holds Client's Usernames
     private SampleFileList sampleList; //object for class 
     private SampleFile sampleFiles; //object for inputing the information via the client
-    private User clientInfo ; // object for the user class 
-    private ClientUser userClient; //object for user client class 
+    private ClientUser clientInfo ; // object for the user class 
+    private UserList list;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CompanyName;

@@ -5,11 +5,13 @@
  */
 package lims;
 
+import java.io.Serializable;
+
 /**
  *
  * @author reticent
  */
-public class ClientUser extends User{
+public class ClientUser extends User implements Serializable{
     
     //Declared Member Variables
     private String companyName; //Holds client user's company name
