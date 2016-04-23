@@ -166,6 +166,11 @@ public class ClientMenu extends javax.swing.JFrame {
         jLabel1.setText("Phone Number");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Empty>", "Gas", "Water", "Soil", "Oil", "Metal" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -461,6 +466,18 @@ public class ClientMenu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_submitBtnActionPerformed
 
+<<<<<<< HEAD
+=======
+    private void sendDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sendDateActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+>>>>>>> master
     public static void main(String args[]) {
       
         /* Create and display the form */
