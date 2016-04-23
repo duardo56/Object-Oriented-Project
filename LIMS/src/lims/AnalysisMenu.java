@@ -114,7 +114,8 @@ public class AnalysisMenu extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        lblFidelity = new javax.swing.JLabel();
+        lFidelity = new javax.swing.JLabel();
+        lblFidelity = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -159,8 +160,15 @@ public class AnalysisMenu extends javax.swing.JFrame {
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, 20));
 
-        lblFidelity.setText("Fidelity :");
-        jPanel3.add(lblFidelity, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
+        lFidelity.setText("Fidelity :");
+        jPanel3.add(lFidelity, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
+
+        lblFidelity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lblFidelityActionPerformed(evt);
+            }
+        });
+        jPanel3.add(lblFidelity, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 310, -1));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -168,7 +176,7 @@ public class AnalysisMenu extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(57, 57, 57)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -192,7 +200,7 @@ public class AnalysisMenu extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(jButton1)))
-                .addContainerGap(394, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,6 +362,10 @@ public class AnalysisMenu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_tblAnalystSampleMouseClicked
 
+    private void lblFidelityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblFidelityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblFidelityActionPerformed
+
     //Populate the Jlist with Samples
     private void fillSampleTable (){
         DefaultTableModel tbl = (DefaultTableModel) tblAnalystSample.getModel();
@@ -374,12 +386,8 @@ public class AnalysisMenu extends javax.swing.JFrame {
                 
                 Object [] arr = {ID, getStatus, testType, expFidelity, dueDate, sentDate, recievedDate, compDate}; 
                 tbl.addRow(arr);
-            
-                        //set the combobox on the 2nd coloumn 
-   //     JComboBox comboBox = new JComboBox();
-     //   TableColumn  sampleColoumn = tblAnalystSample.getColumnModel().getColumn(1);
-     //   sampleColoumn.setCellEditor(new DefaultCellEditor(comboBox));      
-
+                
+                
         }
         tblAnalystSample.setModel(tbl);
     }
@@ -393,6 +401,7 @@ public class AnalysisMenu extends javax.swing.JFrame {
     private SampleFile samplefiles;
     private User clientInfo; 
     private ClientUser userClient;
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane SampleView;
@@ -416,7 +425,8 @@ public class AnalysisMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lblFidelity;
+    private javax.swing.JLabel lFidelity;
+    private javax.swing.JTextField lblFidelity;
     private javax.swing.JTable tblAnalystSample;
     // End of variables declaration//GEN-END:variables
 }
