@@ -21,7 +21,6 @@ import java.net.Socket;
  */
 public class LIMSServer extends Server {
     
-    
     private static final int S_PORT = 8765;
     public UserList userL;
     public SampleFileList fileL;
@@ -59,16 +58,8 @@ public class LIMSServer extends Server {
 		}
 		catch(FileNotFoundException e)
 		{
-//			System.out.println("UserList File Does Not Exist. Creating UserList...");
-//			System.out.println("No users currently exist. Your account will be the administrator.");
-//			System.out.print("Enter your username: ");
-//			String username = console.next();
-//			
-			//Create a new list, add current user to the ADMIN group. They now own the ADMIN group.
-//			userL = new UserList();
-//			userL.addUser(username);
-//			userL.addGroup(username, "ADMIN");
-//			userL.addOwnerships(username, "ADMIN");
+                    System.out.println("File Does Not Exist (Use LIMS Main to create file");
+                    System.exit(-1);
 		}
 		catch(IOException e)
 		{

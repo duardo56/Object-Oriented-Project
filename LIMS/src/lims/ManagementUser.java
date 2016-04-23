@@ -13,11 +13,19 @@ import java.io.Serializable;
  */
 public class ManagementUser extends User implements Serializable{
    
-    //Defualt Constructor
+    //Defualt Constructor (Soon to be removed!!!!!!!!)
     public ManagementUser(String username, String password, String firstName, String lastName, int uniqueID){
         super(username, password, uniqueID);
         this.setFirstName(firstName);
         this.setLastName(lastName);
+    }
+    
+    //Defualt Constructor
+    public ManagementUser(String username, String password, String firstName, String lastName, int uniqueID, long phoneNumber){
+        super(username, password, uniqueID);
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+        this.setPhoneNumber(phoneNumber);
     }
     
 }

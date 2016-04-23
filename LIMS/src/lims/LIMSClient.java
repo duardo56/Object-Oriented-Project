@@ -51,5 +51,40 @@ public class LIMSClient extends Client {
     }
     
     
+    //Create new user
+    public boolean createNewUser (String username, String password, String firstName, String lastName, long phoneNumber, String status){
+        
+        try {
+           
+             //Local Varibles
+            Message sendM = null;    //Holds message sent to server
+            Message receiveM = null; //Receives the response from the server
+            
+            //Reads, sends, and receives the message
+            sendM =  new Message("createNewUser");
+            sendM.addObject(username);   //adds username
+            sendM.addObject(password);   //adds password
+            sendM.addObject(firstName);  //adds first name
+            sendM.addObject(lastName);   //adds last name
+            sendM.addObject(phoneNumber); //adds phone number
+            sendM.addObject(status);    //adds the status
+            output.writeObject(sendM);   //writes to the server
+            receiveM = (Message)input.readObject();  //receives from the server
+            
+            //Successful Response from server
+            if (receiveM.getMessage().equals("OK"))
+            {
+             return true;   
+            }
+            return false;
+        }
+        catch (Exception e){
+            System.err.println("Error: " + e.getMessage());
+            e.printStackTrace(System.err);
+            return false;
+        }
+    }
+    
+    
     
 }

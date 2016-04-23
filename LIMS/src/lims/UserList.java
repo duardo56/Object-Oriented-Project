@@ -25,7 +25,7 @@ public class UserList implements Serializable {
     //Default Constructor
     public UserList(){}
     
-    //Adds user according to the status/type of user
+    //Adds user according to the status/type of user (SOON TO BE DELETED!!!!!!!!!!!!!)
     public void addUser(String username, String password, String firstName, String lastName, String status){
         if (status.equals("Management")){
             User user = new ManagementUser(username.toLowerCase(), password,firstName, lastName,createID());
@@ -38,6 +38,24 @@ public class UserList implements Serializable {
         
         else if (status.equals("Client")){
             User user = new ClientUser(username.toLowerCase(), password,firstName, lastName, createID());
+            list.put(username.toLowerCase(), user);
+        }
+    }
+    
+    ///***********************************************************************************************************************
+    //Adds user according to the status/type of user
+    public void addUser(String username, String password, String firstName, String lastName, long phoneNumber, String status){
+        if (status.equals("Management")){
+            User user = new ManagementUser(username.toLowerCase(), password,firstName, lastName,createID(), phoneNumber);
+            list.put(username.toLowerCase(), user);
+        }
+        else if(status.equals("Analysis")){
+            User user = new AnalysisUser(username.toLowerCase(), password,firstName, lastName, createID(), phoneNumber);
+            list.put(username.toLowerCase(), user);
+        }
+        
+        else if (status.equals("Client")){
+            User user = new ClientUser(username.toLowerCase(), password,firstName, lastName, createID(), phoneNumber);
             list.put(username.toLowerCase(), user);
         }
     }

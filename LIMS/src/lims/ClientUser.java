@@ -22,6 +22,14 @@ public class ClientUser extends User implements Serializable{
         this.setFirstName(firstName);
         this.setLastName(lastName);
     }
+    
+    //Defualt Constructor
+    public ClientUser(String username, String password, String firstName, String lastName, int uniqueID,long phoneNumber){
+        super(username, password, uniqueID);
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+        this.setPhoneNumber(phoneNumber);
+    }
 
     public String getCompanyName() {
         return companyName;

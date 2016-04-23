@@ -20,4 +20,12 @@ public class AnalysisUser extends User implements Serializable {
         this.setLastName(lastName);
     }
     
+    //Defualt Constructor
+    public AnalysisUser(String username, String password, String firstName, String lastName, int uniqueID, long phoneNumber){
+        super(username, password, uniqueID);
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+        this.setPhoneNumber(phoneNumber);
+    }
+    
 }

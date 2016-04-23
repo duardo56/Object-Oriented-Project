@@ -23,8 +23,14 @@ public class LoginCreateUser extends javax.swing.JFrame {
     /**
      * Creates new LoginCreateUser form
      */
+    //Default Constructor
     public LoginCreateUser() {
         initComponents();
+    }
+
+    public LoginCreateUser(LoginMenu m) {
+        initComponents();
+        lm = m;
     }
 
     /**
@@ -49,6 +55,8 @@ public class LoginCreateUser extends javax.swing.JFrame {
         cbManagement = new javax.swing.JCheckBox();
         cbAnalysis = new javax.swing.JCheckBox();
         cbClient = new javax.swing.JCheckBox();
+        jPanel5 = new javax.swing.JPanel();
+        txtPhoneNumber = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Create New Login");
@@ -104,6 +112,10 @@ public class LoginCreateUser extends javax.swing.JFrame {
             }
         });
 
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Phone Number"));
+        jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel5.add(txtPhoneNumber);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -113,21 +125,22 @@ public class LoginCreateUser extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(cbManagement)
                         .addGap(18, 18, 18)
                         .addComponent(cbAnalysis)
                         .addGap(18, 18, 18)
                         .addComponent(cbClient)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(0, 56, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,12 +153,14 @@ public class LoginCreateUser extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbManagement)
                     .addComponent(cbAnalysis)
                     .addComponent(cbClient))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreateUser)
                     .addComponent(btnExit))
@@ -157,79 +172,74 @@ public class LoginCreateUser extends javax.swing.JFrame {
 
     //Exit button
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-            this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 
     //Creates button action event handler
     private void btnCreateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateUserActionPerformed
-        
-        /*
-            Work in Progress - Need to implement a way to save Usernames and files into the same object
-            and find a way to distinguish whether or not a username already exist within the system.
-                1) A way to save files as objects
-                2) A way to read through the files and check uernames
-        
-            ****UPDATE 03/29/2016****
-        Idea: implement System and User class here in order to create User objects and store them 
-        using serialization. 
-        */
-        
+
         //If checkBox is set to Analysis
-        if (getCheckBox().equals("Analysis")){
+        if (getCheckBox().equals("Analysis")) {
             
             //Checks if text boxes are empty
-            if(checkEmptyTxtBoxes()){
+            if (checkEmptyTxtBoxes()) {
+
+                String username = txtUsername.getText();
+                String password = new String (txtPassword.getPassword());
+                String firstName = txtFirstName.getText();
+                String lastName = txtLastName.getText();
+                long phoneNumber = Long.valueOf(txtPhoneNumber.getText());
                 
-                //Username does not exist
-                if (!checkUsername(txtUsername.getText().toLowerCase())){
-                    try {
-                        createNewUser(getCheckBox());
-                    } catch (IOException ex) {
-                        Logger.getLogger(LoginCreateUser.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    this.dispose(); //Closes this form
+                if (lm.lc.createNewUser(username, password, firstName, lastName, phoneNumber, "Analysis")){
+                    System.out.println("Creating a new user was successful!");
+                    this.dispose();
+                }
+                else{
+                    System.out.println("Creating a new user was failed!");
                 }
             }
-        }
-        
-        //If checkBox is set to Management
-        else if(getCheckBox().equals("Management")){
-            
+        } //If checkBox is set to Management
+        else if (getCheckBox().equals("Management")) {
+
             //Checks if text boxes are empty
-            if (checkEmptyTxtBoxes()){
+            if (checkEmptyTxtBoxes()) {
+
+                String username = txtUsername.getText();
+                String password = new String (txtPassword.getPassword());
+                String firstName = txtFirstName.getText();
+                String lastName = txtLastName.getText();
+                long phoneNumber = Long.valueOf(txtPhoneNumber.getText());
                 
-                //Username does not exist
-                 if (!checkUsername(txtUsername.getText().toLowerCase())){
-                     try {
-                         createNewUser(getCheckBox());
-                     } catch (IOException ex) {
-                         Logger.getLogger(LoginCreateUser.class.getName()).log(Level.SEVERE, null, ex);
-                     }
-                    this.dispose(); //Closes this form
+                if (lm.lc.createNewUser(username, password, firstName, lastName, phoneNumber, "Management")){
+                    System.out.println("Creating a new user was successful!");
+                    this.dispose();
+                }
+                else{
+                    System.out.println("Creating a new user was failed!");
                 }
             }
-        }
-        
-        //If checkBox is set to Client
-        else if (getCheckBox().equals("Client")){
-            
+        } //If checkBox is set to Client
+        else if (getCheckBox().equals("Client")) {
+
             //Checks if text boxes are empty
-            if (checkEmptyTxtBoxes()){
+            if (checkEmptyTxtBoxes()) {
+
+                String username = txtUsername.getText();
+                String password = new String (txtPassword.getPassword());
+                String firstName = txtFirstName.getText();
+                String lastName = txtLastName.getText();
+                long phoneNumber = Long.valueOf(txtPhoneNumber.getText());
                 
-                //Username does not exist
-                if (!checkUsername(txtUsername.getText().toLowerCase())){
-                    try {
-                        createNewUser(getCheckBox());
-                    } catch (IOException ex) {
-                        Logger.getLogger(LoginCreateUser.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    this.dispose(); //Closes this form
+                if (lm.lc.createNewUser(username, password, firstName, lastName, phoneNumber, "Client")){
+                    System.out.println("Creating a new user was successful!");
+                    this.dispose();
+                }
+                else{
+                    System.out.println("Creating a new user was failed!");
                 }
             }
-        }
-        
-        //If no checkBox are present
-        else if (getCheckBox().equals("none")){
+        } //If no checkBox are present
+        else if (getCheckBox().equals("none")) {
             javax.swing.JOptionPane.showMessageDialog(null, "Please select one of the check boxes.");
         }
     }//GEN-LAST:event_btnCreateUserActionPerformed
@@ -248,138 +258,82 @@ public class LoginCreateUser extends javax.swing.JFrame {
     private void cbClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbClientActionPerformed
         switchBoxChecking(evt.getActionCommand());
     }//GEN-LAST:event_cbClientActionPerformed
-   
-    
+
     //If there is more than 1 checkbox checked, it will deactive the rest and turn on current
-    private void switchBoxChecking(String evt){
-        
+    private void switchBoxChecking(String evt) {
+
         //if event is equal to Management, set the other buttons to false
-        if (evt.equals("Management")){
+        if (evt.equals("Management")) {
             cbClient.setSelected(false);
             cbAnalysis.setSelected(false);
-        }
-        
-        //if event is equal to Analysis, set the other buttons to false
-        else if(evt.equals("Analysis")){
+        } //if event is equal to Analysis, set the other buttons to false
+        else if (evt.equals("Analysis")) {
             cbManagement.setSelected(false);
             cbClient.setSelected(false);
-        }
-        
-        //if event is equal to Client, set the other buttons to false
-        else if (evt.equals("Client")){
+        } //if event is equal to Client, set the other buttons to false
+        else if (evt.equals("Client")) {
             cbManagement.setSelected(false);
             cbAnalysis.setSelected(false);
         }
     }
-    
+
     //Check what current User CheckBox is selected and returns that as a string
-    private String getCheckBox(){
-        
-        if (cbClient.isSelected()){
+    private String getCheckBox() {
+
+        if (cbClient.isSelected()) {
             return "Client";
-        }
-        else if (cbManagement.isSelected()){
+        } else if (cbManagement.isSelected()) {
             return "Management";
-        }
-        else if(cbAnalysis.isSelected()){
+        } else if (cbAnalysis.isSelected()) {
             return "Analysis";
-        }
-        else{
+        } else {
             return "none";
         }
     }
-    
+
     //Check whether or not the textboxes are empty
-    private boolean checkEmptyTxtBoxes(){
+    private boolean checkEmptyTxtBoxes() {
         //Checks UserName
-        if (txtUsername.getText().length() != 0){
-            
+        if (txtUsername.getText().length() != 0) {
+
             //Checks Password
-            if (txtPassword.getPassword().length !=0){
-                
+            if (txtPassword.getPassword().length != 0) {
+
                 //Checks FirstName
-                if (txtFirstName.getText().length() != 0){
-                    
+                if (txtFirstName.getText().length() != 0) {
+
                     //Checks LastName
-                    if(txtLastName.getText().length() != 0){
-                        return true;
-                    }
-                    
-                    else{
+                    if (txtLastName.getText().length() != 0) {
+                        
+                        //Checks PhoneNumber 
+                        if(txtPhoneNumber.getText().length() != 0){
+                            return true;
+                        }else{
+                            javax.swing.JOptionPane.showMessageDialog(null, "Please enter your phone number.");
+                            return false;   //Returns false if last name is empty
+                        }
+                    } else {
                         javax.swing.JOptionPane.showMessageDialog(null, "Please enter your last name.");
                         return false;   //Returns false if last name is empty
                     }
-                }
-                else{
+                } else {
                     javax.swing.JOptionPane.showMessageDialog(null, "Please enter your first name.");
                     return false;   //Returns false if first name is empty;
                 }
-            }
-            else{
+            } else {
                 javax.swing.JOptionPane.showMessageDialog(null, "Please enter a password.");
                 return false;   //Returns false if password is empty;  
-            }   
-        }
-        else{
+            }
+        } else {
             javax.swing.JOptionPane.showMessageDialog(null, "Please enter a username.");
             return false;   //Returns false if username is empty;
         }
     }
-    
-    //Method to check whether or not username has been taken
-    private boolean checkUsername(String username){
-        try{
-            
-        //Retrieves UserList.bin 
-        FileInputStream fInput = new FileInputStream("UserListTest");
-        ObjectInputStream ois = new ObjectInputStream(fInput);
-        list = (UserList)ois.readObject(); 
-        
-        //If user exist
-        if (!list.checkUser(username)){
-            return false;    //return true
-        }
-        else{
-            javax.swing.JOptionPane.showMessageDialog(null, "Username Exist - Please try another username.");
-            return true;
-        }
-        
-        }
-        catch (FileNotFoundException e){
-            javax.swing.JOptionPane.showMessageDialog(null,"Can't find UserList.bin text file");
-        }
-        catch (IOException e){
-            javax.swing.JOptionPane.showMessageDialog(null,"Error reading UserList.bin file");
-        }
-        catch (ClassNotFoundException e){
-            javax.swing.JOptionPane.showMessageDialog(null,"Error reading UserList.bin file");
-        }
-        return false;
-    }
-    
-    //Create new user method
-    private void createNewUser(String status) throws FileNotFoundException, IOException{
-        
-        char [] temp = txtPassword.getPassword();   //Holds password in an array of characters
-        String password = new String(temp); //Holds password as String
-        
-        //Adds user to UserList
-        list.addUser(txtUsername.getText().toLowerCase(), password , 
-                     txtFirstName.getText(), txtLastName.getText(), status);
-        
-        
-        //Saves
-	ObjectOutputStream outStream = new ObjectOutputStream(new FileOutputStream("UserListTest"));
-	outStream.writeObject(list);
-        
-        //Displays user a message saying it was successful in creating a new user
-        javax.swing.JOptionPane.showMessageDialog(null, "User Successfully created.");
-    }
-    
+
     //Declared Variables
-    private UserList list;   //Holds UserList object
-    
-    
+    private LoginMenu lm;
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreateUser;
     private javax.swing.JButton btnExit;
@@ -390,9 +344,11 @@ public class LoginCreateUser extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtLastName;
     private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtPhoneNumber;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

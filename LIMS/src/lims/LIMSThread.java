@@ -5,6 +5,7 @@
  */
 package lims;
 
+import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -41,12 +42,7 @@ public class LIMSThread extends Thread{
                 Message response;
                 System.out.println("[" + socket.getInetAddress() + ":" + socket.getPort() + "] " + received.getMessage());
                 
-                
-                
-                //Create new user
-                
-                
-                
+                ///*********************************************************************************************************
                 //Login
                 if (received.getMessage().equals("login")){
                     
@@ -73,6 +69,37 @@ public class LIMSThread extends Thread{
                         }    
                     }
                 }
+                //****************************************************************************************
+                //Create New User
+                else if(received.getMessage().equals("createNewUser")){
+                    
+                    String username = (String)received.getObjCont().get(0);
+                    String password = (String)received.getObjCont().get(1);
+                    String firstName = (String)received.getObjCont().get(2);
+                    String lastName = (String)received.getObjCont().get(3);
+                    long phoneNumber = (long)received.getObjCont().get(4);
+                    String status = (String)received.getObjCont().get(5);
+                    
+                    //Checks if there if username is taken
+                    if (gs.userL.checkUser(username)){
+                        response = new Message("FAIL");
+                        response.addObject(null);
+                        output.writeObject(response);
+                    }
+                    //Else username is not taken
+                    else{
+                        gs.userL.addUser(username, password, firstName, lastName, phoneNumber, status);
+                        
+                        //Saves UserList.bin
+                        ObjectOutputStream obj_out = new ObjectOutputStream (new FileOutputStream("UserListTest"));
+                        obj_out.writeObject (gs.userL);
+                        
+                        response = new Message("OK");
+                        response.addObject(null);
+                        output.writeObject(response);   
+                    }
+                }
+                
             }while(loop);
         }
         catch(Exception e){
@@ -91,10 +118,8 @@ public class LIMSThread extends Thread{
             
             if (stored_password.equals(password)){
                 return true;
-            }
-            
+            }   
         }
-        
         return false;
     }
 }
