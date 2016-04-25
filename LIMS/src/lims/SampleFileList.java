@@ -41,6 +41,21 @@ public class SampleFileList implements Serializable {
             list.get(username.toLowerCase()).add(temp);   //Adds file to exisitng user into the hashtable
     }
     
+    //Creates new SampleFile object for user
+    public void addFile(String username, String testType, String company, double expectedFidelity,String dueDate, String sentDate, int userID){
+        
+        ArrayList<SampleFile> t = new ArrayList<SampleFile>();  
+        SampleFile temp = new SampleFile(testType,createID(),company, expectedFidelity,dueDate,sentDate, userID);
+        
+        t.add(temp);
+        
+        //if user does not exist in hashtable
+        if (!checkUser(username.toLowerCase()))
+            list.put(username.toLowerCase(), t); //Adds new user w/ SampleFile into the hashtable
+        else
+            list.get(username.toLowerCase()).add(temp);   //Adds file to exisitng user into the hashtable
+    }
+    
     //Check if user exist within SimpleFileList Hashtable
     public boolean checkUser(String username){
         

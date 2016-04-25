@@ -383,34 +383,34 @@ public class ManagementMenu extends javax.swing.JFrame {
     //View Clients Clients List mouse click event
     private void listClientsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listClientsMouseClicked
         
-//        //Instanced Member Variables
-//        JList source =(javax.swing.JList)evt.getSource();
-//        int index = source.getSelectedIndex();  //Holds currently selected index of the list
-//        ClientUser temp = (ClientUser)(clientUsersL.get(index)); //Stores ClientUser Object
-//        DefaultListModel listModel = new DefaultListModel();
-//        
-//        //***************************************************************************************
-//        ArrayList<SampleFile> tempFile = sampleList.getAllUsersSampleFiles(temp.getUsername());
-//        
-//        //Sets and Displays each label
-//        lblLName.setText(list.getUser(clientUsers.get(index)).getLastName());   //Get and Display Last Name of User
-//        lblFName.setText(list.getUser(clientUsers.get(index)).getFirstName());  //Get and Display First Name of User
-//        if (list.getUser(clientUsers.get(index)).getPhoneNumber() == 0)
-//        {
-//            lblPNumber.setText("");  //Get and Display Phone Number of User
-//        }
-//        else{
-//            lblPNumber.setText(String.valueOf(list.getUser(clientUsers.get(index)).getPhoneNumber()));
-//        }
-//        
-//        lblComp.setText(temp.getCompanyName()); //Get and Display Company Name that user represents
-//        
-//        for (int x = 0; x < sampleList.getAllUsersSampleFiles(temp.getUsername()).size(); x++){
-//            
-//            listModel.addElement((int)tempFile.get(x).getSampleID());
-//        }
-//        
-//        listUFiles.setModel(listModel);
+        //Instanced Member Variables
+        JList source =(javax.swing.JList)evt.getSource();
+        int index = source.getSelectedIndex();  //Holds currently selected index of the list
+        ClientUser temp = (ClientUser)(clientUsersL.get(index)); //Stores ClientUser Object
+        DefaultListModel listModel = new DefaultListModel();
+        
+        //***************************************************************************************
+       
+        //Sets and Displays each label
+        lblLName.setText(clientUsersL.get(index).getLastName());   //Get and Display Last Name of User
+        lblFName.setText(clientUsersL.get(index).getFirstName());  //Get and Display First Name of User
+        if (clientUsersL.get(index).getPhoneNumber() == 0)
+        {
+            lblPNumber.setText("");  //Get and Display Phone Number of User
+        }
+        else{
+            lblPNumber.setText(String.valueOf(clientUsersL.get(index).getPhoneNumber()));
+        }
+        
+        lblComp.setText(temp.getCompanyName()); //Get and Display Company Name that user represents
+        
+        for (int x = 0; x < sampleFilesL.size(); x++){
+            
+            if(sampleFilesL.get(x).getUserID() == clientUsersL.get(index).getUserID())
+                listModel.addElement((int)sampleFilesL.get(x).getSampleID());
+        }
+        
+        listUFiles.setModel(listModel);
         
     }//GEN-LAST:event_listClientsMouseClicked
 

@@ -6,8 +6,6 @@
 package lims;
 import java.io.Serializable;
 import java.util.Date;
-
-
 /**
  *
  * @author reticent
@@ -19,6 +17,7 @@ public class SampleFile implements Serializable{
     
     //Declared Member Variables
     private int analysisID = 0;    //Person working on the sample
+    private int userID = 0;  //Client who submitted file
     private String status;  //Progress of the sample (accepted/rejected/work in progress/completed/revision)
     private int sampleID;   //The identifier of the sample (9-digit number)
     private String testType;    //The type of sample (gas/water/metal/ground)
@@ -42,6 +41,17 @@ public class SampleFile implements Serializable{
         this.dueDate = dueDate;
         this.sentDate = sentDate;
     }
+    //Default w/7 parameters(String, int, String, String, String, String, int)
+    public SampleFile(String testType, int sampleID, String company, double expectedFidelity,String dueDate, String sentDate, int userID){
+        this.status = "Revision";
+        this.testType = testType;
+        this.sampleID = sampleID;
+        this.company = company;
+        this.expectedFidelity = expectedFidelity;
+        this.dueDate = dueDate;
+        this.sentDate = sentDate;
+        this.userID = userID;
+    }
     
     //Setters/Mutators
     //Set Current Status of the Sample
@@ -62,9 +72,17 @@ public class SampleFile implements Serializable{
     public void setFidelity(double fidelity){
         this.fidelity = fidelity;
     }
+
+    public int getUserID() {
+        return userID;
+    }
     
     public void setPhoneNumber(long pNum){
         this.pNum = pNum;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
     
     //Accessors/Getters

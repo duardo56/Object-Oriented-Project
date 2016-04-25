@@ -22,7 +22,7 @@ import java.util.ArrayList;
  */
 public class LIMS {
     
-    public static void main(String[] args) throws IOException  {
+    public static void main(String[] args) throws IOException, ClassNotFoundException  {
         
         ///***********************************************************
         //
@@ -67,12 +67,18 @@ public class LIMS {
         }
         
             try{
+                
+                //Retrieves and displays UserList.bin
+                FileInputStream fInput = new FileInputStream("UserListTest");
+                ObjectInputStream ois = new ObjectInputStream(fInput);
+                UserList testing = (UserList)ois.readObject();
+                
                 //Create SampleFileList for test purpose
                 SampleFileList test = new SampleFileList();
-                test.addFile("Number1", "Gas", "TestComp", 68.0, "12/12/2012", "10/10/2010");
-                test.addFile("Number1", "Solid", "TestSolidComp", 68.0, "09/06/2012", "06/12/2010");
-                test.addFile("Number2", "Solid", "TestComp2", 50.0, "10/02/2014", "7/06/2000");
-                test.addFile("Number3", "Liquid", "DifferentComp", 99.0, "03/02/2020", "10/10/2010");
+                test.addFile("Number1", "Gas", "TestComp", 68.0, "12/12/2012", "10/10/2010", testing.getUser("Number1").getUserID());
+                test.addFile("Number1", "Solid", "TestSolidComp", 68.0, "09/06/2012", "06/12/2010",testing.getUser("Number1").getUserID());
+                test.addFile("Number2", "Solid", "TestComp2", 50.0, "10/02/2014", "7/06/2000",testing.getUser("Number2").getUserID());
+                test.addFile("Number3", "Liquid", "DifferentComp", 99.0, "03/02/2020", "10/10/2010",testing.getUser("Number3").getUserID());
                 
                 //Saves SampleFileList.bin
                 File file = new File("SampleFileList");
