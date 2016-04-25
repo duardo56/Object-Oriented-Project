@@ -19,6 +19,7 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
+import java.util.Random;
 
 /**
  *
@@ -117,12 +118,14 @@ public class AnalysisMenu extends javax.swing.JFrame {
         lFidelity = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        lblFidelity = new javax.swing.JLabel();
+        lblTestResult = new javax.swing.JLabel();
         lblSampleID = new javax.swing.JLabel();
         lblSampleType = new javax.swing.JLabel();
         lblExpFidelity = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        lblFidelity1 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         btnCalc = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -161,16 +164,16 @@ public class AnalysisMenu extends javax.swing.JFrame {
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, 20));
 
         lFidelity.setText("Fidelity :");
-        jPanel3.add(lFidelity, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, -1, -1));
+        jPanel3.add(lFidelity, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, -1));
 
         jLabel4.setText("Expected Fielity: ");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, -1));
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
 
         jLabel5.setText("Sample Type:");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, -1, -1));
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, -1, -1));
 
-        lblFidelity.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jPanel3.add(lblFidelity, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 280, 20));
+        lblTestResult.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jPanel3.add(lblTestResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 280, 20));
 
         lblSampleID.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel3.add(lblSampleID, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 280, 20));
@@ -179,13 +182,19 @@ public class AnalysisMenu extends javax.swing.JFrame {
         jPanel3.add(lblSampleType, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, 280, 20));
 
         lblExpFidelity.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jPanel3.add(lblExpFidelity, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, 280, 20));
+        jPanel3.add(lblExpFidelity, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 280, 20));
 
         jLabel7.setText("%");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 200, 10, -1));
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 150, 10, -1));
 
         jLabel8.setText("%");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 130, 10, -1));
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 110, 10, -1));
+
+        lblFidelity1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jPanel3.add(lblFidelity1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 280, 20));
+
+        jLabel9.setText("Test Result:");
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, -1, -1));
 
         btnCalc.setText("Calclulate Fidelity");
         btnCalc.addActionListener(new java.awt.event.ActionListener() {
@@ -344,9 +353,6 @@ public class AnalysisMenu extends javax.swing.JFrame {
     //Closes the program when exit from Menu is clicked
     private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
         this.dispose();
-        
-        
-        
     }//GEN-LAST:event_jMenuItemExitActionPerformed
 
     private void tblAnalystSampleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAnalystSampleMouseClicked
@@ -365,7 +371,7 @@ public class AnalysisMenu extends javax.swing.JFrame {
     lblSampleID.setText(Integer.toString(sampleId)); //to display on label
     lblSampleType.setText(samplefiles.getTestType());
     lblExpFidelity.setText(Double.toString(expfid));
-    lblFidelity.setText(Double.toString(fidilety)); 
+    lblTestResult.setText(Double.toString(fidilety)); 
   
         
     }//GEN-LAST:event_tblAnalystSampleMouseClicked
@@ -373,9 +379,7 @@ public class AnalysisMenu extends javax.swing.JFrame {
     private void btnGetSampleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetSampleActionPerformed
         //automatically swithc tabs
         SampleView.setSelectedIndex(1);
-    
-     
-        
+   
       
     }//GEN-LAST:event_btnGetSampleActionPerformed
 
@@ -385,43 +389,77 @@ public class AnalysisMenu extends javax.swing.JFrame {
     lblSampleID.setText("");    
     lblSampleType.setText("");
     lblExpFidelity.setText("");
-    lblFidelity.setText("");
+    lblTestResult.setText("");
 
     
     }//GEN-LAST:event_btnSendActionPerformed
     private void btnCalcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcActionPerformed
       // String testType; //to determine the test type 
-         int calculation = 0;
-        
-        if(lblSampleType.getText() == "Gas")
-        {
-         //equation goes here 
-            
-            
-           
-            
-            lblFidelity.setText(Integer.toString(calculation)); 
-        }
-        else if (lblSampleType.getText() == "Water")
-        {
-               
-            
-             lblFidelity.setText(Integer.toString(calculation)); 
-            
-        }
-        else if (lblSampleType.getText() == "Soil")
-        {
-            
-             lblFidelity.setText(Integer.toString(calculation)); 
-        }
-        else if(lblSampleType.getText() == "Oil")
-        {
+         double fidelity;
+         double density_Gas = 719.7;
+         double density_water = 1000;
+         double density_soil = 2000;
+         double density_oil = 862;
+         double density_metal = 2830;
+         double tmp_prep;
          
-             lblFidelity.setText(Integer.toString(calculation)); 
-        }
-        else if(lblSampleType.getText() == "Metal")
-        {
-            
+        
+        if(null != lblSampleType.getText())
+        switch (lblSampleType.getText()) {
+            case "Gas":
+                tmp_prep = prepFactor(); //new instance 
+                //equation goes here
+                fidelity = ((density_Gas - tmp_prep) / tmp_prep) * 100 ;
+                lblTestResult.setText(Double.toString(fidelity));
+                
+                err_calc(fidelity);
+                test_pass(err_calc(fidelity));
+                return_result(test_pass(err_calc(fidelity)));
+                
+                
+                break;
+            case "Water":
+                tmp_prep = prepFactor(); //new instance 
+                fidelity = ((density_water - tmp_prep) / tmp_prep) * 100 ;
+                lblTestResult.setText(Double.toString(fidelity));
+                
+                err_calc(fidelity);
+                test_pass(err_calc(fidelity));
+                return_result(test_pass(err_calc(fidelity)));
+                
+                break;
+            case "Soil":
+                tmp_prep = prepFactor(); //new instance 
+                fidelity = ((density_soil - tmp_prep) / tmp_prep) * 100 ;
+                lblTestResult.setText(Double.toString(fidelity));
+                
+                err_calc(fidelity);
+                test_pass(err_calc(fidelity));
+                return_result(test_pass(err_calc(fidelity)));
+                
+                break;
+            case "Oil":
+                tmp_prep = prepFactor(); //new instance 
+                fidelity = ((density_oil - tmp_prep) / tmp_prep) * 100 ;
+                lblTestResult.setText(Double.toString(fidelity));
+              
+                 err_calc(fidelity);
+                 test_pass(err_calc(fidelity));
+                 return_result(test_pass(err_calc(fidelity)));       
+                break;
+            case "Metal":
+                tmp_prep = prepFactor(); //new instance 
+                fidelity = ((density_metal - tmp_prep) / tmp_prep) * 100 ;
+                lblTestResult.setText(Double.toString(fidelity));
+                
+                
+                err_calc(fidelity);
+                test_pass(err_calc(fidelity));
+                return_result(test_pass(err_calc(fidelity)));
+                break;
+            default:
+              lblSampleType.setText("");
+                break;
         }
         
     }//GEN-LAST:event_btnCalcActionPerformed
@@ -431,9 +469,7 @@ public class AnalysisMenu extends javax.swing.JFrame {
         DefaultTableModel tbl = (DefaultTableModel) tblAnalystSample.getModel();
         
         tbl.setRowCount(0); //Set model row count = 0
-        
-        
-        ArrayList  <SampleFile> fileList = sampleList.getFilesAssignedToAnalysis(userID); 
+
         list.getUser(username); 
         
         for (int i = 0; i < fileList.size(); i++) {
@@ -471,6 +507,52 @@ public class AnalysisMenu extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
+        
+        private double prepFactor()
+        {
+            double prep;
+            if(generate_finalV() >= genrate_initialV()){
+                generate_finalV(); //generate new values
+                genrate_initialV();
+                prepFactor();  //call itself again 
+            }
+             prep = generate_finalV() / genrate_initialV()* 100; 
+            return prep;
+        }
+        
+        private double err_calc(double test_result)
+        {
+            double result;
+            double exp_fid;
+              exp_fid =  (Double) tblAnalystSample.getValueAt(tblAnalystSample.getSelectedRow(), 3);
+        
+             result = ((test_result - exp_fid)/ exp_fid ) * 100 ;
+        
+            return result;
+        }
+        
+        private boolean test_pass(double result )
+        {
+        return result >= 10;
+        }
+        
+        private void return_result(boolean result){
+            if( result == true){
+                lblTestResult.setText("PASSED");
+            }
+            else
+            {
+                lblTestResult.setText("FAILED");
+            }
+            
+        }
+        private double generate_finalV(){
+            return seed.nextDouble() * 100;
+        }
+        
+        private double genrate_initialV(){
+            return seed.nextDouble() * 100;  
+        }
     
     //Declared variable
     private UserList list;  //Holds UserList object
@@ -482,6 +564,8 @@ public class AnalysisMenu extends javax.swing.JFrame {
     private User clientInfo; 
     private ClientUser userClient;
     private ArrayList <Integer> idHolder =  new ArrayList <Integer>(); //hold the changed sample  
+    private Random seed;  //object for random variable 
+    private ArrayList  <SampleFile> fileList = sampleList.getFilesAssignedToAnalysis(userID); 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane SampleView;
@@ -496,6 +580,7 @@ public class AnalysisMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemExit;
@@ -506,9 +591,10 @@ public class AnalysisMenu extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lFidelity;
     private javax.swing.JLabel lblExpFidelity;
-    private javax.swing.JLabel lblFidelity;
+    private javax.swing.JLabel lblFidelity1;
     private javax.swing.JLabel lblSampleID;
     private javax.swing.JLabel lblSampleType;
+    private javax.swing.JLabel lblTestResult;
     private javax.swing.JTable tblAnalystSample;
     // End of variables declaration//GEN-END:variables
 }
