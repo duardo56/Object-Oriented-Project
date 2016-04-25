@@ -39,9 +39,8 @@ public class LIMSServer extends Server {
     @Override
     void start() {
         
-                
 		String userFile = "UserListTest";
-                String sampleFile = "SampleFileList";
+                //String sampleFile = "SampleFileList";
 		//Scanner console = new Scanner(System.in);
 		ObjectInputStream userStream;
 		
@@ -55,6 +54,29 @@ public class LIMSServer extends Server {
 			FileInputStream fis = new FileInputStream(userFile);
 			userStream = new ObjectInputStream(fis);
 			userL = (UserList)userStream.readObject();
+		}
+		catch(FileNotFoundException e)
+		{
+                    System.out.println("File Does Not Exist (Use LIMS Main to create file");
+                    System.exit(-1);
+		}
+		catch(IOException e)
+		{
+			System.out.println("Error reading from UserList file");
+			System.exit(-1);
+		}
+		catch(ClassNotFoundException e)
+		{
+			System.out.println("Error reading from UserList file");
+			System.exit(-1);
+		}
+                
+                //Open user file to get user list
+		try
+		{
+                    FileInputStream fis = new FileInputStream("SampleFileList");
+                    userStream = new ObjectInputStream(fis);
+                    fileL = (SampleFileList)userStream.readObject();
 		}
 		catch(FileNotFoundException e)
 		{

@@ -41,27 +41,14 @@ public class ManagementMenu extends javax.swing.JFrame {
         //Initializes GUI
         initComponents();
         
-        //Reads UserListTest and SampleFileList file 
-        //and store into UserList list object and SampleFileList object
-        try{
-            FileInputStream fInput = new FileInputStream("UserListTest");
-            ObjectInputStream ois = new ObjectInputStream(fInput);
-            list = (UserList)ois.readObject();
-            
-            fInput = new FileInputStream("SampleFileList");
-            ois = new ObjectInputStream(fInput);
-            sampleList =  (SampleFileList)ois.readObject();
-            
-        }
-        catch (FileNotFoundException e){
-            e.printStackTrace();
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        catch(ClassNotFoundException e){
-            e.printStackTrace();
-        }
+        //Connecting to server
+        lc.connect("localhost", 8765);
+        
+        ArrayList<Object> temp = lc.getFilesForManagement();
+        
+        clientUsersL = (ArrayList<User>)temp.get(0);
+        analysistUsersL = (ArrayList<User>) temp.get(1);
+        sampleFilesL = (ArrayList<SampleFile>)temp.get(2);
         
         //Fills tables with proper information
         fillJTable();
@@ -161,7 +148,7 @@ public class ManagementMenu extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, true, true, false, false, false, false, false, false, false
@@ -181,11 +168,6 @@ public class ManagementMenu extends javax.swing.JFrame {
         tblWorkOrder.setFocusCycleRoot(true);
         tblWorkOrder.getTableHeader().setResizingAllowed(false);
         tblWorkOrder.getTableHeader().setReorderingAllowed(false);
-        tblWorkOrder.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                tblWorkOrderKeyReleased(evt);
-            }
-        });
         jScrollPane6.setViewportView(tblWorkOrder);
         tblWorkOrder.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
@@ -382,11 +364,9 @@ public class ManagementMenu extends javax.swing.JFrame {
     //Logout from current Session back to login Menu
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
 
-        //Saves Files
-        saveSampleFile();
-        
         //Disposes GUI then returns back to login menu
         this.dispose();
+        lc.disconnect();
         LoginMenu m = new LoginMenu();
         m.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -394,174 +374,91 @@ public class ManagementMenu extends javax.swing.JFrame {
     //*************************************************************
     //Exit from LIMS System
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        //Saves Files
-        saveSampleFile();
-        
+  
         this.dispose();
+        lc.disconnect();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     //*************************************************************
     //View Clients Clients List mouse click event
     private void listClientsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listClientsMouseClicked
         
-        //Instanced Member Variables
-        JList source =(javax.swing.JList)evt.getSource();
-        int index = source.getSelectedIndex();  //Holds currently selected index of the list
-        ClientUser temp = (ClientUser)list.getUser(clientUsers.get(index)); //Stores ClientUser Object
-        DefaultListModel listModel = new DefaultListModel();
-        ArrayList<SampleFile> tempFile = sampleList.getAllUsersSampleFiles(temp.getUsername());
-        
-        //Sets and Displays each label
-        lblLName.setText(list.getUser(clientUsers.get(index)).getLastName());   //Get and Display Last Name of User
-        lblFName.setText(list.getUser(clientUsers.get(index)).getFirstName());  //Get and Display First Name of User
-        if (list.getUser(clientUsers.get(index)).getPhoneNumber() == 0)
-        {
-            lblPNumber.setText("");  //Get and Display Phone Number of User
-        }
-        else{
-            lblPNumber.setText(String.valueOf(list.getUser(clientUsers.get(index)).getPhoneNumber()));
-        }
-        
-        lblComp.setText(temp.getCompanyName()); //Get and Display Company Name that user represents
-        
-        for (int x = 0; x < sampleList.getAllUsersSampleFiles(temp.getUsername()).size(); x++){
-            
-            listModel.addElement((int)tempFile.get(x).getSampleID());
-        }
-        
-        listUFiles.setModel(listModel);
+//        //Instanced Member Variables
+//        JList source =(javax.swing.JList)evt.getSource();
+//        int index = source.getSelectedIndex();  //Holds currently selected index of the list
+//        ClientUser temp = (ClientUser)(clientUsersL.get(index)); //Stores ClientUser Object
+//        DefaultListModel listModel = new DefaultListModel();
+//        
+//        //***************************************************************************************
+//        ArrayList<SampleFile> tempFile = sampleList.getAllUsersSampleFiles(temp.getUsername());
+//        
+//        //Sets and Displays each label
+//        lblLName.setText(list.getUser(clientUsers.get(index)).getLastName());   //Get and Display Last Name of User
+//        lblFName.setText(list.getUser(clientUsers.get(index)).getFirstName());  //Get and Display First Name of User
+//        if (list.getUser(clientUsers.get(index)).getPhoneNumber() == 0)
+//        {
+//            lblPNumber.setText("");  //Get and Display Phone Number of User
+//        }
+//        else{
+//            lblPNumber.setText(String.valueOf(list.getUser(clientUsers.get(index)).getPhoneNumber()));
+//        }
+//        
+//        lblComp.setText(temp.getCompanyName()); //Get and Display Company Name that user represents
+//        
+//        for (int x = 0; x < sampleList.getAllUsersSampleFiles(temp.getUsername()).size(); x++){
+//            
+//            listModel.addElement((int)tempFile.get(x).getSampleID());
+//        }
+//        
+//        listUFiles.setModel(listModel);
         
     }//GEN-LAST:event_listClientsMouseClicked
 
     //*************************************************************
-    //After pressing the Enter button, this event runs in order to verify the change and store it
-    private void tblWorkOrderKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblWorkOrderKeyReleased
-
-        //Instanced Variables
-        ArrayList <SampleFile> fileList = sampleList.getAllSampleFiles();
-        row = tblWorkOrder.getSelectedRow();    //Holds current selected row
-        column = tblWorkOrder.getSelectedColumn();  //Holds current selected column
-        String currentInput = (String) tblWorkOrder.getValueAt(row, column);
-        int currentID = (int)tblWorkOrder.getValueAt(row, 0);
-
-        try{
-            //Checks if button pressed is the Enter key
-            if (evt.getKeyChar() == KeyEvent.VK_ENTER){
-
-                //Checks if selected column is either Analysis (1) or Status(2)
-                if (column == 2){
-
-                    //Compares current value in the selected cell
-                    //with status of corresponding file for any changes.
-                    if (currentInput.equalsIgnoreCase("approved")
-                        || currentInput.equalsIgnoreCase("rejected")){
-
-                        //Checks to see if current selected ID exist in the idHolder ArrayList
-                        if (!(idHolder.contains(currentID))){
-                            idHolder.add(currentID);
-
-                            //If currentInput is equal to approved, then add WIP to the status
-                            if (currentInput.equalsIgnoreCase("approved"))
-                            statusHolder.add("WIP");
-                            else
-                            statusHolder.add("Rejected");
-                        }
-
-                        //If current sampleID exist within the ArrayList and management wants to change
-                        else{
-                            int index = idHolder.indexOf(currentID);    //holds index
-
-                            //If currentInput is equal to approved, then add WIP to the status
-                            if (currentInput.equalsIgnoreCase("approved"))
-                            statusHolder.set(index, "WIP");
-                            else
-                            statusHolder.set(index, "Rejected");
-                        }
-                    }
-                }
-            }
-        }
-        catch (Exception e){
-            javax.swing.JOptionPane.showMessageDialog(null, "Array is out of bounds");
-        }
-    }//GEN-LAST:event_tblWorkOrderKeyReleased
-
-    //*************************************************************
     //Updates the JTable
     private void btnUpdateTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateTableActionPerformed
-        try{
-            FileInputStream fInput = new FileInputStream("UserListTest");
-            ObjectInputStream ois = new ObjectInputStream(fInput);
-            list = (UserList)ois.readObject();
-
-            fInput = new FileInputStream("SampleFileList");
-            ois = new ObjectInputStream(fInput);
-            sampleList =  (SampleFileList)ois.readObject();
-
-        }
-        catch (FileNotFoundException e){
-            e.printStackTrace();
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        catch(ClassNotFoundException e){
-            e.printStackTrace();
-        }
+        ArrayList<Object> temp = lc.getFilesForManagement();
+        
+        clientUsersL = (ArrayList<User>)temp.get(0);
+        analysistUsersL = (ArrayList<User>) temp.get(1);
+        sampleFilesL = (ArrayList<SampleFile>)temp.get(2);
 
         fillJTable();
         fillClientList();
-//*************************************************************
-//          Code dedicated to reset the values of the status and analysist (TESTING PURPOSES)
-//        for (int x = 0 ; x<tblWorkOrder.getRowCount();x++){
-//             sampleList.getUserSpecificSampleFile((int)tblWorkOrder.getValueAt(x, 0)).setAnalysis("");
-//             sampleList.getUserSpecificSampleFile((int)tblWorkOrder.getValueAt(x, 0)).setStatus("revision");
-//        }
-//        
-//        //Saves Files
-//        try{
-//            //Saves SampleFileList.bin
-//            File file = new File("SampleFileList");
-//            OutputStream fileOutputStream = new FileOutputStream(file);
-//            ObjectOutput outputStream = new ObjectOutputStream(fileOutputStream);
-//            outputStream.writeObject(sampleList);
-//            
-//            //Saves UserList.bin
-//            //file = new File("UserListTest");
-//            //fileOutputStream = new FileOutputStream(file);
-//            //outputStream = new ObjectOutputStream(fileOutputStream);
-//            //outputStream.writeObject(list);
-//        }
-//        catch (FileNotFoundException e){
-//            e.printStackTrace();
-//        }
-//        catch (IOException e){
-//            e.printStackTrace();
-//        }
-
     }//GEN-LAST:event_btnUpdateTableActionPerformed
 
     //*************************************************************
     //Writes the changes to corresponding files
     private void btnAcceptChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptChangesActionPerformed
-
-        for (int x = 0; x < idHolder.size();x++ ){
-            sampleList.getUserSpecificSampleFile(idHolder.get(x)).setStatus(statusHolder.get(x));
+        
+        //Instanced Variables
+        ArrayList<String> statusHolder = new ArrayList<String>();
+        ArrayList<Integer> idHolder = new ArrayList<Integer>();
+        ArrayList<Integer> analysistID = new ArrayList<Integer>();
+        
+        for (int x = 0; x<tblWorkOrder.getRowCount();x++){
             
-            //Loops through the rows until it find correspnding Sample ID that has been changed
-            for (int y = 0; y < tblWorkOrder.getRowCount();y++){
-                
-                //Checks for corresponding SampleId with row to check and store the value of status
-                if ((int)tblWorkOrder.getValueAt(y, 0) == idHolder.get(x) && tblWorkOrder.getValueAt(y, 1) !=null ){
-                    sampleList.getUserSpecificSampleFile(idHolder.get(x)).setAnalysisID(Integer.parseInt((String)tblWorkOrder.getValueAt(y, 1)));
-                    
+            if (tblWorkOrder.getValueAt(x, 2).equals("Approved") && tblWorkOrder.getValueAt(x, 1)!=null){
+                if(tblWorkOrder.getValueAt(x, 1)!=null){
+                    statusHolder.add((String)tblWorkOrder.getValueAt(x, 2));
+                    int temp = (Integer)tblWorkOrder.getValueAt(x, 1);
+                    analysistID.add(temp);
+                    idHolder.add((Integer)tblWorkOrder.getValueAt(x, 0));
+                }
+                else if (tblWorkOrder.getValueAt(x, 1)==null){
+                    javax.swing.JOptionPane.showMessageDialog(null, "Analysist has not been assigned to SampleID " + tblWorkOrder.getValueAt(x, 0));
                     break;
                 }
             }
+            else if (tblWorkOrder.getValueAt(x, 2).equals("Rejected")){
+                statusHolder.add((String)tblWorkOrder.getValueAt(x, 2));
+                idHolder.add(null);
+            }
         }
         
-        //Saves Files
-        saveSampleFile();
+        if (!statusHolder.isEmpty())
+            lc.mgntAccept(statusHolder, idHolder, analysistID);
+       
     }//GEN-LAST:event_btnAcceptChangesActionPerformed
     
     //*************************************************************
@@ -570,12 +467,10 @@ public class ManagementMenu extends javax.swing.JFrame {
         
         //Instanced Member Variables
         DefaultListModel listModel1 = new DefaultListModel();
-        
-        clientUsers = (list.getUsersWithCertainClass("ClientUser"));
        
-        for (int x = 0; x < clientUsers.size(); x++){
+        for (int x = 0; x < clientUsersL.size(); x++){
             
-            listModel1.addElement(list.getUser(clientUsers.get(x)).getUserID());   
+            listModel1.addElement(clientUsersL.get(x).getUserID());   
         }
         
         listClients.setModel(listModel1);
@@ -591,7 +486,7 @@ public class ManagementMenu extends javax.swing.JFrame {
         tbl.setRowCount(0); //Set Table Row Count = 0
         
         //TableModel tbl = tblWorkOrder.getModel();
-        ArrayList <SampleFile> fileList = sampleList.getAllSampleFiles();   //Holds all Sample Files
+        ArrayList <SampleFile> fileList = sampleFilesL;   //Holds all Sample Files
         
         //combobox to chooose sample types 
         JComboBox StatusComboBox = new JComboBox();
@@ -609,26 +504,23 @@ public class ManagementMenu extends javax.swing.JFrame {
         StatusComboBox.addItem("        "); //empty string 
         StatusComboBox.addItem("Approved");
         StatusComboBox.addItem("Rejected");
-       
-        analysistUsers = (list.getUsersWithCertainClass("AnalysisUser"));
         
         //populate the analyst combobox 
-        for (int x = 0; x < analysistUsers.size(); x++){
+        for (int x = 0; x < analysistUsersL.size(); x++){
             
-            AnalystcomboBox.addItem(list.getUser(analysistUsers.get(x)).getUserID());
+            AnalystcomboBox.addItem(analysistUsersL.get(x).getUserID());
         }
 
         //Stores each variable from corresponding SampleFile into an Object arr to add to the JTable row
         for (int x = tblWorkOrder.getRowCount(); x < fileList.size();x++){
             
-            String analysis = null;
+            int analysis = 0;
             
             int ID = fileList.get(x).getSampleID();
             if (fileList.get(x).getAnalysisID() == 0){
-                analysis = null;
             }
             else{
-                analysis = String.valueOf(fileList.get(x).getAnalysisID());
+                analysis = fileList.get(x).getAnalysisID();
             }
             
             if (fileList.get(x).getReceivedDate() ==null){
@@ -658,32 +550,12 @@ public class ManagementMenu extends javax.swing.JFrame {
         tblWorkOrder.setModel(tbl);
     }
     
-    private void saveSampleFile(){
-        //Saves Files
-        try{
-            //Saves SampleFileList.bin
-            File file = new File("SampleFileList");
-            OutputStream fileOutputStream = new FileOutputStream(file);
-            ObjectOutput outputStream = new ObjectOutputStream(fileOutputStream);
-            outputStream.writeObject(sampleList);
-        }
-        catch (FileNotFoundException e){
-            e.printStackTrace();
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-    
     //Declared variable
-    private SampleFileList sampleList;  //Holds SampleFileList class
-    private ArrayList <String> statusHolder = new ArrayList<String>(); //Holds the changed status of the sample
-    private ArrayList <Integer> idHolder = new ArrayList<Integer>();    //Holds the changed sample 
-    private ArrayList <String> clientUsers; //Holds users that are clients of the system
-    private ArrayList <String> analysistUsers; //Holds users that are clients of the system
-    private UserList list;  //Holds UserList (specifically Clients) object    
-    private int row;    //Current Clicked row
-    private int column; //Current Clicked Column    
+    private ArrayList <User> clientUsersL; //Holds users that are clients of the system
+    private ArrayList <User> analysistUsersL; //Holds users that are clients of the system
+    private ArrayList <SampleFile> sampleFilesL;    //Holds sample files
+    LIMSClient lc = new LIMSClient();
+        
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane SampleView;

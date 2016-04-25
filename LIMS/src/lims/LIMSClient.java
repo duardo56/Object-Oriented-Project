@@ -13,7 +13,6 @@ import java.util.ArrayList;
  */
 public class LIMSClient extends Client {
     
-    
     //Communicates back and forth with server to get ACK for Login
     public User login(String username, String password){
         
@@ -50,13 +49,12 @@ public class LIMSClient extends Client {
         }
     }
     
-    
     //Create new user
     public boolean createNewUser (String username, String password, String firstName, String lastName, long phoneNumber, String status){
         
         try {
            
-             //Local Varibles
+            //Local Varibles
             Message sendM = null;    //Holds message sent to server
             Message receiveM = null; //Receives the response from the server
             
@@ -85,6 +83,66 @@ public class LIMSClient extends Client {
         }
     }
     
+    public ArrayList<Object> getFilesForManagement(){
+        
+        ArrayList<Object> list = null;
+        
+        try {
+           
+             //Local Varibles
+            Message sendM = null;    //Holds message sent to server
+            Message receiveM = null; //Receives the response from the server
+            
+            //Reads, sends, and receives the message
+            sendM =  new Message("getFilesForManagement");
+            output.writeObject(sendM);   //writes to the server
+            receiveM = (Message)input.readObject();  //receives from the server
+            
+            //Successful Response from server
+            if (receiveM.getMessage().equals("OK"))
+            {
+                ArrayList<Object> temp = receiveM.getObjCont();
+                
+                return temp;   
+            }
+            return null;
+        }
+        catch (Exception e){
+            System.err.println("Error: " + e.getMessage());
+            e.printStackTrace(System.err);
+            return null;
+        }
+    }
+    
+    public boolean mgntAccept(ArrayList<String> status, ArrayList<Integer> sampleID, ArrayList<Integer> analysistID){
+        
+        try{
+        //Local Varibles
+        Message sendM = null;    //Holds message sent to server
+        Message receiveM = null; //Receives the response from the server
+            
+        //Reads, sends, and receives the message
+        sendM =  new Message("mgntAccept");
+        sendM.addObject(status);
+        sendM.addObject(sampleID);
+        sendM.addObject(analysistID);
+        
+        output.writeObject(sendM);
+        receiveM = (Message)input.readObject();
+        
+         //Successful Response from server
+            if (receiveM.getMessage().equals("OK"))
+            {
+             return true;   
+            }
+            return false;
+        }
+        catch (Exception e){
+            System.err.println("Error: " + e.getMessage());
+            e.printStackTrace(System.err);
+            return false;
+        }
+    }
     
     
 }

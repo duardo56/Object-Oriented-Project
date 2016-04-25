@@ -81,7 +81,7 @@ public class UserList implements Serializable {
     
     //Method returns an ArrayList of users of a certain type (Management, Analysis, or Client)
     public ArrayList getUsersWithCertainClass(String typeOfUser){
-        ArrayList<String> arr= new ArrayList<String>();
+        ArrayList<User> arr= new ArrayList<User>();
         Enumeration uc = list.keys();
         String temp;
         
@@ -90,7 +90,7 @@ public class UserList implements Serializable {
             temp = (String) uc.nextElement();   //Stores username
             
             if (this.getUserClass(temp).equals(typeOfUser)){
-                arr.add(temp);
+                arr.add(this.getUser(temp));
             }
         }
         

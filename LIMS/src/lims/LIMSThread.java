@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  *
@@ -98,6 +99,47 @@ public class LIMSThread extends Thread{
                         response.addObject(null);
                         output.writeObject(response);   
                     }
+                }
+                
+                //******************************************************************************************************
+                //Retrieve Clients and Analysist for Management
+                else if(received.getMessage().equals("getFilesForManagement")){
+                    ArrayList<User> clients = null; //Stores clients
+                    ArrayList<User> analysist = null;  //Stores analysist
+                    ArrayList<SampleFile> sampleFile = null;    //Samples Files
+
+                    clients = gs.userL.getUsersWithCertainClass("ClientUser");
+                    analysist = gs.userL.getUsersWithCertainClass("AnalysisUser");
+                    sampleFile = gs.fileL.getAllSampleFiles();
+                    
+                    response = new Message ("OK");
+                    response.addObject(clients);
+                    response.addObject(analysist);
+                    response.addObject(sampleFile);
+                    
+                    output.writeObject(response);
+                }
+                
+                else if(received.getMessage().equals("mgntAccept")){
+                    
+                    //Instanced Variables
+                    ArrayList<String> status = (ArrayList<String>)received.getObjCont().get(0);
+                    ArrayList<Integer> sampleID = (ArrayList<Integer>)received.getObjCont().get(1);
+                    ArrayList<Integer> analysistID = (ArrayList<Integer>)received.getObjCont().get(2);
+                    
+                    for (int x = 0; x <status.size();x++){
+                        gs.fileL.getUserSpecificSampleFile(sampleID.get(x)).setAnalysisID(analysistID.get(x));
+                        gs.fileL.getUserSpecificSampleFile(sampleID.get(x)).setStatus(status.get(x));
+                    }
+                    
+                    //Saves UserList.bin
+                    ObjectOutputStream obj_out = new ObjectOutputStream (new FileOutputStream("SampleFileList"));
+                    obj_out.writeObject (gs.fileL);
+                    
+                    response = new Message("OK");
+                    response.addObject(null);
+                    
+                    output.writeObject(response);
                 }
                 
             }while(loop);

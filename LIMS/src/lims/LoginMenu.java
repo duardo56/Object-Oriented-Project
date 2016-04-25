@@ -196,6 +196,7 @@ public class LoginMenu extends javax.swing.JFrame {
 
     //Closes the program
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        lc.disconnect();
         this.dispose();
         //MainMenu GUI = new MainMenu();
         //GUI.setVisible(true);
