@@ -5,11 +5,18 @@
  */
 package lims;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -102,23 +109,22 @@ public class AnalysisMenu extends javax.swing.JFrame {
 
         SampleView = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
+        btnGetSample = new javax.swing.JButton();
+        btnSend = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lFidelity = new javax.swing.JLabel();
-        lblFidelity = new javax.swing.JTextField();
-        lblSampleID = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        lblExpFidelity = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        lblFidelity = new javax.swing.JLabel();
+        lblSampleID = new javax.swing.JLabel();
+        lblSampleType = new javax.swing.JLabel();
+        lblExpFidelity = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        btnCalc = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -134,119 +140,97 @@ public class AnalysisMenu extends javax.swing.JFrame {
 
         SampleView.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
 
-        jButton1.setText("Logout");
-
-        jButton2.setText("Get Sample");
-
-        jButton3.setText("Send");
-
-        jButton4.setText("Gas");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnGetSample.setText("Get Sample");
+        btnGetSample.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnGetSampleActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Oil");
-
-        jButton6.setText("Water");
-
-        jButton7.setText("Ground");
-
-        jLabel1.setText("Select the test type:");
-
-        jButton8.setText("Metal");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        btnSend.setText("Send");
+        btnSend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                btnSendActionPerformed(evt);
             }
         });
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("Sample Id:");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, 20));
 
         lFidelity.setText("Fidelity :");
-        jPanel3.add(lFidelity, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
-
-        lblFidelity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lblFidelityActionPerformed(evt);
-            }
-        });
-        jPanel3.add(lblFidelity, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 310, -1));
-
-        lblSampleID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lblSampleIDActionPerformed(evt);
-            }
-        });
-        jPanel3.add(lblSampleID, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, 280, -1));
+        jPanel3.add(lFidelity, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, -1, -1));
 
         jLabel4.setText("Expected Fielity: ");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
-        jPanel3.add(lblExpFidelity, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 280, -1));
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, -1));
+
+        jLabel5.setText("Sample Type:");
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, -1, -1));
+
+        lblFidelity.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jPanel3.add(lblFidelity, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 280, 20));
+
+        lblSampleID.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jPanel3.add(lblSampleID, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 280, 20));
+
+        lblSampleType.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jPanel3.add(lblSampleType, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, 280, 20));
+
+        lblExpFidelity.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jPanel3.add(lblExpFidelity, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, 280, 20));
+
+        jLabel7.setText("%");
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 200, 10, -1));
+
+        jLabel8.setText("%");
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 130, 10, -1));
+
+        btnCalc.setText("Calclulate Fidelity");
+        btnCalc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Calculate the sample fidelity here ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1)))
-                .addGap(159, 159, 159))
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(btnGetSample)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCalc)
+                .addGap(273, 273, 273)
+                .addComponent(btnSend)
+                .addGap(91, 91, 91))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(69, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(159, 159, 159)
-                        .addComponent(jButton2)
-                        .addGap(303, 303, 303)
-                        .addComponent(jButton3))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jButton1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(379, 379, 379))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(11, 11, 11)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addGap(15, 15, 15))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnGetSample)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSend)
+                        .addComponent(btnCalc)))
+                .addGap(53, 53, 53))
         );
 
         SampleView.addTab("Analysis", jPanel2);
@@ -365,38 +349,82 @@ public class AnalysisMenu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItemExitActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
-
     private void tblAnalystSampleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAnalystSampleMouseClicked
-     
+    //switch back to first panel
+    SampleView.setSelectedIndex(0);
+        
      int tmp = tblAnalystSample.getSelectedRow();
      samplefiles =  sampleList.getUserSpecificSampleFile((int) tblAnalystSample.getValueAt(tmp, 0)); //retrive the values of the sample id 
-        
      
+     int sampleId = samplefiles.getSampleID();  //to hold the sample id 
+     double expfid = samplefiles.getExpectedFidelity();
+     double fidilety = samplefiles.getFidelity();
      
-         
-        
+     //converted some values to string 
+     
+    lblSampleID.setText(Integer.toString(sampleId)); //to display on label
+    lblSampleType.setText(samplefiles.getTestType());
+    lblExpFidelity.setText(Double.toString(expfid));
+    lblFidelity.setText(Double.toString(fidilety)); 
+  
         
     }//GEN-LAST:event_tblAnalystSampleMouseClicked
 
-    private void lblFidelityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblFidelityActionPerformed
-        // TODO add your handling code here:
+    private void btnGetSampleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetSampleActionPerformed
+        //automatically swithc tabs
+        SampleView.setSelectedIndex(1);
+    
+     
         
-        
-        
-        
-        
-    }//GEN-LAST:event_lblFidelityActionPerformed
+      
+    }//GEN-LAST:event_btnGetSampleActionPerformed
 
-    private void lblSampleIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblSampleIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lblSampleIDActionPerformed
+    private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
+    saveSampleFile(); //update the table 
+    javax.swing.JOptionPane.showMessageDialog(null, "Sucessful Submission.");
+    lblSampleID.setText("");    
+    lblSampleType.setText("");
+    lblExpFidelity.setText("");
+    lblFidelity.setText("");
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    
+    }//GEN-LAST:event_btnSendActionPerformed
+    private void btnCalcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcActionPerformed
+      // String testType; //to determine the test type 
+         int calculation = 0;
+        
+        if(lblSampleType.getText() == "Gas")
+        {
+         //equation goes here 
+            
+            
+           
+            
+            lblFidelity.setText(Integer.toString(calculation)); 
+        }
+        else if (lblSampleType.getText() == "Water")
+        {
+               
+            
+             lblFidelity.setText(Integer.toString(calculation)); 
+            
+        }
+        else if (lblSampleType.getText() == "Soil")
+        {
+            
+             lblFidelity.setText(Integer.toString(calculation)); 
+        }
+        else if(lblSampleType.getText() == "Oil")
+        {
+         
+             lblFidelity.setText(Integer.toString(calculation)); 
+        }
+        else if(lblSampleType.getText() == "Metal")
+        {
+            
+        }
+        
+    }//GEN-LAST:event_btnCalcActionPerformed
 
     //Populate the Jlist with Samples
     private void fillSampleTable (){
@@ -404,9 +432,11 @@ public class AnalysisMenu extends javax.swing.JFrame {
         
         tbl.setRowCount(0); //Set model row count = 0
         
-        ArrayList  <SampleFile> fileList = sampleList.getFilesAssignedToAnalysis(userID); 
         
-        for (int i = tblAnalystSample.getRowCount(); i < fileList.size(); i++) {
+        ArrayList  <SampleFile> fileList = sampleList.getFilesAssignedToAnalysis(userID); 
+        list.getUser(username); 
+        
+        for (int i = 0; i < fileList.size(); i++) {
                 int ID = fileList.get(i).getSampleID(); 
                 String getStatus = fileList.get(i).getStatus();
                 String testType = fileList.get(i).getTestType();
@@ -424,6 +454,24 @@ public class AnalysisMenu extends javax.swing.JFrame {
         tblAnalystSample.setModel(tbl);
     }
     
+    
+        private void saveSampleFile(){
+        //Saves Files
+        try{
+            //Saves SampleFileList.bin
+            File file = new File("SampleFileList");
+            OutputStream fileOutputStream = new FileOutputStream(file);
+            ObjectOutput outputStream = new ObjectOutputStream(fileOutputStream);
+            outputStream.writeObject(sampleList);
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+    
     //Declared variable
     private UserList list;  //Holds UserList object
     private int userID;
@@ -433,23 +481,21 @@ public class AnalysisMenu extends javax.swing.JFrame {
     private SampleFile samplefiles;
     private User clientInfo; 
     private ClientUser userClient;
+    private ArrayList <Integer> idHolder =  new ArrayList <Integer>(); //hold the changed sample  
     
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane SampleView;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton btnCalc;
+    private javax.swing.JButton btnGetSample;
+    private javax.swing.JButton btnSend;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemExit;
@@ -459,9 +505,10 @@ public class AnalysisMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lFidelity;
-    private javax.swing.JTextField lblExpFidelity;
-    private javax.swing.JTextField lblFidelity;
-    private javax.swing.JTextField lblSampleID;
+    private javax.swing.JLabel lblExpFidelity;
+    private javax.swing.JLabel lblFidelity;
+    private javax.swing.JLabel lblSampleID;
+    private javax.swing.JLabel lblSampleType;
     private javax.swing.JTable tblAnalystSample;
     // End of variables declaration//GEN-END:variables
 }

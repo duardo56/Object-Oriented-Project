@@ -421,6 +421,7 @@ public class ManagementMenu extends javax.swing.JFrame {
         else{
             lblPNumber.setText(String.valueOf(list.getUser(clientUsers.get(index)).getPhoneNumber()));
         }
+        
         lblComp.setText(temp.getCompanyName()); //Get and Display Company Name that user represents
         
         for (int x = 0; x < sampleList.getAllUsersSampleFiles(temp.getUsername()).size(); x++){

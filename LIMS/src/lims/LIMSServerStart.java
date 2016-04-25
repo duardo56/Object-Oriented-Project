@@ -11,6 +11,10 @@ package lims;
  */
 public class LIMSServerStart {
     
+    public LIMSServerStart(){
+     
+    }
+    
     public static void main(String args[]){
         
         //User passing server name and port
