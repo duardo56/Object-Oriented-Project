@@ -35,6 +35,10 @@ public class AnalysisMenu extends javax.swing.JFrame {
         //Initializes GUI
         initComponents();
         
+        lc.connect("localhost", 8765); //connects to server 
+        
+        
+        
         username = "Number2";
         
         //Reads UserListTest and SampleFileList file 
@@ -65,12 +69,16 @@ public class AnalysisMenu extends javax.swing.JFrame {
     }
     
     //Constructor
-    public AnalysisMenu(String username){
-        
+    public AnalysisMenu(int id) {
+         lc.connect("localhost", 8765);
+        fileList = lc.retriveAnalysisFiles(id);
+        userID = id; 
         //Initializes GUI
         initComponents();
         
-        this.username = username;
+       
+        
+        
         
         //Reads UserListTest and SampleFileList file 
         //and store into UserList list object and SampleFileList object
@@ -87,13 +95,8 @@ public class AnalysisMenu extends javax.swing.JFrame {
             
         }
         catch (FileNotFoundException e){
-            e.printStackTrace();
         }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        catch(ClassNotFoundException e){
-            e.printStackTrace();
+        catch (IOException | ClassNotFoundException e){
         }
         
         fillSampleTable(); //call method here 
@@ -565,7 +568,10 @@ public class AnalysisMenu extends javax.swing.JFrame {
     private ClientUser userClient;
     private ArrayList <Integer> idHolder =  new ArrayList <Integer>(); //hold the changed sample  
     private Random seed;  //object for random variable 
-    private ArrayList  <SampleFile> fileList = sampleList.getFilesAssignedToAnalysis(userID); 
+    private ArrayList  <SampleFile> fileList ; 
+    private LIMSClient lc ;
+
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane SampleView;

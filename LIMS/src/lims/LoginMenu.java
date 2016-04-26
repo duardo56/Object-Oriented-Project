@@ -5,12 +5,7 @@
  */
 package lims;
 
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.util.Arrays;
 
 /**
  *
@@ -149,7 +144,6 @@ public class LoginMenu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     //Login to the LIMS system
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
@@ -173,10 +167,12 @@ public class LoginMenu extends javax.swing.JFrame {
                 
                 else if (u.getClass().getSimpleName().equals("AnalysisUser")){
 
-                    AnalysisMenu m = new AnalysisMenu();    //Creates Analysis menu object
-                    m.setVisible(true); //Sets visibility of m to true 
+                        AnalysisMenu m = new AnalysisMenu(u.getUserID());    //Creates Analysis menu object
+                         m.setVisible(true); //Sets visibility of m to true 
 
                     this.dispose(); //disposes of login menu window
+                    
+              
                 }
                 
                 else if(u.getClass().getSimpleName().equals("ClientUser")){

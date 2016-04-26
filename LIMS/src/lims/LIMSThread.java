@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  *
@@ -98,6 +99,18 @@ public class LIMSThread extends Thread{
                         response.addObject(null);
                         output.writeObject(response);   
                     }
+                }
+                
+                else if (received.getMessage().equals("retriveAnalysisFiles"))
+                {
+                        int id = (Integer)received.getObjCont().get(0);
+                        
+                        ArrayList <SampleFile> list_ana =  gs.fileL.getFilesAssignedToAnalysis(id);
+                        
+                        response = new Message("OK");
+                        response.addObject(list_ana);
+                        output.writeObject(response);
+                        output.reset(); 
                 }
                 
             }while(loop);
