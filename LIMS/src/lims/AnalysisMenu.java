@@ -116,16 +116,13 @@ public class AnalysisMenu extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        lFidelity = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         lblTestResult = new javax.swing.JLabel();
         lblSampleID = new javax.swing.JLabel();
         lblSampleType = new javax.swing.JLabel();
         lblExpFidelity = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        lblFidelity1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         btnCalc = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -164,9 +161,6 @@ public class AnalysisMenu extends javax.swing.JFrame {
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, 20));
 
-        lFidelity.setText("Fidelity :");
-        jPanel3.add(lFidelity, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, -1, -1));
-
         jLabel4.setText("Expected Fielity: ");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
 
@@ -174,7 +168,7 @@ public class AnalysisMenu extends javax.swing.JFrame {
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, -1, -1));
 
         lblTestResult.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jPanel3.add(lblTestResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 280, 20));
+        jPanel3.add(lblTestResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 280, 20));
 
         lblSampleID.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel3.add(lblSampleID, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 280, 20));
@@ -185,17 +179,11 @@ public class AnalysisMenu extends javax.swing.JFrame {
         lblExpFidelity.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel3.add(lblExpFidelity, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 280, 20));
 
-        jLabel7.setText("%");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 150, 10, -1));
-
         jLabel8.setText("%");
         jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 110, 10, -1));
 
-        lblFidelity1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jPanel3.add(lblFidelity1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 280, 20));
-
         jLabel9.setText("Test Result:");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, -1, -1));
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, -1, -1));
 
         btnCalc.setText("Calclulate Fidelity");
         btnCalc.addActionListener(new java.awt.event.ActionListener() {
@@ -360,7 +348,17 @@ public class AnalysisMenu extends javax.swing.JFrame {
     //switch back to first panel
     SampleView.setSelectedIndex(0);
         
-     int tmp = tblAnalystSample.getSelectedRow();
+    
+    int samlpleId = (int)tblAnalystSample.getValueAt(tblAnalystSample.getSelectedRow(), 0);
+     String sampleType = (String)tblAnalystSample.getValueAt(tblAnalystSample.getSelectedRow(), 2);
+     double expfid = (double)tblAnalystSample.getValueAt(tblAnalystSample.getSelectedRow(), 3);
+    
+     
+     
+     lblSampleID.setText(String.valueOf(samlpleId));
+     lblSampleType.setText(sampleType);
+     lblExpFidelity.setText(String.valueOf(expfid));
+     
 //     samplefiles =  sampleList.getUserSpecificSampleFile((int) tblAnalystSample.getValueAt(tmp, 0)); //retrive the values of the sample id 
 //     
 //     int sampleId = samplefiles.getSampleID();  //to hold the sample id 
@@ -382,25 +380,15 @@ public class AnalysisMenu extends javax.swing.JFrame {
         SampleView.setSelectedIndex(1);
     }//GEN-LAST:event_btnGetSampleActionPerformed
 
-    private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
-    //saveSampleFile(); //update the table 
-    javax.swing.JOptionPane.showMessageDialog(null, "Sucessful Submission.");
-    lblSampleID.setText("");    
-    lblSampleType.setText("");
-    lblExpFidelity.setText("");
-    lblTestResult.setText("");
-
-    
-    }//GEN-LAST:event_btnSendActionPerformed
     private void btnCalcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcActionPerformed
       // String testType; //to determine the test type 
-         double fidelity;
+         double fidelity =0;
          double density_Gas = 719.7;
          double density_water = 1000;
          double density_soil = 2000;
          double density_oil = 862;
          double density_metal = 2830;
-         double tmp_prep;
+         double tmp_prep = 0;
          
         
         if(null != lblSampleType.getText())
@@ -463,6 +451,16 @@ public class AnalysisMenu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnCalcActionPerformed
 
+    private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
+        saveSampleFile(); //update the table
+        javax.swing.JOptionPane.showMessageDialog(null, "Sucessful Submission.");
+        lblSampleID.setText("");
+        lblSampleType.setText("");
+        lblExpFidelity.setText("");
+        lblTestResult.setText("");
+
+    }//GEN-LAST:event_btnSendActionPerformed
+
     //Populate the Jlist with Samples
     private void fillSampleTable (){
         DefaultTableModel tbl = (DefaultTableModel) tblAnalystSample.getModel();
@@ -490,26 +488,26 @@ public class AnalysisMenu extends javax.swing.JFrame {
     }
     
     
-//        private void saveSampleFile(){
-//        //Saves Files
-//        try{
-//            //Saves SampleFileList.bin
-//            File file = new File("SampleFileList");
-//            OutputStream fileOutputStream = new FileOutputStream(file);
-//            ObjectOutput outputStream = new ObjectOutputStream(fileOutputStream);
-//            outputStream.writeObject(sampleList);
-//        }
-//        catch (FileNotFoundException e){
-//            e.printStackTrace();
-//        }
-//        catch (IOException e){
-//            e.printStackTrace();
-//        }
-//    }
+        private void saveSampleFile(){
+        //Saves Files
+        try{
+            //Saves SampleFileList.bin
+            File file = new File("SampleFileList");
+            OutputStream fileOutputStream = new FileOutputStream(file);
+            ObjectOutput outputStream = new ObjectOutputStream(fileOutputStream);
+            outputStream.writeObject(sampleList);
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
         
         private double prepFactor()
         {
-            double prep;
+            double prep = 0;
             if(generate_finalV() >= genrate_initialV()){
                 generate_finalV(); //generate new values
                 genrate_initialV();
@@ -546,11 +544,11 @@ public class AnalysisMenu extends javax.swing.JFrame {
             
         }
         private double generate_finalV(){
-            return seed.nextDouble() * 100;
+            return ((seed.nextInt(100) +1) * 100);
         }
         
         private double genrate_initialV(){
-            return seed.nextDouble() * 100;  
+            return ((seed.nextInt(100) +1) * 100);  
         }
     
     //Declared variable
@@ -563,9 +561,9 @@ public class AnalysisMenu extends javax.swing.JFrame {
     //private User clientInfo; 
     //private ClientUser userClient;
     private ArrayList <Integer> idHolder =  new ArrayList <Integer>(); //hold the changed sample  
-    private Random seed;  //object for random variable 
+    private Random seed = new Random();  //object for random variable 
     private ArrayList  <SampleFile> fileList ; 
-    private LIMSClient lc =  new LIMSClient();
+    private LIMSClient lc =  new LIMSClient(); //creates the proper array 
 
     
     
@@ -580,7 +578,6 @@ public class AnalysisMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
@@ -591,9 +588,7 @@ public class AnalysisMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lFidelity;
     private javax.swing.JLabel lblExpFidelity;
-    private javax.swing.JLabel lblFidelity1;
     private javax.swing.JLabel lblSampleID;
     private javax.swing.JLabel lblSampleType;
     private javax.swing.JLabel lblTestResult;
