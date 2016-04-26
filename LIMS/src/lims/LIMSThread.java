@@ -101,7 +101,7 @@ public class LIMSThread extends Thread{
                     }
                 }
                 
-<<<<<<< HEAD
+
                 //******************************************************************************************************
                 //Retrieve Clients and Analysist for Management
                 else if(received.getMessage().equals("getFilesForManagement")){
@@ -146,7 +146,8 @@ public class LIMSThread extends Thread{
                     output.writeObject(response);
                     
                     output.reset();
-=======
+                }
+
                 else if (received.getMessage().equals("retriveAnalysisFiles"))
                 {
                         int id = (Integer)received.getObjCont().get(0);
@@ -157,7 +158,7 @@ public class LIMSThread extends Thread{
                         response.addObject(list_ana);
                         output.writeObject(response);
                         output.reset(); 
->>>>>>> master
+
                 }
                 
                 //******************************************************************************************************

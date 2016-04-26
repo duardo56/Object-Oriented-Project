@@ -36,68 +36,66 @@ public class AnalysisMenu extends javax.swing.JFrame {
         initComponents();
         
         lc.connect("localhost", 8765); //connects to server 
-        
-        
-        
-        username = "Number2";
+
+        //username = "Number2";
         
         //Reads UserListTest and SampleFileList file 
         //and store into UserList list object and SampleFileList object
-        try{
-            FileInputStream fInput = new FileInputStream("UserListTest");
-            ObjectInputStream ois = new ObjectInputStream(fInput);
-            list = (UserList)ois.readObject();
-            
-             userID = list.getUser(username).getUserID();    //Gets userID
-            
-            fInput = new FileInputStream("SampleFileList");
-            ois = new ObjectInputStream(fInput);
-            sampleList =  (SampleFileList)ois.readObject();
-            
-        }
-        catch (FileNotFoundException e){
-            e.printStackTrace();
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        catch(ClassNotFoundException e){
-            e.printStackTrace();
-        }
+//        try{
+//            FileInputStream fInput = new FileInputStream("UserListTest");
+//            ObjectInputStream ois = new ObjectInputStream(fInput);
+//            list = (UserList)ois.readObject();
+//            
+//             userID = list.getUser(username).getUserID();    //Gets userID
+//            
+//            fInput = new FileInputStream("SampleFileList");
+//            ois = new ObjectInputStream(fInput);
+//            sampleList =  (SampleFileList)ois.readObject();
+//            
+//        }
+//        catch (FileNotFoundException e){
+//            e.printStackTrace();
+//        }
+//        catch (IOException e){
+//            e.printStackTrace();
+//        }
+//        catch(ClassNotFoundException e){
+//            e.printStackTrace();
+//        }
         
         fillSampleTable(); //call method here 
     }
     
     //Constructor
     public AnalysisMenu(int id) {
-         lc.connect("localhost", 8765);
-        fileList = lc.retriveAnalysisFiles(id);
-        userID = id; 
+        
         //Initializes GUI
         initComponents();
         
-       
+        lc.connect("localhost", 8765);
+        fileList = lc.retriveAnalysisFiles(id);
         
+        System.out.println("fileList size: " + fileList.size());
+        //userID = id; 
         
-        
-        //Reads UserListTest and SampleFileList file 
-        //and store into UserList list object and SampleFileList object
-        try{
-            FileInputStream fInput = new FileInputStream("UserListTest");
-            ObjectInputStream ois = new ObjectInputStream(fInput);
-            list = (UserList)ois.readObject();
-            
-            userID = list.getUser(username).getUserID();    //Gets userID
-            
-            fInput = new FileInputStream("SampleFileList");
-            ois = new ObjectInputStream(fInput);
-            sampleList =  (SampleFileList)ois.readObject();
-            
-        }
-        catch (FileNotFoundException e){
-        }
-        catch (IOException | ClassNotFoundException e){
-        }
+//        //Reads UserListTest and SampleFileList file 
+//        //and store into UserList list object and SampleFileList object
+//        try{
+//            FileInputStream fInput = new FileInputStream("UserListTest");
+//            ObjectInputStream ois = new ObjectInputStream(fInput);
+//            list = (UserList)ois.readObject();
+//            
+//            userID = list.getUser(username).getUserID();    //Gets userID
+//            
+//            fInput = new FileInputStream("SampleFileList");
+//            ois = new ObjectInputStream(fInput);
+//            sampleList =  (SampleFileList)ois.readObject();
+//            
+//        }
+//        catch (FileNotFoundException e){
+//        }
+//        catch (IOException | ClassNotFoundException e){
+//        }
         
         fillSampleTable(); //call method here 
     }
@@ -363,31 +361,29 @@ public class AnalysisMenu extends javax.swing.JFrame {
     SampleView.setSelectedIndex(0);
         
      int tmp = tblAnalystSample.getSelectedRow();
-     samplefiles =  sampleList.getUserSpecificSampleFile((int) tblAnalystSample.getValueAt(tmp, 0)); //retrive the values of the sample id 
-     
-     int sampleId = samplefiles.getSampleID();  //to hold the sample id 
-     double expfid = samplefiles.getExpectedFidelity();
-     double fidilety = samplefiles.getFidelity();
-     
-     //converted some values to string 
-     
-    lblSampleID.setText(Integer.toString(sampleId)); //to display on label
-    lblSampleType.setText(samplefiles.getTestType());
-    lblExpFidelity.setText(Double.toString(expfid));
-    lblTestResult.setText(Double.toString(fidilety)); 
-  
+//     samplefiles =  sampleList.getUserSpecificSampleFile((int) tblAnalystSample.getValueAt(tmp, 0)); //retrive the values of the sample id 
+//     
+//     int sampleId = samplefiles.getSampleID();  //to hold the sample id 
+//     double expfid = samplefiles.getExpectedFidelity();
+//     double fidilety = samplefiles.getFidelity();
+//     
+//     //converted some values to string 
+//     
+//    lblSampleID.setText(Integer.toString(sampleId)); //to display on label
+//    lblSampleType.setText(samplefiles.getTestType());
+//    lblExpFidelity.setText(Double.toString(expfid));
+//    lblTestResult.setText(Double.toString(fidilety)); 
+//  
         
     }//GEN-LAST:event_tblAnalystSampleMouseClicked
 
     private void btnGetSampleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetSampleActionPerformed
         //automatically swithc tabs
         SampleView.setSelectedIndex(1);
-   
-      
     }//GEN-LAST:event_btnGetSampleActionPerformed
 
     private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
-    saveSampleFile(); //update the table 
+    //saveSampleFile(); //update the table 
     javax.swing.JOptionPane.showMessageDialog(null, "Sucessful Submission.");
     lblSampleID.setText("");    
     lblSampleType.setText("");
@@ -473,7 +469,7 @@ public class AnalysisMenu extends javax.swing.JFrame {
         
         tbl.setRowCount(0); //Set model row count = 0
 
-        list.getUser(username); 
+        //list.getUser(username); 
         
         for (int i = 0; i < fileList.size(); i++) {
                 int ID = fileList.get(i).getSampleID(); 
@@ -494,22 +490,22 @@ public class AnalysisMenu extends javax.swing.JFrame {
     }
     
     
-        private void saveSampleFile(){
-        //Saves Files
-        try{
-            //Saves SampleFileList.bin
-            File file = new File("SampleFileList");
-            OutputStream fileOutputStream = new FileOutputStream(file);
-            ObjectOutput outputStream = new ObjectOutputStream(fileOutputStream);
-            outputStream.writeObject(sampleList);
-        }
-        catch (FileNotFoundException e){
-            e.printStackTrace();
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-    }
+//        private void saveSampleFile(){
+//        //Saves Files
+//        try{
+//            //Saves SampleFileList.bin
+//            File file = new File("SampleFileList");
+//            OutputStream fileOutputStream = new FileOutputStream(file);
+//            ObjectOutput outputStream = new ObjectOutputStream(fileOutputStream);
+//            outputStream.writeObject(sampleList);
+//        }
+//        catch (FileNotFoundException e){
+//            e.printStackTrace();
+//        }
+//        catch (IOException e){
+//            e.printStackTrace();
+//        }
+//    }
         
         private double prepFactor()
         {
@@ -558,18 +554,18 @@ public class AnalysisMenu extends javax.swing.JFrame {
         }
     
     //Declared variable
-    private UserList list;  //Holds UserList object
-    private int userID;
+//    private UserList list;  //Holds UserList object
+    //private int userID;
     private DefaultListModel listModel;
     private SampleFileList sampleList; //Holds SampleFileList
-    private String username;
-    private SampleFile samplefiles;
-    private User clientInfo; 
-    private ClientUser userClient;
+    //private String username;
+    //private SampleFile samplefiles;
+    //private User clientInfo; 
+    //private ClientUser userClient;
     private ArrayList <Integer> idHolder =  new ArrayList <Integer>(); //hold the changed sample  
     private Random seed;  //object for random variable 
     private ArrayList  <SampleFile> fileList ; 
-    private LIMSClient lc ;
+    private LIMSClient lc =  new LIMSClient();
 
     
     

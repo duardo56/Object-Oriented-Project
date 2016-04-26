@@ -86,7 +86,6 @@ public class LIMSClient extends Client {
         }
     }
     
-<<<<<<< HEAD
     public ArrayList<Object> getFilesForManagement(){
         
         ArrayList<Object> list = null;
@@ -147,44 +146,34 @@ public class LIMSClient extends Client {
             return false;
         }
     }
-    
-<<<<<<< Updated upstream
-=======
+
     public ArrayList <SampleFile> retriveAnalysisFiles(int id)
     {
-      ArrayList <SampleFile> list = null; 
+        try{
+            ArrayList <SampleFile> list = null; 
       
-      Message sendM = null;    //Holds message sent to server
-      Message receiveM = null; //Receives the response from the server
+            Message sendM = null;    //Holds message sent to server
+            Message receiveM = null; //Receives the response from the server
       
-      sendM = new Message("retriveAnalysisFiles");
-      sendM.addObject(id);
+            sendM = new Message("retriveAnalysisFiles");
+            sendM.addObject(id);
       
- 
-        try {
             output.writeObject(sendM);
-        } catch (IOException ex) {
-            Logger.getLogger(LIMSClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-      
-        
-        try {
             receiveM = (Message)input.readObject();
-        } catch (IOException ex) {
-            Logger.getLogger(LIMSClient.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LIMSClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
-        if(receiveM.getMessage().equals("OK"))
-        {
-            return (ArrayList <SampleFile>) receiveM.getObjCont().get(0); 
+            if(receiveM.getMessage().equals("OK"))
+            {
+                return (ArrayList <SampleFile>) receiveM.getObjCont().get(0); 
+            }
         }
-      return list;   
+        catch (Exception e){
+            System.err.println("Error: " + e.getMessage());
+            e.printStackTrace(System.err);
+            return null;
+        }
+      return null;   
     } 
->>>>>>> master
-=======
+    
     public ArrayList<Object> getFilesForClient(){
         
         ArrayList<Object> list = null;
@@ -215,6 +204,5 @@ public class LIMSClient extends Client {
             return null;
         }
     }
->>>>>>> Stashed changes
     
 }

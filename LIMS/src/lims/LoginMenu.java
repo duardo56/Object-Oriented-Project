@@ -167,12 +167,12 @@ public class LoginMenu extends javax.swing.JFrame {
                 
                 else if (u.getClass().getSimpleName().equals("AnalysisUser")){
 
-                        AnalysisMenu m = new AnalysisMenu(u.getUserID());    //Creates Analysis menu object
-                         m.setVisible(true); //Sets visibility of m to true 
+                    int i = u.getUserID();
+                    AnalysisMenu m = new AnalysisMenu(i);    //Creates Analysis menu object
+                    m.setVisible(true); //Sets visibility of m to true 
 
                     this.dispose(); //disposes of login menu window
-                    
-              
+
                 }
                 
                 else if(u.getClass().getSimpleName().equals("ClientUser")){
