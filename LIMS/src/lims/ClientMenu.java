@@ -51,7 +51,7 @@ public class ClientMenu extends javax.swing.JFrame {
         //Connecting to server
         lc.connect("localhost", 8765);
         this.username = u.getUsername();   //Sets username of current client
-        sampleFiles =lc.getFilesForClient(username);
+        //sampleFiles =lc.getFilesForClient(username);
         clientInfo = (ClientUser) u;
         
         CompanyName.setText(clientInfo.getCompanyName());
@@ -376,8 +376,16 @@ public class ClientMenu extends javax.swing.JFrame {
             clientInfo.setCompanyName(comp);
             clientInfo.setPhoneNumber((Long.valueOf(txtPhoneNum.getText())));
             
-            //sampleList.addFile(username, sample, comp, expFidelity, dDate, sentDate);
+            //Store in an ArrayList<Object>
+            ArrayList<Object> temp = new ArrayList<Object>();
+            temp.add(comp);
+            temp.add(sample);
+            temp.add(expFidelity);
+            temp.add(dDate);
+            temp.add(sentDate);
+            temp.add(Long.valueOf(txtPhoneNum.getText()));
             
+            lc.clientSubmit(temp, clientInfo);
             
         
             CompanyName.setText(clientInfo.getCompanyName());
@@ -419,7 +427,9 @@ public class ClientMenu extends javax.swing.JFrame {
     private void fillJTable(){
         DefaultTableModel tbl = (DefaultTableModel)tblSampleTest.getModel();
         tbl.setRowCount(0); //Set Table Row Count = 0
+        sampleFiles =lc.getFilesForClient(username);
         ArrayList <SampleFile> fileList = sampleFiles;
+        
 
             for( int x = 0 ; x < fileList.size(); x++)
             {

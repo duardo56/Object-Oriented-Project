@@ -42,10 +42,11 @@ public class SampleFileList implements Serializable {
     }
     
     //Creates new SampleFile object for user
-    public void addFile(String username, String testType, String company, double expectedFidelity,String dueDate, String sentDate, int userID){
+    public void addFile(String username, String testType, String company, double expectedFidelity,String dueDate, String sentDate, int userID, long phoneNumber){
         
         ArrayList<SampleFile> t = new ArrayList<SampleFile>();  
         SampleFile temp = new SampleFile(testType,createID(),company, expectedFidelity,dueDate,sentDate, userID);
+        temp.setPhoneNumber(phoneNumber);
         
         t.add(temp);
         

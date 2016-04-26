@@ -207,17 +207,16 @@ public class LIMSClient extends Client {
         }
     }
     
-    public boolean clientSubmit(SampleFile file, User u){
+    public boolean clientSubmit(ArrayList<Object> list, User u){
         try{
         //Local Varibles
         Message sendM = null;    //Holds message sent to server
         Message receiveM = null; //Receives the response from the server
             
         //Reads, sends, and receives the message
-        sendM =  new Message("mgntAccept");
-        //sendM.addObject(status);
-        //sendM.addObject(sampleID);
-        //sendM.addObject(analysistID);
+        sendM =  new Message("clientSubmit");
+        sendM.addObject(list);
+        sendM.addObject(u);
         
         output.writeObject(sendM);
         receiveM = (Message)input.readObject();
@@ -234,8 +233,5 @@ public class LIMSClient extends Client {
             e.printStackTrace(System.err);
             return false;
         }
-        //return true;
-    }
-  
-    
+    } 
 }

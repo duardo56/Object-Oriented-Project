@@ -181,6 +181,47 @@ public class LIMSThread extends Thread{
                     output.reset();
                 }
                 
+                //******************************************************************************************************
+                //Client Submitting files
+                else if (received.getMessage().equals("clientSubmit")){
+                    ArrayList<Object> list = null;
+                    User t = (User)received.getObjCont().get(1);
+                    
+                    list = (ArrayList<Object>)received.getObjCont().get(0);
+                    
+                    //Retrieving data
+                    String username = t.getUsername();
+                    int userID = t.getUserID();
+                    String company = (String)list.get(0);
+                    String testType = (String)list.get(1);
+                    double expectedFidelity = (double)list.get(2);
+                    String dueDate = (String)list.get(3);
+                    String sentDate = (String)list.get(4);
+                    Long phoneNumber = (long)list.get(5);
+                    
+                    //Add file
+                    gs.fileL.addFile(username, testType, company, expectedFidelity, dueDate, sentDate, userID, phoneNumber);
+                    //Update User w/ phone number and company name
+                    ClientUser c = (ClientUser)gs.userL.getUser(username);
+                    c.setCompanyName(company);
+                    c.setPhoneNumber(phoneNumber);
+                    
+                     response = new Message ("OK");
+                    response.addObject(null);
+                    
+                    output.writeObject(response);
+                    
+                    //Saves SampleFileList.bin 
+                    ObjectOutputStream obj_out = new ObjectOutputStream (new FileOutputStream("SampleFileList")); 
+                    obj_out.writeObject (gs.fileL);
+                    
+                    //Saves UserList.bin
+                    obj_out = new ObjectOutputStream (new FileOutputStream("UserListTest"));
+                    obj_out.writeObject (gs.userL);
+                    
+                    output.reset();
+                }
+                
             }while(loop);
         }
         catch(Exception e){
