@@ -148,6 +148,7 @@ public class LIMSClient extends Client {
         }
     }
     
+<<<<<<< Updated upstream
 =======
     public ArrayList <SampleFile> retriveAnalysisFiles(int id)
     {
@@ -183,5 +184,37 @@ public class LIMSClient extends Client {
       return list;   
     } 
 >>>>>>> master
+=======
+    public ArrayList<Object> getFilesForClient(){
+        
+        ArrayList<Object> list = null;
+        
+        try {
+           
+             //Local Varibles
+            Message sendM = null;    //Holds message sent to server
+            Message receiveM = null; //Receives the response from the server
+            
+            //Reads, sends, and receives the message
+            sendM =  new Message("getFilesForClient");
+            output.writeObject(sendM);   //writes to the server
+            receiveM = (Message)input.readObject();  //receives from the server
+            
+            //Successful Response from server
+            if (receiveM.getMessage().equals("OK"))
+            {
+                ArrayList<Object> temp = receiveM.getObjCont();
+                
+                return temp;   
+            }
+            return null;
+        }
+        catch (Exception e){
+            System.err.println("Error: " + e.getMessage());
+            e.printStackTrace(System.err);
+            return null;
+        }
+    }
+>>>>>>> Stashed changes
     
 }

@@ -30,6 +30,9 @@ public class ClientMenu extends javax.swing.JFrame {
         
         username = "Number3";
         
+        //Connecting to server
+        lc.connect("localhost", 8765);
+        
           //Reads UserListTest and SampleFileList file 
         //and store into UserList list object and SampleFileList object
         try{
@@ -513,6 +516,7 @@ public class ClientMenu extends javax.swing.JFrame {
     private SampleFile sampleFiles; //object for inputing the information via the client
     private ClientUser clientInfo ; // object for the user class 
     private UserList list;
+    private LIMSClient lc;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CompanyName;

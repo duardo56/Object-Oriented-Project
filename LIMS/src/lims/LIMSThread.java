@@ -122,6 +122,8 @@ public class LIMSThread extends Thread{
                     output.writeObject(response);
                 }
                 
+                //**********************************************************************************
+                //Management Accept Button for Changes
                 else if(received.getMessage().equals("mgntAccept")){
                     
                     //Instanced Variables
@@ -156,6 +158,26 @@ public class LIMSThread extends Thread{
                         output.writeObject(response);
                         output.reset(); 
 >>>>>>> master
+                }
+                
+                //******************************************************************************************************
+                //Retrieve Clients and Analysist for Management
+                else if(received.getMessage().equals("getFilesForClient")){
+                    
+                    ArrayList<User> clients = null; //Stores clients
+                    ArrayList<User> analysist = null;  //Stores analysist
+                    ArrayList<SampleFile> sampleFile = null;    //Samples Files
+
+                    clients = gs.userL.getUsersWithCertainClass("ClientUser");
+                    analysist = gs.userL.getUsersWithCertainClass("AnalysisUser");
+                    sampleFile = gs.fileL.getAllSampleFiles();
+                    
+                    response = new Message ("OK");
+                    response.addObject(clients);
+                    response.addObject(analysist);
+                    response.addObject(sampleFile);
+                    
+                    output.writeObject(response);
                 }
                 
             }while(loop);
