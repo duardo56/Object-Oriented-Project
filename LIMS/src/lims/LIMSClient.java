@@ -174,7 +174,7 @@ public class LIMSClient extends Client {
       return null;   
     } 
     
-    public ArrayList<Object> getFilesForClient(){
+    public ArrayList<SampleFile> getFilesForClient(String username){
         
         ArrayList<Object> list = null;
         
@@ -186,7 +186,9 @@ public class LIMSClient extends Client {
             
             //Reads, sends, and receives the message
             sendM =  new Message("getFilesForClient");
+            sendM.addObject(username);   //Adds username to the message
             output.writeObject(sendM);   //writes to the server
+            
             receiveM = (Message)input.readObject();  //receives from the server
             
             //Successful Response from server
@@ -194,7 +196,7 @@ public class LIMSClient extends Client {
             {
                 ArrayList<Object> temp = receiveM.getObjCont();
                 
-                return temp;   
+                return (ArrayList<SampleFile>)temp.get(0);   
             }
             return null;
         }
@@ -204,5 +206,36 @@ public class LIMSClient extends Client {
             return null;
         }
     }
+    
+    public boolean clientSubmit(SampleFile file, User u){
+        try{
+        //Local Varibles
+        Message sendM = null;    //Holds message sent to server
+        Message receiveM = null; //Receives the response from the server
+            
+        //Reads, sends, and receives the message
+        sendM =  new Message("mgntAccept");
+        //sendM.addObject(status);
+        //sendM.addObject(sampleID);
+        //sendM.addObject(analysistID);
+        
+        output.writeObject(sendM);
+        receiveM = (Message)input.readObject();
+        
+         //Successful Response from server
+            if (receiveM.getMessage().equals("OK"))
+            {
+             return true;   
+            }
+            return false;
+        }
+        catch (Exception e){
+            System.err.println("Error: " + e.getMessage());
+            e.printStackTrace(System.err);
+            return false;
+        }
+        //return true;
+    }
+  
     
 }

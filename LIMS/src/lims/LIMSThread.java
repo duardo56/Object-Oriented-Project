@@ -162,23 +162,23 @@ public class LIMSThread extends Thread{
                 }
                 
                 //******************************************************************************************************
-                //Retrieve Clients and Analysist for Management
+                //Retrieve Client's Sample Files
                 else if(received.getMessage().equals("getFilesForClient")){
                     
-                    ArrayList<User> clients = null; //Stores clients
-                    ArrayList<User> analysist = null;  //Stores analysist
                     ArrayList<SampleFile> sampleFile = null;    //Samples Files
 
-                    clients = gs.userL.getUsersWithCertainClass("ClientUser");
-                    analysist = gs.userL.getUsersWithCertainClass("AnalysisUser");
-                    sampleFile = gs.fileL.getAllSampleFiles();
+                    sampleFile = gs.fileL.getAllUsersSampleFiles((String)received.getObjCont().get(0));
                     
                     response = new Message ("OK");
-                    response.addObject(clients);
-                    response.addObject(analysist);
                     response.addObject(sampleFile);
                     
                     output.writeObject(response);
+                    
+                    //Saves UserList.bin 
+                    ObjectOutputStream obj_out = new ObjectOutputStream (new FileOutputStream("SampleFileList")); 
+                    obj_out.writeObject (gs.fileL);
+                    
+                    output.reset();
                 }
                 
             }while(loop);

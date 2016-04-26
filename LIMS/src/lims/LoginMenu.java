@@ -170,14 +170,15 @@ public class LoginMenu extends javax.swing.JFrame {
                     int i = u.getUserID();
                     AnalysisMenu m = new AnalysisMenu(i);    //Creates Analysis menu object
                     m.setVisible(true); //Sets visibility of m to true 
-
+                    lc.disconnect();
                     this.dispose(); //disposes of login menu window
 
                 }
                 
                 else if(u.getClass().getSimpleName().equals("ClientUser")){
-                    ClientMenu m = new ClientMenu(user);    //Creates client menu  pbject
+                    ClientMenu m = new ClientMenu(u);    //Creates client menu  pbject
                     m.setVisible(true); //Sets visibility of m to true
+                    lc.disconnect();
                     this.dispose(); //disposes of login menu window
                 }
         }

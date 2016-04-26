@@ -30,32 +30,6 @@ public class ClientMenu extends javax.swing.JFrame {
         
         username = "Number3";
         
-        //Connecting to server
-        lc.connect("localhost", 8765);
-        
-          //Reads UserListTest and SampleFileList file 
-        //and store into UserList list object and SampleFileList object
-        try{
-            FileInputStream fInput = new FileInputStream("UserListTest");
-            ObjectInputStream ois = new ObjectInputStream(fInput);
-            list = (UserList)ois.readObject();
-            
-            fInput = new FileInputStream("SampleFileList");
-            ois = new ObjectInputStream(fInput);
-            sampleList =  (SampleFileList)ois.readObject();
-            
-            clientInfo = (ClientUser)list.getUser(username);
-        }
-        catch (FileNotFoundException e){
-            e.printStackTrace();
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        catch(ClassNotFoundException e){
-            e.printStackTrace();
-        }
-        
         CompanyName.setText(clientInfo.getCompanyName());
         
         if(clientInfo.getPhoneNumber() ==0)
@@ -71,32 +45,25 @@ public class ClientMenu extends javax.swing.JFrame {
     }
     
     //Constructor w/1 parameter (String username)
-    public ClientMenu(String username) {
+    public ClientMenu(User u) {
         initComponents();
         
-        this.username = username;   //Sets username of current client
+        //Connecting to server
+        lc.connect("localhost", 8765);
+        this.username = u.getUsername();   //Sets username of current client
+        sampleFiles =lc.getFilesForClient(username);
+        clientInfo = (ClientUser) u;
         
-         try{
-            FileInputStream fInput = new FileInputStream("SampleFileList");
-            ObjectInputStream ois =  new ObjectInputStream(fInput);
-            sampleList = (SampleFileList)ois.readObject();
-            
-            fInput = new FileInputStream("UserListTest");
-            ois = new ObjectInputStream(fInput);
-            list = (UserList)ois.readObject();
-            
-            clientInfo = (ClientUser)list.getUser(username);
-            
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-        catch(ClassNotFoundException e ){
-            e.printStackTrace();
-        }
+        CompanyName.setText(clientInfo.getCompanyName());
         
+        if(clientInfo.getPhoneNumber() ==0)
+        {
+            txtPhoneNum.setText("");
+        }
+        else
+        {
+            txtPhoneNum.setText(String.valueOf(clientInfo.getPhoneNumber()));
+        }
         fillJTable();
     }
 
@@ -382,12 +349,13 @@ public class ClientMenu extends javax.swing.JFrame {
     private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOutActionPerformed
         LoginMenu gui = new LoginMenu();
         gui.setVisible(true);
+        lc.disconnect();
         this.dispose();
     }//GEN-LAST:event_btnLogOutActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    
-      System.exit(0);
+        lc.disconnect();
+        System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     //Submits SampleFile information
@@ -408,36 +376,9 @@ public class ClientMenu extends javax.swing.JFrame {
             clientInfo.setCompanyName(comp);
             clientInfo.setPhoneNumber((Long.valueOf(txtPhoneNum.getText())));
             
-            sampleList.addFile(username, sample, comp, expFidelity, dDate, sentDate);
+            //sampleList.addFile(username, sample, comp, expFidelity, dDate, sentDate);
             
-           //save the files 
-           try{
-               //saves the file 
-               File file = new File("SampleFileList");
-               OutputStream fileOutputStream = new FileOutputStream(file);
-               ObjectOutput outputStream = new ObjectOutputStream (fileOutputStream);
-               outputStream.writeObject(sampleList);
-
-            } catch (FileNotFoundException e) {
-               e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        
-        //update the table 
-        try{
             
-            FileInputStream fInput = new FileInputStream("SampleFileList");
-            ObjectInputStream ois;
-            ois = new ObjectInputStream(fInput);
-            sampleList = (SampleFileList)ois.readObject();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
         
             CompanyName.setText(clientInfo.getCompanyName());
             FidelityGoal.setText("");
@@ -448,20 +389,6 @@ public class ClientMenu extends javax.swing.JFrame {
             jComboBox1.setSelectedIndex(0);
         
             fillJTable();
-            
-            //save the files 
-           try{
-               //saves the file 
-               File file = new File("UserListTest");
-               OutputStream fileOutputStream = new FileOutputStream(file);
-               ObjectOutput outputStream = new ObjectOutputStream (fileOutputStream);
-               outputStream.writeObject(list);
-
-            } catch (FileNotFoundException e) {
-               e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
         else {
             javax.swing.JOptionPane.showMessageDialog(null,"Please enter all the proper information");
@@ -478,7 +405,6 @@ public class ClientMenu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-
     public static void main(String args[]) {
       
         /* Create and display the form */
@@ -493,7 +419,7 @@ public class ClientMenu extends javax.swing.JFrame {
     private void fillJTable(){
         DefaultTableModel tbl = (DefaultTableModel)tblSampleTest.getModel();
         tbl.setRowCount(0); //Set Table Row Count = 0
-        ArrayList <SampleFile> fileList = sampleList.getAllUsersSampleFiles(username);
+        ArrayList <SampleFile> fileList = sampleFiles;
 
             for( int x = 0 ; x < fileList.size(); x++)
             {
@@ -512,11 +438,11 @@ public class ClientMenu extends javax.swing.JFrame {
     
     //Declared member variables
     private String username;    //Holds Client's Usernames
-    private SampleFileList sampleList; //object for class 
-    private SampleFile sampleFiles; //object for inputing the information via the client
+    //private SampleFileList sampleList; //object for class 
+    private ArrayList<SampleFile> sampleFiles; //object for inputing the information via the client
     private ClientUser clientInfo ; // object for the user class 
-    private UserList list;
-    private LIMSClient lc;
+    //private UserList list;
+    private LIMSClient lc = new LIMSClient();
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CompanyName;
