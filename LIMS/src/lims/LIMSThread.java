@@ -63,6 +63,8 @@ public class LIMSThread extends Thread{
                             response = new Message("OK");
                             response.addObject(gs.userL.getUser(username));
                             output.writeObject(response);
+                            
+                            output.reset();
                         }
                         else{
                             response = new Message("FAIL");
