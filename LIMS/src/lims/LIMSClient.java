@@ -5,7 +5,10 @@
  */
 package lims;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -83,6 +86,7 @@ public class LIMSClient extends Client {
         }
     }
     
+<<<<<<< HEAD
     public ArrayList<Object> getFilesForManagement(){
         
         ArrayList<Object> list = null;
@@ -144,5 +148,40 @@ public class LIMSClient extends Client {
         }
     }
     
+=======
+    public ArrayList <SampleFile> retriveAnalysisFiles(int id)
+    {
+      ArrayList <SampleFile> list = null; 
+      
+      Message sendM = null;    //Holds message sent to server
+      Message receiveM = null; //Receives the response from the server
+      
+      sendM = new Message("retriveAnalysisFiles");
+      sendM.addObject(id);
+      
+ 
+        try {
+            output.writeObject(sendM);
+        } catch (IOException ex) {
+            Logger.getLogger(LIMSClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+      
+        
+        try {
+            receiveM = (Message)input.readObject();
+        } catch (IOException ex) {
+            Logger.getLogger(LIMSClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LIMSClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(receiveM.getMessage().equals("OK"))
+        {
+            return (ArrayList <SampleFile>) receiveM.getObjCont().get(0); 
+        }
+      return list;   
+    } 
+>>>>>>> master
     
 }
