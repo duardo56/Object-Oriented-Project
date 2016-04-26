@@ -104,9 +104,9 @@ public class LIMS {
         //LIMSClient lc = new LIMSClient();
         //lc.connect("localhost", 8765);
         
-        MainMenu GUI = new MainMenu();
+        //MainMenu GUI = new MainMenu();
         
-        //LoginMenu GUI = new LoginMenu("localhost", 8765);
+        LoginMenu GUI = new LoginMenu("localhost", 8765);
         GUI.setVisible(true);
     }
     
